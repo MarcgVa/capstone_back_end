@@ -1,0 +1,21 @@
+{
+  "name": "back_end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^6.6.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "prisma": "^6.6.0"
+  }
+}

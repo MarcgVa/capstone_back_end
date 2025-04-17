@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+//models//
+
+// Models //
+model User {
+id String @id @default(uuid())
+email String @unique
+name String?
+role Role @default(USER)
+}
+
+model Profile {
+  id Int @id @default(autoincrement())
+  userId String @unique  
+  firstName String?
+  lastName String?
+  address String @db.VarChar(100)
+  city String
+  state String
+  phone String @unique
+
+  @@unique([firstName, lastName])
+}
+model Accounts {
+  id Int @id @default(autoincrement())
+  servicePlan String 
+  accountId String @unique
+  billCycle String
+  startDate DateTime 
+  cutDate DateTime
+}
+model todos {
+  id Int @id @default(autoincrement())
+  description String @db.VarChar(255)
+  createdAt DateTime @default(now())
+  completed Boolean @default(false)
+  dueDate DateTime 
+  assignedTo String 
+  accountId String
+}
+
+model consultations {
+  id Int @id @default(autoincrement())
+  name String
+  address String
+  phone String
+  email String @unique
+  requestDate DateTime
+  completed Boolean @default(false)
+}
+
+model billing {
+  id Int @id @default(autoincrement())
+  accountId String
+  startDate DateTime
+  endDate DateTime
+  amount Float
+}
+model invoices {
+  id Int @id @default(autoincrement())
+  accountId String
+  invoices Json[]
+}
+
+enum Role {
+  USER
+  ADMIN
+  MANAGER
+  TECH
+}
