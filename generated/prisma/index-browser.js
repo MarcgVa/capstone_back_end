@@ -120,7 +120,62 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  name: 'name',
+  role: 'role'
+};
+
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  address: 'address',
+  city: 'city',
+  state: 'state',
+  phone: 'phone'
+};
+
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  servicePlan: 'servicePlan',
+  accountId: 'accountId',
+  billCycle: 'billCycle',
+  startDate: 'startDate',
+  cutDate: 'cutDate'
+};
+
+exports.Prisma.TodosScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  createdAt: 'createdAt',
+  completed: 'completed',
+  dueDate: 'dueDate',
+  assignedTo: 'assignedTo',
+  accountId: 'accountId'
+};
+
+exports.Prisma.ConsultationsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  email: 'email',
+  requestDate: 'requestDate',
+  completed: 'completed'
+};
+
+exports.Prisma.BillingScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  amount: 'amount'
+};
+
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  invoices: 'invoices'
 };
 
 exports.Prisma.SortOrder = {
@@ -137,10 +192,21 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Role = exports.$Enums.Role = {
+  USER: 'USER',
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  TECH: 'TECH'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Profile: 'Profile',
+  Account: 'Account',
+  todos: 'todos',
+  consultations: 'consultations',
+  billing: 'billing',
+  Invoice: 'Invoice'
 };
 
 /**

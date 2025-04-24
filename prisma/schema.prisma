@@ -23,13 +23,18 @@ id String @id @default(uuid())
 email String @unique
 name String?
 role Role @default(USER)
+profiles Profile[]
+account Account[]
+todos todos[]
+bills billing[]
 }
 
 model Profile {
   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
   userId String @unique  
-  firstName String?
-  lastName String?
+  firstName String
+  lastName String
   address String @db.VarChar(100)
   city String
   state String
@@ -37,9 +42,10 @@ model Profile {
 
   @@unique([firstName, lastName])
 }
-model Accounts {
+model Account {
   id Int @id @default(autoincrement())
   servicePlan String 
+  acctOwner User @relation(fields: [accountId], references: [id])
   accountId String @unique
   billCycle String
   startDate DateTime 
@@ -52,6 +58,7 @@ model todos {
   completed Boolean @default(false)
   dueDate DateTime 
   assignedTo String 
+  assignee User @relation(fields: [accountId], references: [id])
   accountId String
 }
 
@@ -67,13 +74,15 @@ model consultations {
 
 model billing {
   id Int @id @default(autoincrement())
+  client User @relation(fields: [accountId], references: [id])
   accountId String
   startDate DateTime
   endDate DateTime
   amount Float
+  
 }
-model invoices {
-  id Int @id @default(autoincrement())
+model Invoice {
+  id String @id @default(uuid())
   accountId String
   invoices Json[]
 }
