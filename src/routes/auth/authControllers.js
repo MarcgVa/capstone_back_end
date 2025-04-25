@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { prisma, bcrypt, jwt } = require("../common/common");
+const { prisma, bcrypt, jwt } = require("../../common/common");
 
 
 const login = async (req, res) => {
@@ -42,7 +42,10 @@ const register = async (req, res) => {
   }
 }
 
+const getUser = async (req, res, next) => {
+  
+}
 
 
 
-module.exports = { login, register };
+module.exports = { login, register, getUser };

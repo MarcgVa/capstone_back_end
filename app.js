@@ -5,10 +5,12 @@ app.use(express.json());
 app.use(cors());
 
 
-const authRoutes = require("./src/routes/authRoutes")
+const authRoutes = require("./src/routes/auth/authRoutes");
+const todoRoutes = require("./src/routes/todo/todoRoutes");
+
 
 app.use("/auth", authRoutes);
-
+app.use("/todos", todoRoutes);
 
 
 

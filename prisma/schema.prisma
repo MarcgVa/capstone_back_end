@@ -14,77 +14,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 //models//
 
 // Models //
 model User {
-id String @id @default(uuid())
-email String @unique
-password String
-role Role @default(USER)
-profiles Profile[]
-account Account[]
-todos todos[]
-bills billing[]
+  userId   String   @id @default(uuid())
+  email    String   @unique
+  password String
+  role     Role     @default(USER)
+  account  Account?
+  todos    Todos[]
 }
 
-model Profile {
-  id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
-  userId String @unique  
-  firstName String
-  lastName String
-  address String @db.VarChar(100)
-  city String
-  state String
-  phone String @unique
-
-  @@unique([firstName, lastName])
-}
 model Account {
-  id Int @id @default(autoincrement())
-  servicePlan String 
-  acctOwner User @relation(fields: [accountId], references: [id])
-  accountId String @unique
-  billCycle String
-  startDate DateTime 
-  cutDate DateTime
-}
-model todos {
-  id Int @id @default(autoincrement())
-  description String @db.VarChar(255)
-  createdAt DateTime @default(now())
-  completed Boolean @default(false)
-  dueDate DateTime 
-  assignedTo String 
-  assignee User @relation(fields: [accountId], references: [id])
-  accountId String
+  id            Int         @id @default(autoincrement())
+  user          User        @relation(fields: [accountId], references: [userId])
+  accountId     String      @unique
+  firstName     String
+  lastName      String
+  address       String      @db.VarChar(100)
+  city          String
+  state         String
+  phone         String      @unique
+  startDate     DateTime
+  cutDate       DateTime
+  bill          Billing[]
+  invoice       Invoice[]
+  serPlan       ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
+  servicePlanId String
+
+  @@unique([firstName, lastName, phone])
 }
 
-model consultations {
-  id Int @id @default(autoincrement())
-  name String
-  address String
-  phone String
-  email String @unique
+model ServicePlan {
+  servicePlanId String    @id @default(uuid())
+  title         String    @unique
+  description   String    @db.VarChar(255)
+  cost          Float
+  cycle         Int
+  account       Account[]
+}
+
+model Todos {
+  id          Int      @id @default(autoincrement())
+  description String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  completed   Boolean  @default(false)
+  dueDate     DateTime
+  assignedTo  String
+  assignee    User     @relation(fields: [userId], references: [userId])
+  userId      String
+}
+
+model Consultations {
+  id          Int      @id @default(autoincrement())
+  name        String
+  address     String
+  phone       String
+  email       String   @unique
   requestDate DateTime
-  completed Boolean @default(false)
+  completed   Boolean  @default(false)
 }
 
-model billing {
-  id Int @id @default(autoincrement())
-  client User @relation(fields: [accountId], references: [id])
-  accountId String
+model Billing {
+  id        Int      @id @default(autoincrement())
+  account   Account  @relation(fields: [billToId], references: [accountId])
+  billToId  String
   startDate DateTime
-  endDate DateTime
-  amount Float
-  
+  endDate   DateTime
+  billCycle String
+  amount    Float
 }
+
 model Invoice {
-  id String @id @default(uuid())
+  invoiceId String  @id @default(uuid())
+  account   Account @relation(fields: [accountId], references: [accountId])
   accountId String
-  invoices Json[]
+  invoice   String  @db.Xml
 }
 
 enum Role {

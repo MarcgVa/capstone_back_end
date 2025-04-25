@@ -118,40 +118,43 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
+  userId: 'userId',
   email: 'email',
   password: 'password',
   role: 'role'
 };
 
-exports.Prisma.ProfileScalarFieldEnum = {
+exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  accountId: 'accountId',
   firstName: 'firstName',
   lastName: 'lastName',
   address: 'address',
   city: 'city',
   state: 'state',
-  phone: 'phone'
+  phone: 'phone',
+  startDate: 'startDate',
+  cutDate: 'cutDate',
+  servicePlanId: 'servicePlanId'
 };
 
-exports.Prisma.AccountScalarFieldEnum = {
-  id: 'id',
-  servicePlan: 'servicePlan',
-  accountId: 'accountId',
-  billCycle: 'billCycle',
-  startDate: 'startDate',
-  cutDate: 'cutDate'
+exports.Prisma.ServicePlanScalarFieldEnum = {
+  servicePlanId: 'servicePlanId',
+  title: 'title',
+  description: 'description',
+  cost: 'cost',
+  cycle: 'cycle'
 };
 
 exports.Prisma.TodosScalarFieldEnum = {
   id: 'id',
   description: 'description',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
   completed: 'completed',
   dueDate: 'dueDate',
   assignedTo: 'assignedTo',
-  accountId: 'accountId'
+  userId: 'userId'
 };
 
 exports.Prisma.ConsultationsScalarFieldEnum = {
@@ -166,16 +169,17 @@ exports.Prisma.ConsultationsScalarFieldEnum = {
 
 exports.Prisma.BillingScalarFieldEnum = {
   id: 'id',
-  accountId: 'accountId',
+  billToId: 'billToId',
   startDate: 'startDate',
   endDate: 'endDate',
+  billCycle: 'billCycle',
   amount: 'amount'
 };
 
 exports.Prisma.InvoiceScalarFieldEnum = {
-  id: 'id',
+  invoiceId: 'invoiceId',
   accountId: 'accountId',
-  invoices: 'invoices'
+  invoice: 'invoice'
 };
 
 exports.Prisma.SortOrder = {
@@ -196,11 +200,11 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Profile: 'Profile',
   Account: 'Account',
-  todos: 'todos',
-  consultations: 'consultations',
-  billing: 'billing',
+  ServicePlan: 'ServicePlan',
+  Todos: 'Todos',
+  Consultations: 'Consultations',
+  Billing: 'Billing',
   Invoice: 'Invoice'
 };
 
