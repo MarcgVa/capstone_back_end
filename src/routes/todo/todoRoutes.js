@@ -1,12 +1,11 @@
-const { get } = require("../../../app");
-const { router } = require("../common/common");
+const { router } = require("../../common/common");
 const {
   getTodos,
   getMyTodos,
   createTodo,
   updateTodo,
   deleteTodo,
-} = require("../controllers/authControllers");
+} = require("./todoController");
 
 function middleware(req, res, next) {
   const token = req.headers?.authorization?.split(" ")[1];
@@ -19,8 +18,8 @@ function middleware(req, res, next) {
 
 router.get("/todos", middleware, getTodos);
 router.get("/me", middleware, getMyTodos);
-router.post("/new", login);
-router.put("/:itemId", register);
-router.get("/me", middleware, getUser);
+router.post("/new", createTodo);
+router.put("/:itemId", middleware, updateTodo);
+router.get("/itemId", middleware, deleteTodo);
 
 module.exports = router;

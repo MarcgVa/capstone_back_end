@@ -132,6 +132,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   address: 'address',
   city: 'city',
   state: 'state',
+  zip: 'zip',
   phone: 'phone',
   startDate: 'startDate',
   cutDate: 'cutDate',
@@ -190,6 +191,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',

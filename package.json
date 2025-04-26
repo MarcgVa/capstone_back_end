@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server:dev": "nodemon ./server/index.js"
+    "server": "nodemon ./server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +18,8 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "universal-cookie": "^8.0.1"
   },
   "devDependencies": {
     "prisma": "^6.6.0"

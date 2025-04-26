@@ -2629,10 +2629,12 @@ export namespace Prisma {
 
   export type AccountAvgAggregateOutputType = {
     id: number | null
+    zip: number | null
   }
 
   export type AccountSumAggregateOutputType = {
     id: number | null
+    zip: number | null
   }
 
   export type AccountMinAggregateOutputType = {
@@ -2643,6 +2645,7 @@ export namespace Prisma {
     address: string | null
     city: string | null
     state: string | null
+    zip: number | null
     phone: string | null
     startDate: Date | null
     cutDate: Date | null
@@ -2657,6 +2660,7 @@ export namespace Prisma {
     address: string | null
     city: string | null
     state: string | null
+    zip: number | null
     phone: string | null
     startDate: Date | null
     cutDate: Date | null
@@ -2671,6 +2675,7 @@ export namespace Prisma {
     address: number
     city: number
     state: number
+    zip: number
     phone: number
     startDate: number
     cutDate: number
@@ -2681,10 +2686,12 @@ export namespace Prisma {
 
   export type AccountAvgAggregateInputType = {
     id?: true
+    zip?: true
   }
 
   export type AccountSumAggregateInputType = {
     id?: true
+    zip?: true
   }
 
   export type AccountMinAggregateInputType = {
@@ -2695,6 +2702,7 @@ export namespace Prisma {
     address?: true
     city?: true
     state?: true
+    zip?: true
     phone?: true
     startDate?: true
     cutDate?: true
@@ -2709,6 +2717,7 @@ export namespace Prisma {
     address?: true
     city?: true
     state?: true
+    zip?: true
     phone?: true
     startDate?: true
     cutDate?: true
@@ -2723,6 +2732,7 @@ export namespace Prisma {
     address?: true
     city?: true
     state?: true
+    zip?: true
     phone?: true
     startDate?: true
     cutDate?: true
@@ -2824,9 +2834,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date
-    cutDate: Date
+    cutDate: Date | null
     servicePlanId: string
     _count: AccountCountAggregateOutputType | null
     _avg: AccountAvgAggregateOutputType | null
@@ -2857,6 +2868,7 @@ export namespace Prisma {
     address?: boolean
     city?: boolean
     state?: boolean
+    zip?: boolean
     phone?: boolean
     startDate?: boolean
     cutDate?: boolean
@@ -2876,6 +2888,7 @@ export namespace Prisma {
     address?: boolean
     city?: boolean
     state?: boolean
+    zip?: boolean
     phone?: boolean
     startDate?: boolean
     cutDate?: boolean
@@ -2892,6 +2905,7 @@ export namespace Prisma {
     address?: boolean
     city?: boolean
     state?: boolean
+    zip?: boolean
     phone?: boolean
     startDate?: boolean
     cutDate?: boolean
@@ -2908,13 +2922,14 @@ export namespace Prisma {
     address?: boolean
     city?: boolean
     state?: boolean
+    zip?: boolean
     phone?: boolean
     startDate?: boolean
     cutDate?: boolean
     servicePlanId?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "firstName" | "lastName" | "address" | "city" | "state" | "phone" | "startDate" | "cutDate" | "servicePlanId", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "firstName" | "lastName" | "address" | "city" | "state" | "zip" | "phone" | "startDate" | "cutDate" | "servicePlanId", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     bill?: boolean | Account$billArgs<ExtArgs>
@@ -2947,9 +2962,10 @@ export namespace Prisma {
       address: string
       city: string
       state: string
+      zip: number
       phone: string
       startDate: Date
-      cutDate: Date
+      cutDate: Date | null
       servicePlanId: string
     }, ExtArgs["result"]["account"]>
     composites: {}
@@ -3385,6 +3401,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Account", 'String'>
     readonly city: FieldRef<"Account", 'String'>
     readonly state: FieldRef<"Account", 'String'>
+    readonly zip: FieldRef<"Account", 'Int'>
     readonly phone: FieldRef<"Account", 'String'>
     readonly startDate: FieldRef<"Account", 'DateTime'>
     readonly cutDate: FieldRef<"Account", 'DateTime'>
@@ -9318,6 +9335,7 @@ export namespace Prisma {
     address: 'address',
     city: 'city',
     state: 'state',
+    zip: 'zip',
     phone: 'phone',
     startDate: 'startDate',
     cutDate: 'cutDate',
@@ -9400,6 +9418,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -9551,9 +9577,10 @@ export namespace Prisma {
     address?: StringFilter<"Account"> | string
     city?: StringFilter<"Account"> | string
     state?: StringFilter<"Account"> | string
+    zip?: IntFilter<"Account"> | number
     phone?: StringFilter<"Account"> | string
     startDate?: DateTimeFilter<"Account"> | Date | string
-    cutDate?: DateTimeFilter<"Account"> | Date | string
+    cutDate?: DateTimeNullableFilter<"Account"> | Date | string | null
     servicePlanId?: StringFilter<"Account"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     bill?: BillingListRelationFilter
@@ -9569,9 +9596,10 @@ export namespace Prisma {
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
+    zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
-    cutDate?: SortOrder
+    cutDate?: SortOrderInput | SortOrder
     servicePlanId?: SortOrder
     user?: UserOrderByWithRelationInput
     bill?: BillingOrderByRelationAggregateInput
@@ -9592,8 +9620,9 @@ export namespace Prisma {
     address?: StringFilter<"Account"> | string
     city?: StringFilter<"Account"> | string
     state?: StringFilter<"Account"> | string
+    zip?: IntFilter<"Account"> | number
     startDate?: DateTimeFilter<"Account"> | Date | string
-    cutDate?: DateTimeFilter<"Account"> | Date | string
+    cutDate?: DateTimeNullableFilter<"Account"> | Date | string | null
     servicePlanId?: StringFilter<"Account"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     bill?: BillingListRelationFilter
@@ -9609,9 +9638,10 @@ export namespace Prisma {
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
+    zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
-    cutDate?: SortOrder
+    cutDate?: SortOrderInput | SortOrder
     servicePlanId?: SortOrder
     _count?: AccountCountOrderByAggregateInput
     _avg?: AccountAvgOrderByAggregateInput
@@ -9631,9 +9661,10 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"Account"> | string
     city?: StringWithAggregatesFilter<"Account"> | string
     state?: StringWithAggregatesFilter<"Account"> | string
+    zip?: IntWithAggregatesFilter<"Account"> | number
     phone?: StringWithAggregatesFilter<"Account"> | string
     startDate?: DateTimeWithAggregatesFilter<"Account"> | Date | string
-    cutDate?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    cutDate?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
     servicePlanId?: StringWithAggregatesFilter<"Account"> | string
   }
 
@@ -10000,9 +10031,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
@@ -10017,9 +10049,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     servicePlanId: string
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
@@ -10031,9 +10064,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
@@ -10048,9 +10082,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     servicePlanId?: StringFieldUpdateOperationsInput | string
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
@@ -10064,9 +10099,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     servicePlanId: string
   }
 
@@ -10076,9 +10112,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -10089,9 +10126,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     servicePlanId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -10503,6 +10541,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -10523,6 +10572,11 @@ export namespace Prisma {
   export type ServicePlanScalarRelationFilter = {
     is?: ServicePlanWhereInput
     isNot?: ServicePlanWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type BillingOrderByRelationAggregateInput = {
@@ -10547,6 +10601,7 @@ export namespace Prisma {
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
+    zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
     cutDate?: SortOrder
@@ -10555,6 +10610,7 @@ export namespace Prisma {
 
   export type AccountAvgOrderByAggregateInput = {
     id?: SortOrder
+    zip?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -10565,6 +10621,7 @@ export namespace Prisma {
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
+    zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
     cutDate?: SortOrder
@@ -10579,6 +10636,7 @@ export namespace Prisma {
     address?: SortOrder
     city?: SortOrder
     state?: SortOrder
+    zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
     cutDate?: SortOrder
@@ -10587,6 +10645,7 @@ export namespace Prisma {
 
   export type AccountSumOrderByAggregateInput = {
     id?: SortOrder
+    zip?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -10617,6 +10676,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -10964,8 +11037,20 @@ export namespace Prisma {
     connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutAccountNestedInput = {
@@ -11010,14 +11095,6 @@ export namespace Prisma {
     upsert?: ServicePlanUpsertWithoutAccountInput
     connect?: ServicePlanWhereUniqueInput
     update?: XOR<XOR<ServicePlanUpdateToOneWithWhereWithoutAccountInput, ServicePlanUpdateWithoutAccountInput>, ServicePlanUncheckedUpdateWithoutAccountInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type BillingUncheckedUpdateManyWithoutAccountNestedInput = {
@@ -11214,6 +11291,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11255,6 +11343,31 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -11290,9 +11403,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
     serPlan: ServicePlanCreateNestedOneWithoutAccountInput
@@ -11305,9 +11419,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     servicePlanId: string
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
@@ -11364,9 +11479,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
     serPlan?: ServicePlanUpdateOneRequiredWithoutAccountNestedInput
@@ -11379,9 +11495,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     servicePlanId?: StringFieldUpdateOperationsInput | string
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
@@ -11617,9 +11734,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
@@ -11633,9 +11751,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -11677,9 +11796,10 @@ export namespace Prisma {
     address?: StringFilter<"Account"> | string
     city?: StringFilter<"Account"> | string
     state?: StringFilter<"Account"> | string
+    zip?: IntFilter<"Account"> | number
     phone?: StringFilter<"Account"> | string
     startDate?: DateTimeFilter<"Account"> | Date | string
-    cutDate?: DateTimeFilter<"Account"> | Date | string
+    cutDate?: DateTimeNullableFilter<"Account"> | Date | string | null
     servicePlanId?: StringFilter<"Account"> | string
   }
 
@@ -11737,9 +11857,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
     serPlan: ServicePlanCreateNestedOneWithoutAccountInput
@@ -11753,9 +11874,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     servicePlanId: string
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -11782,9 +11904,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
     serPlan?: ServicePlanUpdateOneRequiredWithoutAccountNestedInput
@@ -11798,9 +11921,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     servicePlanId?: StringFieldUpdateOperationsInput | string
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -11811,9 +11935,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     serPlan: ServicePlanCreateNestedOneWithoutAccountInput
@@ -11827,9 +11952,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
     servicePlanId: string
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -11856,9 +11982,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     serPlan?: ServicePlanUpdateOneRequiredWithoutAccountNestedInput
@@ -11872,9 +11999,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     servicePlanId?: StringFieldUpdateOperationsInput | string
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -11977,9 +12105,10 @@ export namespace Prisma {
     address: string
     city: string
     state: string
+    zip: number
     phone: string
     startDate: Date | string
-    cutDate: Date | string
+    cutDate?: Date | string | null
   }
 
   export type AccountUpdateWithoutSerPlanInput = {
@@ -11988,9 +12117,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
@@ -12004,9 +12134,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -12019,9 +12150,10 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     state?: StringFieldUpdateOperationsInput | string
+    zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    cutDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

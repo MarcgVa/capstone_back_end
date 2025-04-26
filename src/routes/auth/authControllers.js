@@ -1,8 +1,10 @@
 require("dotenv").config();
-const { prisma, bcrypt, jwt } = require("../../common/common");
+const { prisma, bcrypt, jwt, cookies } = require("../../common/common");
 
 
 const login = async (req, res) => {
+
+
   const { email, password } = req.body;
   const user = await prisma.user.findFirst({
     where: {
@@ -22,7 +24,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   
-  const { email, password, role } = req.body
+  const { email, password, role, firstName, lastName, address, city, state, zip, phone } = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = await prisma.user.create({
@@ -30,6 +32,19 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
       role,
+      account: {
+        create: {
+          data: {
+            firstName,
+            lastName,
+            address,
+            city,
+            state,
+            zip,
+            phone,
+          }
+        }
+      }
     },
   });    
 

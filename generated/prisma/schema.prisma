@@ -35,9 +35,10 @@ model Account {
   address       String      @db.VarChar(100)
   city          String
   state         String
+  zip           Int
   phone         String      @unique
   startDate     DateTime
-  cutDate       DateTime
+  cutDate       DateTime?
   bill          Billing[]
   invoice       Invoice[]
   serPlan       ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])

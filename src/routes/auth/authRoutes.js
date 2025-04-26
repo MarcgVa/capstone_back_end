@@ -1,5 +1,5 @@
-const { router } = require("../common/common");
-const { login, register, getUser } = require("../controllers/authControllers");
+const { router } = require("../../common/common");
+const { login, register, getUser } = require("./authControllers");
 
 function middleware(req, res, next) {
   const token = req.headers?.authorization?.split(" ")[1];
