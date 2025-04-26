@@ -24,7 +24,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   
-  const { email, password, role, firstName, lastName, address, city, state, zip, phone } = req.body;
+  const { email, password, role, firstName, lastName, address, city, state, zip, phone, servicePlanId } = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = await prisma.user.create({
@@ -34,23 +34,23 @@ const register = async (req, res) => {
       role,
       account: {
         create: {
-          data: {
-            firstName,
-            lastName,
-            address,
-            city,
-            state,
-            zip,
-            phone,
-          }
-        }
-      }
+          firstName,
+          lastName,
+          address,
+          city,
+          state,
+          zip,
+          phone,
+          servicePlanId,
+        },
+      },
     },
   });    
 
+
   if (newUser) {
     console.log(newUser);
-    const token = jwt.sign(newUser.id,process.env.JWT_SECRET);
+    const token = jwt.sign(newUser.userId, process.env.JWT_SECRET);
     res.json({ newUser, token });
   } else { 
     res.send("Something didn't work");

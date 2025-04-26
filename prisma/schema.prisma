@@ -27,33 +27,31 @@ model User {
 }
 
 model Account {
-  id            Int         @id @default(autoincrement())
-  user          User        @relation(fields: [accountId], references: [userId])
-  accountId     String      @unique
-  firstName     String
-  lastName      String
-  address       String      @db.VarChar(100)
-  city          String
-  state         String
-  zip           Int
-  phone         String      @unique
-  startDate     DateTime
-  cutDate       DateTime?
-  bill          Billing[]
-  invoice       Invoice[]
-  serPlan       ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
-  servicePlanId String
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [accountId], references: [userId])
+  accountId String    @unique
+  firstName String
+  lastName  String
+  address   String    @db.VarChar(100)
+  city      String
+  state     String
+  zip       Int
+  phone     String    @unique
+  startDate DateTime?
+  cutDate   DateTime?
+  bill      Billing[]
+  invoice   Invoice[]
 
   @@unique([firstName, lastName, phone])
 }
 
 model ServicePlan {
-  servicePlanId String    @id @default(uuid())
-  title         String    @unique
-  description   String    @db.VarChar(255)
+  servicePlanId String  @id @default(uuid())
+  accountId     String? @unique
+  title         String  @unique
+  description   String  @db.VarChar(255)
   cost          Float
   cycle         Int
-  account       Account[]
 }
 
 model Todos {
