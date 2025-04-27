@@ -4,11 +4,7 @@ const { prisma, jwt } = require('../../common/common');
 const getTodos = async (req, res) => {
   const token = req.headers?.authorization.split(" ")[1];
   const id = jwt.verify(token, process.env.JWT_SECRET);
-  const items = await prisma.todos.findMany({
-    where: {
-      userId: { equals: id, }
-    },
-  });
+  const items = await prisma.todos.findMany({});
   res.send(items);
 };
 
@@ -17,7 +13,7 @@ const getMyTodos = async (req, res, next) => {
   const id = jwt.verify(token, process.env.JWT_SECRET);
   const items = await prisma.todos.findMany({
     where: {
-      assignee: { equals: req.body.email, }
+      assignedTo: { equals: req.body.email, }
     },
   });
   res.send(items);
@@ -42,17 +38,28 @@ const createTodo = async (req, res, next) => {
 const updateTodo = async (req, res, next) => {
   const token = req.headers?.authorization.split(' ')[1];
   const updatedBy = jwt.verify(token, process.env.JWT_SECRET);
+  const { title, description, dueDate, assignedTo, completed} = req.body;
+  const id = req.params.id * 1;
+
   try {
     const item = await prisma.todos.update({
       where: {
-        id: req.params.itemId,
+        id: id,
       },
-      data: req.body,
+      data: {
+        title,
+        description,
+        dueDate: new Date(dueDate),
+        completed,
+        assignedTo,
+        updatedBy,
+      },
     });
+
+      res.send(item);
   } catch (error) {
     next(error);
   }
-  res.send(item);
 };
 
 const deleteTodo = async (req, res, next) => {
