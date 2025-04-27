@@ -149,13 +149,15 @@ exports.Prisma.ServicePlanScalarFieldEnum = {
 
 exports.Prisma.TodosScalarFieldEnum = {
   id: 'id',
+  title: 'title',
   description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   completed: 'completed',
   dueDate: 'dueDate',
   assignedTo: 'assignedTo',
-  userId: 'userId'
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
 };
 
 exports.Prisma.ConsultationsScalarFieldEnum = {
