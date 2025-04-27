@@ -16,10 +16,10 @@ function middleware(req, res, next) {
   }
 }
 
-router.get("/todos", middleware, getTodos);
-router.get("/me", middleware, getMyTodos);
+router.get("/me", middleware, getTodos);
 router.post("/new", createTodo);
 router.put("/:itemId", middleware, updateTodo);
-router.get("/itemId", middleware, deleteTodo);
+router.delete("/:id", middleware, deleteTodo);
+
 
 module.exports = router;
