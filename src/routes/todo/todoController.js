@@ -42,23 +42,23 @@ const createTodo = async (req, res, next) => {
 const updateTodo = async (req, res, next) => {
   const token = req.headers?.authorization.split(' ')[1];
   const updatedBy = jwt.verify(token, process.env.JWT_SECRET);
-  try{
+  try {
     const item = await prisma.todos.update({
       where: {
         id: req.params.itemId,
       },
       data: req.body,
     });
-  } catch(error) {
+  } catch (error) {
     next(error);
   }
   res.send(item);
-}
+};
 
 const deleteTodo = async (req, res, next) => {
   const token = req.headers?.authorization.split(" ")[1];
   const createdBy = jwt.verify(token, process.env.JWT_SECRET);
-  const id = req.params.id * 1;
+  const id = req.params.id * 1; //converting the string id to int
 
   try {
     await prisma.todos.delete({
@@ -67,11 +67,11 @@ const deleteTodo = async (req, res, next) => {
         createdBy,
       },
     });
-     res.sendStatus(204);
+    res.sendStatus(204);
   } catch (ex) {
     next(ex);
   }
-}
+};
 
 
 module.exports = {
