@@ -2,7 +2,7 @@ require('dotenv').config();
 const { prisma, jwt } = require('../../common/common');
 
 const getTodos = async (req, res) => {
-  const token = req.headers?.authorization.splice(7);
+  const token = req.headers?.authorization.split(" ")[1];
   const id = jwt.verify(token, process.env.JWT_SECRET);
   const items = await prisma.todos.findMany({
     where: {
@@ -13,7 +13,7 @@ const getTodos = async (req, res) => {
 };
 
 const getMyTodos = async (req, res, next) => {
-  const token = req.headers?.authorization.splice(7);
+  const token = req.headers?.authorization.split(" ")[1];
   const id = jwt.verify(token, process.env.JWT_SECRET);
   const items = await prisma.todos.findMany({
     where: {
@@ -24,14 +24,14 @@ const getMyTodos = async (req, res, next) => {
 };
 
 const createTodo = async (req, res, next) => {
-  const token = req.headers?.authorization.splice(7);
+  const token = req.headers?.authorization.split(" ")[1];
   const createdBy = jwt.verify(token, process.env.JWT_SECRET);
   const { title, description, dueDate, assignedTo } = req.body;
   const item = await prisma.todos.create({
     data: {
       title,
       description,
-      dueDate,
+      dueDate: new Date(dueDate),
       assignedTo,
       createdBy,
     },
@@ -40,39 +40,37 @@ const createTodo = async (req, res, next) => {
 };
 
 const updateTodo = async (req, res, next) => {
-  const token = req.headers?.authorization.splice(7);
+  const token = req.headers?.authorization.split(' ')[1];
   const updatedBy = jwt.verify(token, process.env.JWT_SECRET);
-
-  const item = await prisma.todos.update({
-    where: {
-      id: req.params.itemId,
-    },
-    data: {
-      // TODO:  ADD UPDATE DATA - Figure out the code required to update only what is presented.
-    },
-  })
-  
-}
-
-const deleteTodo = async (req, res, next) => {
-  const token = req.headers?.authorization.splice(7);
-  const id = jwt.verify(token, process.env.JWT_SECRET);
-
-  if (createdBy !== id && updatedBy !== id && SYSTEM_ID !== id) { 
-    res.send("Not Authorized to delete this item.");
-    next();
-  }
-  
-  try {
-    await prisma.todos.delete({
+  try{
+    const item = await prisma.todos.update({
       where: {
         id: req.params.itemId,
       },
+      data: req.body,
     });
+  } catch(error) {
+    next(error);
+  }
+  res.send(item);
+}
+
+const deleteTodo = async (req, res, next) => {
+  const token = req.headers?.authorization.split(" ")[1];
+  const createdBy = jwt.verify(token, process.env.JWT_SECRET);
+  const id = req.params.id * 1;
+
+  try {
+    await prisma.todos.delete({
+      where: {
+        id,
+        createdBy,
+      },
+    });
+     res.sendStatus(204);
   } catch (ex) {
     next(ex);
   }
-  res.sendStatus(204);
 }
 
 

@@ -19,7 +19,7 @@ function middleware(req, res, next) {
 router.get("/me", middleware, getTodos);
 router.post("/new", createTodo);
 router.put("/:itemId", middleware, updateTodo);
-router.delete("/itemId", middleware, deleteTodo);
+router.delete("/:id", middleware, deleteTodo);
 
 
 module.exports = router;
