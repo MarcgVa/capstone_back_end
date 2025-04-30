@@ -147,7 +147,7 @@ exports.Prisma.ServicePlanScalarFieldEnum = {
   cycle: 'cycle'
 };
 
-exports.Prisma.TodosScalarFieldEnum = {
+exports.Prisma.TasksScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
@@ -190,6 +190,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -198,6 +203,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
@@ -210,7 +221,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   ServicePlan: 'ServicePlan',
-  Todos: 'Todos',
+  Tasks: 'Tasks',
   Consultations: 'Consultations',
   Billing: 'Billing',
   Invoice: 'Invoice'
