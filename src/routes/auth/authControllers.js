@@ -25,6 +25,7 @@ const register = async (req, res) => {
   const { email, password, role, firstName, lastName, address, city, state, zip, phone, servicePlanId } = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
+  zipcode = zip * 1;
   const newUser = await prisma.user.create({
     data: {
       email,
@@ -37,9 +38,8 @@ const register = async (req, res) => {
           address,
           city,
           state,
-          zip,
+          zip: zipcode,
           phone,
-          servicePlanId,
         },
       },
     },

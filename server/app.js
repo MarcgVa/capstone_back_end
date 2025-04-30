@@ -6,11 +6,11 @@ app.use(cors());
 
 
 const authRoutes = require("../src/routes/auth/authRoutes");
-const todoRoutes = require("../src/routes/todo/todoRoutes");
+const taskRoutes = require("../src/routes/tasks/taskRoutes");
 
 
 app.use("/api/auth", authRoutes);
-app.use("/api/todo", todoRoutes);
+app.use("/api/tasks", taskRoutes);
 
 
 

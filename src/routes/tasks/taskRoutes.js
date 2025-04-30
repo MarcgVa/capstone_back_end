@@ -5,7 +5,7 @@ const {
   createTodo,
   updateTodo,
   deleteTodo,
-} = require("./todoController");
+} = require("./taskController");
 
 function middleware(req, res, next) {
   const token = req.headers?.authorization?.split(" ")[1];
@@ -16,9 +16,10 @@ function middleware(req, res, next) {
   }
 }
 
-router.get("/me", middleware, getTodos);
+router.get("/all", middleware, getTodos);
+router.get("/assigned", middleware, getMyTodos);
 router.post("/new", createTodo);
-router.put("/:itemId", middleware, updateTodo);
+router.put("/:id", middleware, updateTodo);
 router.delete("/:id", middleware, deleteTodo);
 
 
