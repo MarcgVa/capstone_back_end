@@ -23,7 +23,7 @@ model User {
   password String
   role     Role     @default(USER)
   account  Account?
-  todos    Todos[]
+  todos    Tasks[]
 }
 
 model Account {
@@ -54,7 +54,7 @@ model ServicePlan {
   cycle         Int
 }
 
-model Todos {
+model Tasks {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(50)
   description String?  @db.VarChar(255)
@@ -65,7 +65,7 @@ model Todos {
   assignedTo  String?
   assignee    User     @relation(fields: [createdBy], references: [id])
   createdBy   String
-  updatedBy   String?
+  updatedBy   Json?
 }
 
 model Consultations {
