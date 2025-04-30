@@ -20,7 +20,7 @@ const getMyTasks = async (req, res, next) => {
 };
 
 const createTask = async (req, res, next) => {
-  const token = req.headers?.authorization.split(" ")[1];
+  const token = req.headers?.authorization?.split(" ")[1];
   let createdBy = '';
   if (token) {
    createdBy = jwt.verify(token, process.env.JWT_SECRET);
