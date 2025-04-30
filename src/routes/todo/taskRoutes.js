@@ -5,7 +5,7 @@ const {
   createTodo,
   updateTodo,
   deleteTodo,
-} = require("./todoController");
+} = require("./taskController");
 
 function middleware(req, res, next) {
   const token = req.headers?.authorization?.split(" ")[1];

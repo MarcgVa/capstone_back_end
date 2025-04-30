@@ -25,7 +25,12 @@ const getMyTodos = async (req, res, next) => {
 
 const createTodo = async (req, res, next) => {
   const token = req.headers?.authorization.split(" ")[1];
-  const createdBy = jwt.verify(token, process.env.JWT_SECRET);
+  let createdBy = '';
+  if (token) {
+    createdBy = jwt.verify(token, process.env.JWT_SECRET);
+  } else {
+    createdBy = process.env.SYS_ADMIN_ID;
+  }
   const { title, description, dueDate, assignedTo } = req.body;
   const item = await prisma.todos.create({
     data: {

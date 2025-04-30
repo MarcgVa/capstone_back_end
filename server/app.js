@@ -10,7 +10,7 @@ const todoRoutes = require("../src/routes/todo/todoRoutes");
 
 
 app.use("/api/auth", authRoutes);
-app.use("/api/todo", todoRoutes);
+app.use("/api/tasks", todoRoutes);
 
 
 
