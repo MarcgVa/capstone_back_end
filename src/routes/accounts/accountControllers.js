@@ -2,6 +2,14 @@ require("dotenv").config();
 const { prisma, bcrypt, jwt } = require("../../common/common");
 
 
+
+const getAuthentication = (req) => { 
+  const token = req.headers?.authorization?.split(' ')[1];
+  const authId = jwt.verify(token, process.env.JWT_SECRET);
+
+  return { token, authId };
+};
+
 const checkRole = async (id) => {
   const authAccount = await prisma.user.findFirst({
     where: {
@@ -19,8 +27,7 @@ const checkRole = async (id) => {
 
 
 const getUsers = async (req, res, next) => {
-  const token = req.headers?.authorization?.split(' ')[1];
-  const authId = jwt.verify(token, process.env.JWT_SECRET);
+  const { token, authId } = getAuthentication(req);
   const isAuthorized = checkRole(authId);
   if (token && isAuthorized) {
     try {
@@ -45,8 +52,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const getUser = async (req, res, next) => {
-  const token = req.headers?.authorization?.split(' ')[1];
-  const authId = jwt.verify(token, process.env.JWT_SECRET);
+  const { token, authId } = getAuthentication(req);
   const isAuthorized = checkRole(authId);
   const { id } = req.params;
 
@@ -70,8 +76,9 @@ const getUser = async (req, res, next) => {
   }
 };
 
+
+
 const getSelf = async (req, res, next) => {
-  
   try {
     const token = req.headers?.authorization?.split(" ")[1];
     const id = jwt.verify(token, process.env.JWT_SECRET);
