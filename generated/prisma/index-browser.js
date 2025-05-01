@@ -124,6 +124,11 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.RelationLoadStrategy = {
+  query: 'query',
+  join: 'join'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',

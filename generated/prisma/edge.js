@@ -96,6 +96,11 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.RelationLoadStrategy = {
+  query: 'query',
+  join: 'join'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
@@ -222,7 +227,9 @@ const config = {
         "native": true
       }
     ],
-    "previewFeatures": [],
+    "previewFeatures": [
+      "relationJoins"
+    ],
     "sourceFilePath": "/Volumes/External Drive/code/capstone/back_end/prisma/schema.prisma",
     "isCustomOutput": true
   },
@@ -237,16 +244,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:root@localhost:5432/capstone?schema=public"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n//models//\n\n// Models //\nmodel User {\n  id       String   @id @default(uuid())\n  email    String   @unique\n  password String\n  role     Role     @default(USER)\n  account  Account?\n  todos    Tasks[]\n}\n\nmodel Account {\n  id        Int       @id @default(autoincrement())\n  user      User      @relation(fields: [accountId], references: [id])\n  accountId String    @unique\n  firstName String\n  lastName  String\n  address   String    @db.VarChar(100)\n  city      String\n  state     String\n  zip       Int\n  phone     String    @unique\n  startDate DateTime?\n  cutDate   DateTime?\n  bill      Billing[]\n  invoice   Invoice[]\n\n  @@unique([firstName, lastName, phone])\n}\n\nmodel ServicePlan {\n  servicePlanId String  @id @default(uuid())\n  accountId     String? @unique\n  title         String  @unique\n  description   String  @db.VarChar(255)\n  cost          Float\n  cycle         Int\n}\n\nmodel Tasks {\n  id          Int      @id @default(autoincrement())\n  title       String   @db.VarChar(50)\n  description String?  @db.VarChar(255)\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  completed   Boolean  @default(false)\n  dueDate     DateTime\n  assignedTo  String?\n  assignee    User     @relation(fields: [createdBy], references: [id])\n  createdBy   String\n  updatedBy   Json?\n}\n\nmodel Consultations {\n  id          Int      @id @default(autoincrement())\n  name        String\n  address     String\n  phone       String\n  email       String   @unique\n  requestDate DateTime\n  completed   Boolean  @default(false)\n}\n\nmodel Billing {\n  id        Int      @id @default(autoincrement())\n  account   Account  @relation(fields: [billToId], references: [accountId])\n  billToId  String\n  startDate DateTime\n  endDate   DateTime\n  billCycle String\n  amount    Float\n}\n\nmodel Invoice {\n  invoiceId String  @id @default(uuid())\n  account   Account @relation(fields: [accountId], references: [accountId])\n  accountId String\n  invoice   String  @db.Xml\n}\n\nenum Role {\n  USER\n  ADMIN\n  MANAGER\n  TECH\n}\n",
-  "inlineSchemaHash": "a9555d55d19ff5a1d67162281b45e9fe9a077bce5e17ef64eb96872a89b0118d",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"relationJoins\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n//models//\n\n// Models //\nmodel User {\n  id       String   @id @default(uuid())\n  email    String   @unique\n  password String\n  role     Role     @default(USER)\n  account  Account?\n  todos    Tasks[]\n}\n\nmodel Account {\n  id        Int       @id @default(autoincrement())\n  user      User      @relation(fields: [accountId], references: [id])\n  accountId String    @unique\n  firstName String\n  lastName  String\n  address   String    @db.VarChar(100)\n  city      String\n  state     String\n  zip       Int\n  phone     String    @unique\n  startDate DateTime?\n  cutDate   DateTime?\n  bill      Billing[]\n  invoice   Invoice[]\n\n  @@unique([firstName, lastName, phone])\n}\n\nmodel ServicePlan {\n  servicePlanId String  @id @default(uuid())\n  accountId     String? @unique\n  title         String  @unique\n  description   String  @db.VarChar(255)\n  cost          Float\n  cycle         Int\n}\n\nmodel Tasks {\n  id          Int      @id @default(autoincrement())\n  title       String   @db.VarChar(50)\n  description String?  @db.VarChar(255)\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n  completed   Boolean  @default(false)\n  dueDate     DateTime\n  assignedTo  String?\n  assignee    User     @relation(fields: [createdBy], references: [id])\n  createdBy   String\n  updatedBy   Json?\n}\n\nmodel Consultations {\n  id          Int      @id @default(autoincrement())\n  name        String\n  address     String\n  phone       String\n  email       String   @unique\n  requestDate DateTime\n  completed   Boolean  @default(false)\n}\n\nmodel Billing {\n  id        Int      @id @default(autoincrement())\n  account   Account  @relation(fields: [billToId], references: [accountId])\n  billToId  String\n  startDate DateTime\n  endDate   DateTime\n  billCycle String\n  amount    Float\n}\n\nmodel Invoice {\n  invoiceId String  @id @default(uuid())\n  account   Account @relation(fields: [accountId], references: [accountId])\n  accountId String\n  invoice   String  @db.Xml\n}\n\nenum Role {\n  USER\n  ADMIN\n  MANAGER\n  TECH\n}\n",
+  "inlineSchemaHash": "c06c60bda36da19097023834b959017966056bdf05398817e0584b430b87591a",
   "copyEngine": true
 }
 config.dirname = '/'

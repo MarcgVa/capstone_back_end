@@ -22,7 +22,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { email, password, role, firstName, lastName, address, city, state, zip, phone, servicePlanId } = req.body;
+  const { email, password, role, firstName, lastName, address, city, state, zip, phone } = req.body;
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   zipcode = zip * 1;
@@ -45,11 +45,10 @@ const register = async (req, res) => {
     },
   });    
 
-  const cookies = new Cookies(req.headers.cookie, { path: "/" });
+
   if (newUser) {
     console.log(newUser);
     const token = jwt.sign(newUser.id, process.env.JWT_SECRET);
-    cookies.set('GSReg', true);
     res.json({ newUser, token });
   } else { 
     res.send("Something didn't work");

@@ -1,4 +1,4 @@
-const { router } = require("../../common/common");
+const router = require("express").Router();
 const { login, register, getUser } = require("./authControllers");
 
 function middleware(req, res, next) {
@@ -12,8 +12,6 @@ function middleware(req, res, next) {
 
 router.post("/login", login);
 router.post("/register", register);
-router.get('/me', middleware, getUser)
-
-
+router.get("/me", middleware, getUser);
 
 module.exports = router;
