@@ -1,5 +1,4 @@
 require("dotenv").config();
-const { token } = require("morgan");
 const { prisma, bcrypt, jwt } = require("../../common/common");
 
 
@@ -23,13 +22,15 @@ const getUsers = async (req, res, next) => {
   const token = req.headers?.authorization?.split(' ')[1];
   const authId = jwt.verify(token, process.env.JWT_SECRET);
   const isAuthorized = checkRole(authId);
-
   if (token && isAuthorized) {
     try {
       const clients = await prisma.user.findMany({
         where: {
           role: { equals: 'USER' }
         },
+        include: {
+          account: true
+        }
       });
       
       if (clients) {
@@ -48,6 +49,7 @@ const getUser = async (req, res, next) => {
   const authId = jwt.verify(token, process.env.JWT_SECRET);
   const isAuthorized = checkRole(authId);
   const { id } = req.params;
+
 
   if (id === authId || isAuthorized) {
     try {
@@ -74,10 +76,15 @@ const getSelf = async (req, res, next) => {
     const token = req.headers?.authorization?.split(" ")[1];
     const id = jwt.verify(token, process.env.JWT_SECRET);
 
+    console.log("id", id);
+
     const account = await prisma.account.findFirst({
       where: {
         accountId: { equals: id, }
       },
+      include: {
+        user: true,
+      }
     });
 
     if (account) {
