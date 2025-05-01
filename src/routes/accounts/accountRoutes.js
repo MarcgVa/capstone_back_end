@@ -10,7 +10,7 @@ function middleware(req, res, next) {
   }
 };
 
-router.get("/clients", middleware, getUsers);
+router.get("/list", middleware, getUsers);
 router.get("/:id", middleware, getUser);
 router.get("/me", middleware, getSelf);
 router.put("/:id", middleware, updateUser);
