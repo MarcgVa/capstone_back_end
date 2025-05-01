@@ -26,7 +26,7 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
   zipcode = zip * 1;
-  const newUser = await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email,
       password: hashedPassword,
@@ -46,10 +46,11 @@ const register = async (req, res) => {
   });    
 
 
-  if (newUser) {
-    console.log(newUser);
-    const token = jwt.sign(newUser.id, process.env.JWT_SECRET);
-    res.json({ newUser, token });
+  if (user) {
+    console.log(user);
+    const token = jwt.sign(user.id, process.env.JWT_SECRET);
+    console.log('token after registration',token);
+    res.json({user, token });
   } else { 
     res.send("Something didn't work");
   }

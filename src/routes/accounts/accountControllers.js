@@ -1,27 +1,12 @@
 require("dotenv").config();
 const { prisma, bcrypt, jwt } = require("../../common/common");
+const { verifyAuthentication,verifyAuthRole } = require("../../common/utils");
 
-
-const checkRole = async (id) => {
-  const authAccount = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
-
-  const role = authAccount.role.toLowerCase()
-  if (role === 'manager' || role === 'admin') {
-    return true;
-  } else { 
-    return false;
-  }
-};
 
 
 const getUsers = async (req, res, next) => {
-  const token = req.headers?.authorization?.split(' ')[1];
-  const authId = jwt.verify(token, process.env.JWT_SECRET);
-  const isAuthorized = checkRole(authId);
+  const { token, authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
   if (token && isAuthorized) {
     try {
       const clients = await prisma.user.findMany({
@@ -36,26 +21,25 @@ const getUsers = async (req, res, next) => {
       if (clients) {
         res.send(clients);
       }
+
     } catch (error) {
       next(error);
     }
-  } else { 
-    res.send('Not authorized to make this request.')
+  } else {
+    res.send('Not authorized,verifyRole to make this request.')
+  
   }
 };
 
 const getUser = async (req, res, next) => {
-  const token = req.headers?.authorization?.split(' ')[1];
-  const authId = jwt.verify(token, process.env.JWT_SECRET);
-  const isAuthorized = checkRole(authId);
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
-
-
   if (id === authId || isAuthorized) {
     try {
       const client = await prisma.account.findFirst({
         where: {
-          accountId: {equals: id},
+          accountId: { equals: id },
         },
       });
 
@@ -70,17 +54,13 @@ const getUser = async (req, res, next) => {
   }
 };
 
+
 const getSelf = async (req, res, next) => {
-  
   try {
-    const token = req.headers?.authorization?.split(" ")[1];
-    const id = jwt.verify(token, process.env.JWT_SECRET);
-
-    console.log("id", id);
-
+    const { authId } = verifyAuthentication(req);
     const account = await prisma.account.findFirst({
       where: {
-        accountId: { equals: id, }
+        accountId: { equals: authId, }
       },
       include: {
         user: true,
@@ -98,11 +78,63 @@ const getSelf = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
+  const { email, role, account } = req.body;
+  const { firstName, lastName, address, city, state, zip, phone } = account;
+   
+  const { id } = req.params;
+  try {
+    if (authId === id || isAuthorized) { 
+      const user = await prisma.account.update({
+        where: {
+          accountId: { equals: id },
+        },
+        data: {
+          email,
+          role,
+          account: {
+            update: {
+              firstName,
+              lastName,
+              address,
+              city,
+              state,
+              zip,
+              phone,
+            },
+          },
+        },
+      });
+
+    }
+    
+  } catch (error) {
+    next(error)
+  }
 };
 
 const deleteUser = async (req, res, next) => {
-  
-}
+   const { token, authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
+  const { id } = req.params;
+  try {
+    if (id === authId || isAuthorized) { 
+      const response = await prisma.user.delete({
+        where: {
+          id,
+        },
+        include: {
+          account: true,
+          todos: true,
+        }
+      });
+    }
+    res.Status(204);
+  } catch (error) {
+    next(error)
+  }
+};
+
 
 module.exports = { getUser, getUsers, getSelf, updateUser, deleteUser };
