@@ -45,11 +45,10 @@ const register = async (req, res) => {
     },
   });    
 
-  const cookies = new Cookies(req.headers.cookie, { path: "/" });
+
   if (newUser) {
     console.log(newUser);
     const token = jwt.sign(newUser.id, process.env.JWT_SECRET);
-    cookies.set('GSReg', true);
     res.json({ newUser, token });
   } else { 
     res.send("Something didn't work");
