@@ -1,5 +1,11 @@
-const { router } = require('../../common/common');
-const { getUser, getUsers, getSelf, updateUser, deleteUser } = require("./accountControllers");
+const router = require("express").Router();
+const {
+  getUser,
+  getUsers,
+  getSelf,
+  updateUser,
+  deleteUser,
+} = require("./accountControllers");
 
 function middleware(req, res, next) {
   const token = req.headers?.authorization?.split(" ")[1];
@@ -8,7 +14,7 @@ function middleware(req, res, next) {
   } else {
     res.send("Please log in again");
   }
-};
+}
 
 router.get("/list", middleware, getUsers);
 router.get("/:id", middleware, getUser);

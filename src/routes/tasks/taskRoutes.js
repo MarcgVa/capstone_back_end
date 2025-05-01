@@ -1,10 +1,11 @@
-const { router } = require("../../common/common");
+const router = require("express").Router();
 const {
   getTasks,
+  getTask,
   getMyTasks,
-  createTask,
   updateTask,
   deleteTask,
+  createTask,
 } = require("./taskController");
 
 function middleware(req, res, next) {
@@ -17,10 +18,10 @@ function middleware(req, res, next) {
 }
 
 router.get("/all", middleware, getTasks);
-router.get("/assigned", middleware, getMyTasks);
+router.get("/:id", middleware, getTask);
+router.get("/me", middleware, getMyTasks);
 router.post("/new", createTask);
 router.put("/:id", middleware, updateTask);
 router.delete("/:id", middleware, deleteTask);
-
 
 module.exports = router;

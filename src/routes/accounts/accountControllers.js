@@ -88,8 +88,6 @@ const getSelf = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  
 };
 
 const updateUser = async (req, res, next) => {
