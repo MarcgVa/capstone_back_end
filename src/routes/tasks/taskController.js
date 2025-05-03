@@ -1,34 +1,56 @@
 require('dotenv').config();
 const { prisma, jwt } = require('../../common/common');
+const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
 const getTasks = async (req, res) => {
-  const token = req.headers?.authorization.split(" ")[1];
-  const id = jwt.verify(token, process.env.JWT_SECRET);
-  const items = await prisma.tasks.findMany({
-    where: {
-      userId: { equals: id, }
-    },
-  });
-  res.send(items);
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
+  
+  if (isAuthorized) {
+    const items = await prisma.tasks.findMany({
+    });
+    res.send(items);
+  } else { 
+    res.sendStatus(403);
+  }
 };
 
 const getTask = async (req, res) => {
-  const token = req.headers?.authorization.split(" ")[1];
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
-  const item = await prisma.tasks.findMany({
-    where: {
-      id,
-    },
-  });
-  res.send(item);
+  if (authId === id || isAuthorized){
+    try {
+      const item = await prisma.tasks.findMany({
+        where: {
+          id,
+        },
+      });
+      res.send(item);
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    res.sendStatus(403) 
+  }
 };
 
 const getMyTasks = async (req, res, next) => {
   const token = req.headers?.authorization.split(" ")[1];
   const id = jwt.verify(token, process.env.JWT_SECRET);
+  const user = await prisma.user.findFirst({
+    where: { id: { equals: id } },
+    
+  });
   const items = await prisma.tasks.findMany({
     where: {
-      assignee: { equals: req.body.email, }
+      OR: [
+
+        { assignedTo: { equals: user.email } },
+
+        { createdBy: { equals: id } },
+
+      ],
     },
   });
   res.send(items);
