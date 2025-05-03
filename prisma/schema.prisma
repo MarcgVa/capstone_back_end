@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
   previewFeatures = ["relationJoins"]
 }
 
@@ -24,35 +24,45 @@ model User {
   password String
   role     Role     @default(USER)
   account  Account?
-  todos    Tasks[]
+  tasks    Tasks[]
 }
 
 model Account {
-  id        Int       @id @default(autoincrement())
-  user      User      @relation(fields: [accountId], references: [id])
-  accountId String    @unique
+  id        Int        @id @default(autoincrement())
+  user      User       @relation(fields: [accountId], references: [id])
+  accountId String     @unique
   firstName String
   lastName  String
-  address   String    @db.VarChar(100)
+  address   String     @db.VarChar(100)
   city      String
   state     String
   zip       Int
-  phone     String    @unique
+  phone     String     @unique
   startDate DateTime?
   cutDate   DateTime?
   bill      Billing[]
   invoice   Invoice[]
+  Services  Services[]
 
   @@unique([firstName, lastName, phone])
 }
 
 model ServicePlan {
-  servicePlanId String  @id @default(uuid())
-  accountId     String? @unique
-  title         String  @unique
-  description   String  @db.VarChar(255)
+  servicePlanId String     @id @default(uuid())
+  accountId     String?    @unique
+  title         String     @unique
+  description   String     @db.VarChar(255)
   cost          Float
   cycle         Int
+  services      Services[]
+}
+
+model Services {
+  id        String      @id @default(uuid())
+  account   Account     @relation(fields: [accountId], references: [accountId])
+  accountId String
+  service   ServicePlan @relation(fields: [serviceId], references: [servicePlanId])
+  serviceId String
 }
 
 model Tasks {

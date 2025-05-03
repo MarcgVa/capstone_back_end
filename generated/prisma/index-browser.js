@@ -152,6 +152,12 @@ exports.Prisma.ServicePlanScalarFieldEnum = {
   cycle: 'cycle'
 };
 
+exports.Prisma.ServicesScalarFieldEnum = {
+  id: 'id',
+  accountId: 'accountId',
+  serviceId: 'serviceId'
+};
+
 exports.Prisma.TasksScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -226,6 +232,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   ServicePlan: 'ServicePlan',
+  Services: 'Services',
   Tasks: 'Tasks',
   Consultations: 'Consultations',
   Billing: 'Billing',
