@@ -14,7 +14,7 @@ const login = async (req, res) => {
   const match = await bcrypt.compare(password, user?.password);
 
   if (match) {
-    const token = jwt.sign(user.id, process.env.JWT_SECRET);
+    const token = jwt.sign({id:user.id}, process.env.JWT_SECRET);
     res.send({ user, token });
   } else {
     res.send("Try to logon again...");
@@ -48,7 +48,7 @@ const register = async (req, res) => {
 
   if (user) {
     console.log(user);
-    const token = jwt.sign(user.id, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     console.log('token after registration',token);
     res.json({user, token });
   } else { 

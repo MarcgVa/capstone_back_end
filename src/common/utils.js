@@ -5,8 +5,7 @@ const { prisma, jwt } = require("./common");
 
 const verifyAuthentication = (req) => {
   const token = req.headers?.authorization?.split(" ")[1];
-  const authId = jwt.verify(token, process.env.JWT_SECRET);
-
+  const authId = jwt.verify(token, process.env.JWT_SECRET).id;
   return { token, authId };
 };
 

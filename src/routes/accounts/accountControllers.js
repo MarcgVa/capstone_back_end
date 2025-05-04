@@ -31,41 +31,20 @@ const getUsers = async (req, res, next) => {
   }
 };
 
-const getUser = async (req, res, next) => {
-  const { authId } = verifyAuthentication(req);
-  const isAuthorized = await verifyAuthRole(authId);
-  const { id } = req.params;
-  if (id === authId || isAuthorized) {
-    try {
-      const client = await prisma.account.findFirst({
-        where: {
-          accountId: { equals: id },
-        },
-      });
-
-      if (client) {
-        res.send(client);
-      }
-    } catch (error) {
-      next(error);
-    }
-  } else {
-    res.send("Not authorized to make this request.");
-  }
-};
-
-
 const getSelf = async (req, res, next) => {
   try {
     const { authId } = verifyAuthentication(req);
-    const account = await prisma.account.findFirst({
+    console.log('authId', authId);
+    const account = await prisma.user.findFirst({
       where: {
-        accountId: { equals: authId, }
+        id: { equals: authId, }
       },
       include: {
-        user: true,
+        account: true,
       }
     });
+
+    console.log('GetSelf-account', account);
 
     if (account) {
       res.send(account);
@@ -137,4 +116,4 @@ const deleteUser = async (req, res, next) => {
 };
 
 
-module.exports = { getUser, getUsers, getSelf, updateUser, deleteUser };
+module.exports = { getUsers, getSelf, updateUser, deleteUser };
