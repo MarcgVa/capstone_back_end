@@ -2,16 +2,13 @@ require('dotenv').config();
 const { prisma, jwt } = require('../../common/common');
 const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
-const getTasks = async (req, res) => {
+const getTasks = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
-  const isAuthorized = await verifyAuthRole(authId);
-  
-  if (isAuthorized) {
-    const items = await prisma.tasks.findMany({
-    });
+  try {
+    const items = await prisma.tasks.findMany({});
     res.send(items);
-  } else { 
-    res.sendStatus(403);
+  } catch (error) {
+    next(error);
   }
 };
 
