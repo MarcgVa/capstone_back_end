@@ -34,7 +34,6 @@ const getUsers = async (req, res, next) => {
 const getSelf = async (req, res, next) => {
   try {
     const { authId } = verifyAuthentication(req);
-    console.log('authId', authId);
     const account = await prisma.user.findFirst({
       where: {
         id: { equals: authId, }
