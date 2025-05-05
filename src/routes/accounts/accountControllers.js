@@ -44,8 +44,6 @@ const getSelf = async (req, res, next) => {
       }
     });
 
-    console.log('GetSelf-account', account);
-
     if (account) {
       res.send(account);
     } else {
