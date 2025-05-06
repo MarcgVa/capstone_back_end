@@ -120,7 +120,7 @@ const disableUser = async (req, res, next) => {
     if (isAuthorized) {
       const user = await prisma.user.update({
         where: {
-          accountId: { equals: id },
+          id: { equals: id },
         },
         data: {
           role: "DISABLED",
