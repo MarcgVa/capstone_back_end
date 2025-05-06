@@ -25,6 +25,7 @@ model User {
   role     Role     @default(USER)
   account  Account?
   tasks    Tasks[]
+  createdAt DateTime @default(now())
 }
 
 model Account {
@@ -38,8 +39,8 @@ model Account {
   state     String
   zip       Int
   phone     String     @unique
-  startDate DateTime?
-  cutDate   DateTime?
+  startDate DateTime? @db.Date
+  cutDate   DateTime? @db.Date
   bill      Billing[]
   invoice   Invoice[]
   Services  Services[]
@@ -72,7 +73,7 @@ model Tasks {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   completed   Boolean  @default(false)
-  dueDate     DateTime
+  dueDate     DateTime @db.Date
   assignedTo  String?
   assignee    User     @relation(fields: [createdBy], references: [id])
   createdBy   String
@@ -85,7 +86,7 @@ model Consultations {
   address     String
   phone       String
   email       String   @unique
-  requestDate DateTime
+  requestDate DateTime @db.Date
   completed   Boolean  @default(false)
 }
 
@@ -93,8 +94,8 @@ model Billing {
   id        Int      @id @default(autoincrement())
   account   Account  @relation(fields: [billToId], references: [accountId])
   billToId  String
-  startDate DateTime
-  endDate   DateTime
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
   billCycle String
   amount    Float
 }
@@ -106,9 +107,17 @@ model Invoice {
   invoice   String  @db.Xml
 }
 
+model maintenance {
+  id Int @id @default(autoincrement())
+  item String @db.VarChar(50)
+  cycle Int
+  startDate DateTime @db.Date
+}
+
 enum Role {
   USER
   ADMIN
   MANAGER
   TECH
+  DISABLED
 }

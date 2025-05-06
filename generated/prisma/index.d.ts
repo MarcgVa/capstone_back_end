@@ -53,6 +53,11 @@ export type Billing = $Result.DefaultSelection<Prisma.$BillingPayload>
  * 
  */
 export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
+/**
+ * Model maintenance
+ * 
+ */
+export type maintenance = $Result.DefaultSelection<Prisma.$maintenancePayload>
 
 /**
  * Enums
@@ -62,7 +67,8 @@ export namespace $Enums {
   USER: 'USER',
   ADMIN: 'ADMIN',
   MANAGER: 'MANAGER',
-  TECH: 'TECH'
+  TECH: 'TECH',
+  DISABLED: 'DISABLED'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -277,6 +283,16 @@ export class PrismaClient<
     * ```
     */
   get invoice(): Prisma.InvoiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.maintenance`: Exposes CRUD operations for the **maintenance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Maintenances
+    * const maintenances = await prisma.maintenance.findMany()
+    * ```
+    */
+  get maintenance(): Prisma.maintenanceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -724,7 +740,8 @@ export namespace Prisma {
     Tasks: 'Tasks',
     Consultations: 'Consultations',
     Billing: 'Billing',
-    Invoice: 'Invoice'
+    Invoice: 'Invoice',
+    maintenance: 'maintenance'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -743,7 +760,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "servicePlan" | "services" | "tasks" | "consultations" | "billing" | "invoice"
+      modelProps: "user" | "account" | "servicePlan" | "services" | "tasks" | "consultations" | "billing" | "invoice" | "maintenance"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1339,6 +1356,80 @@ export namespace Prisma {
           }
         }
       }
+      maintenance: {
+        payload: Prisma.$maintenancePayload<ExtArgs>
+        fields: Prisma.maintenanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.maintenanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.maintenanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          findFirst: {
+            args: Prisma.maintenanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.maintenanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          findMany: {
+            args: Prisma.maintenanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>[]
+          }
+          create: {
+            args: Prisma.maintenanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          createMany: {
+            args: Prisma.maintenanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.maintenanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>[]
+          }
+          delete: {
+            args: Prisma.maintenanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          update: {
+            args: Prisma.maintenanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          deleteMany: {
+            args: Prisma.maintenanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.maintenanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.maintenanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>[]
+          }
+          upsert: {
+            args: Prisma.maintenanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$maintenancePayload>
+          }
+          aggregate: {
+            args: Prisma.MaintenanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMaintenance>
+          }
+          groupBy: {
+            args: Prisma.maintenanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MaintenanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.maintenanceCountArgs<ExtArgs>
+            result: $Utils.Optional<MaintenanceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1431,6 +1522,7 @@ export namespace Prisma {
     consultations?: ConsultationsOmit
     billing?: BillingOmit
     invoice?: InvoiceOmit
+    maintenance?: maintenanceOmit
   }
 
   /* Types for Logging */
@@ -1650,6 +1742,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.Role | null
+    createdAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1657,6 +1750,7 @@ export namespace Prisma {
     email: string | null
     password: string | null
     role: $Enums.Role | null
+    createdAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1664,6 +1758,7 @@ export namespace Prisma {
     email: number
     password: number
     role: number
+    createdAt: number
     _all: number
   }
 
@@ -1673,6 +1768,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    createdAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1680,6 +1776,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    createdAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1687,6 +1784,7 @@ export namespace Prisma {
     email?: true
     password?: true
     role?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -1767,6 +1865,7 @@ export namespace Prisma {
     email: string
     password: string
     role: $Enums.Role
+    createdAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1791,6 +1890,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
     account?: boolean | User$accountArgs<ExtArgs>
     tasks?: boolean | User$tasksArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1801,6 +1901,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1808,6 +1909,7 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1815,9 +1917,10 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
+    createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | User$accountArgs<ExtArgs>
     tasks?: boolean | User$tasksArgs<ExtArgs>
@@ -1837,6 +1940,7 @@ export namespace Prisma {
       email: string
       password: string
       role: $Enums.Role
+      createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2266,6 +2370,7 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -10558,6 +10663,1035 @@ export namespace Prisma {
 
 
   /**
+   * Model maintenance
+   */
+
+  export type AggregateMaintenance = {
+    _count: MaintenanceCountAggregateOutputType | null
+    _avg: MaintenanceAvgAggregateOutputType | null
+    _sum: MaintenanceSumAggregateOutputType | null
+    _min: MaintenanceMinAggregateOutputType | null
+    _max: MaintenanceMaxAggregateOutputType | null
+  }
+
+  export type MaintenanceAvgAggregateOutputType = {
+    id: number | null
+    cycle: number | null
+  }
+
+  export type MaintenanceSumAggregateOutputType = {
+    id: number | null
+    cycle: number | null
+  }
+
+  export type MaintenanceMinAggregateOutputType = {
+    id: number | null
+    item: string | null
+    cycle: number | null
+    startDate: Date | null
+  }
+
+  export type MaintenanceMaxAggregateOutputType = {
+    id: number | null
+    item: string | null
+    cycle: number | null
+    startDate: Date | null
+  }
+
+  export type MaintenanceCountAggregateOutputType = {
+    id: number
+    item: number
+    cycle: number
+    startDate: number
+    _all: number
+  }
+
+
+  export type MaintenanceAvgAggregateInputType = {
+    id?: true
+    cycle?: true
+  }
+
+  export type MaintenanceSumAggregateInputType = {
+    id?: true
+    cycle?: true
+  }
+
+  export type MaintenanceMinAggregateInputType = {
+    id?: true
+    item?: true
+    cycle?: true
+    startDate?: true
+  }
+
+  export type MaintenanceMaxAggregateInputType = {
+    id?: true
+    item?: true
+    cycle?: true
+    startDate?: true
+  }
+
+  export type MaintenanceCountAggregateInputType = {
+    id?: true
+    item?: true
+    cycle?: true
+    startDate?: true
+    _all?: true
+  }
+
+  export type MaintenanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which maintenance to aggregate.
+     */
+    where?: maintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of maintenances to fetch.
+     */
+    orderBy?: maintenanceOrderByWithRelationInput | maintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: maintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned maintenances
+    **/
+    _count?: true | MaintenanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MaintenanceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MaintenanceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MaintenanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MaintenanceMaxAggregateInputType
+  }
+
+  export type GetMaintenanceAggregateType<T extends MaintenanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateMaintenance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMaintenance[P]>
+      : GetScalarType<T[P], AggregateMaintenance[P]>
+  }
+
+
+
+
+  export type maintenanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: maintenanceWhereInput
+    orderBy?: maintenanceOrderByWithAggregationInput | maintenanceOrderByWithAggregationInput[]
+    by: MaintenanceScalarFieldEnum[] | MaintenanceScalarFieldEnum
+    having?: maintenanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MaintenanceCountAggregateInputType | true
+    _avg?: MaintenanceAvgAggregateInputType
+    _sum?: MaintenanceSumAggregateInputType
+    _min?: MaintenanceMinAggregateInputType
+    _max?: MaintenanceMaxAggregateInputType
+  }
+
+  export type MaintenanceGroupByOutputType = {
+    id: number
+    item: string
+    cycle: number
+    startDate: Date
+    _count: MaintenanceCountAggregateOutputType | null
+    _avg: MaintenanceAvgAggregateOutputType | null
+    _sum: MaintenanceSumAggregateOutputType | null
+    _min: MaintenanceMinAggregateOutputType | null
+    _max: MaintenanceMaxAggregateOutputType | null
+  }
+
+  type GetMaintenanceGroupByPayload<T extends maintenanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MaintenanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MaintenanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
+            : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type maintenanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item?: boolean
+    cycle?: boolean
+    startDate?: boolean
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type maintenanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item?: boolean
+    cycle?: boolean
+    startDate?: boolean
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type maintenanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item?: boolean
+    cycle?: boolean
+    startDate?: boolean
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type maintenanceSelectScalar = {
+    id?: boolean
+    item?: boolean
+    cycle?: boolean
+    startDate?: boolean
+  }
+
+  export type maintenanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "item" | "cycle" | "startDate", ExtArgs["result"]["maintenance"]>
+
+  export type $maintenancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "maintenance"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      item: string
+      cycle: number
+      startDate: Date
+    }, ExtArgs["result"]["maintenance"]>
+    composites: {}
+  }
+
+  type maintenanceGetPayload<S extends boolean | null | undefined | maintenanceDefaultArgs> = $Result.GetResult<Prisma.$maintenancePayload, S>
+
+  type maintenanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<maintenanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit' | 'relationLoadStrategy'> & {
+      select?: MaintenanceCountAggregateInputType | true
+    }
+
+  export interface maintenanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['maintenance'], meta: { name: 'maintenance' } }
+    /**
+     * Find zero or one Maintenance that matches the filter.
+     * @param {maintenanceFindUniqueArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends maintenanceFindUniqueArgs>(args: SelectSubset<T, maintenanceFindUniqueArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Maintenance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {maintenanceFindUniqueOrThrowArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends maintenanceFindUniqueOrThrowArgs>(args: SelectSubset<T, maintenanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Maintenance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceFindFirstArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends maintenanceFindFirstArgs>(args?: SelectSubset<T, maintenanceFindFirstArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Maintenance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceFindFirstOrThrowArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends maintenanceFindFirstOrThrowArgs>(args?: SelectSubset<T, maintenanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Maintenances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Maintenances
+     * const maintenances = await prisma.maintenance.findMany()
+     * 
+     * // Get first 10 Maintenances
+     * const maintenances = await prisma.maintenance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends maintenanceFindManyArgs>(args?: SelectSubset<T, maintenanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Maintenance.
+     * @param {maintenanceCreateArgs} args - Arguments to create a Maintenance.
+     * @example
+     * // Create one Maintenance
+     * const Maintenance = await prisma.maintenance.create({
+     *   data: {
+     *     // ... data to create a Maintenance
+     *   }
+     * })
+     * 
+     */
+    create<T extends maintenanceCreateArgs>(args: SelectSubset<T, maintenanceCreateArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Maintenances.
+     * @param {maintenanceCreateManyArgs} args - Arguments to create many Maintenances.
+     * @example
+     * // Create many Maintenances
+     * const maintenance = await prisma.maintenance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends maintenanceCreateManyArgs>(args?: SelectSubset<T, maintenanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Maintenances and returns the data saved in the database.
+     * @param {maintenanceCreateManyAndReturnArgs} args - Arguments to create many Maintenances.
+     * @example
+     * // Create many Maintenances
+     * const maintenance = await prisma.maintenance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Maintenances and only return the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends maintenanceCreateManyAndReturnArgs>(args?: SelectSubset<T, maintenanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Maintenance.
+     * @param {maintenanceDeleteArgs} args - Arguments to delete one Maintenance.
+     * @example
+     * // Delete one Maintenance
+     * const Maintenance = await prisma.maintenance.delete({
+     *   where: {
+     *     // ... filter to delete one Maintenance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends maintenanceDeleteArgs>(args: SelectSubset<T, maintenanceDeleteArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Maintenance.
+     * @param {maintenanceUpdateArgs} args - Arguments to update one Maintenance.
+     * @example
+     * // Update one Maintenance
+     * const maintenance = await prisma.maintenance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends maintenanceUpdateArgs>(args: SelectSubset<T, maintenanceUpdateArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Maintenances.
+     * @param {maintenanceDeleteManyArgs} args - Arguments to filter Maintenances to delete.
+     * @example
+     * // Delete a few Maintenances
+     * const { count } = await prisma.maintenance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends maintenanceDeleteManyArgs>(args?: SelectSubset<T, maintenanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Maintenances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Maintenances
+     * const maintenance = await prisma.maintenance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends maintenanceUpdateManyArgs>(args: SelectSubset<T, maintenanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Maintenances and returns the data updated in the database.
+     * @param {maintenanceUpdateManyAndReturnArgs} args - Arguments to update many Maintenances.
+     * @example
+     * // Update many Maintenances
+     * const maintenance = await prisma.maintenance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Maintenances and only return the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends maintenanceUpdateManyAndReturnArgs>(args: SelectSubset<T, maintenanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Maintenance.
+     * @param {maintenanceUpsertArgs} args - Arguments to update or create a Maintenance.
+     * @example
+     * // Update or create a Maintenance
+     * const maintenance = await prisma.maintenance.upsert({
+     *   create: {
+     *     // ... data to create a Maintenance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Maintenance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends maintenanceUpsertArgs>(args: SelectSubset<T, maintenanceUpsertArgs<ExtArgs>>): Prisma__maintenanceClient<$Result.GetResult<Prisma.$maintenancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Maintenances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceCountArgs} args - Arguments to filter Maintenances to count.
+     * @example
+     * // Count the number of Maintenances
+     * const count = await prisma.maintenance.count({
+     *   where: {
+     *     // ... the filter for the Maintenances we want to count
+     *   }
+     * })
+    **/
+    count<T extends maintenanceCountArgs>(
+      args?: Subset<T, maintenanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MaintenanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Maintenance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MaintenanceAggregateArgs>(args: Subset<T, MaintenanceAggregateArgs>): Prisma.PrismaPromise<GetMaintenanceAggregateType<T>>
+
+    /**
+     * Group by Maintenance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {maintenanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends maintenanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: maintenanceGroupByArgs['orderBy'] }
+        : { orderBy?: maintenanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, maintenanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMaintenanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the maintenance model
+   */
+  readonly fields: maintenanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for maintenance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__maintenanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the maintenance model
+   */
+  interface maintenanceFieldRefs {
+    readonly id: FieldRef<"maintenance", 'Int'>
+    readonly item: FieldRef<"maintenance", 'String'>
+    readonly cycle: FieldRef<"maintenance", 'Int'>
+    readonly startDate: FieldRef<"maintenance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * maintenance findUnique
+   */
+  export type maintenanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter, which maintenance to fetch.
+     */
+    where: maintenanceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance findUniqueOrThrow
+   */
+  export type maintenanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter, which maintenance to fetch.
+     */
+    where: maintenanceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance findFirst
+   */
+  export type maintenanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter, which maintenance to fetch.
+     */
+    where?: maintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of maintenances to fetch.
+     */
+    orderBy?: maintenanceOrderByWithRelationInput | maintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for maintenances.
+     */
+    cursor?: maintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of maintenances.
+     */
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance findFirstOrThrow
+   */
+  export type maintenanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter, which maintenance to fetch.
+     */
+    where?: maintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of maintenances to fetch.
+     */
+    orderBy?: maintenanceOrderByWithRelationInput | maintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for maintenances.
+     */
+    cursor?: maintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of maintenances.
+     */
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance findMany
+   */
+  export type maintenanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter, which maintenances to fetch.
+     */
+    where?: maintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of maintenances to fetch.
+     */
+    orderBy?: maintenanceOrderByWithRelationInput | maintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing maintenances.
+     */
+    cursor?: maintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` maintenances.
+     */
+    skip?: number
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance create
+   */
+  export type maintenanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * The data needed to create a maintenance.
+     */
+    data: XOR<maintenanceCreateInput, maintenanceUncheckedCreateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance createMany
+   */
+  export type maintenanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many maintenances.
+     */
+    data: maintenanceCreateManyInput | maintenanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * maintenance createManyAndReturn
+   */
+  export type maintenanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many maintenances.
+     */
+    data: maintenanceCreateManyInput | maintenanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * maintenance update
+   */
+  export type maintenanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * The data needed to update a maintenance.
+     */
+    data: XOR<maintenanceUpdateInput, maintenanceUncheckedUpdateInput>
+    /**
+     * Choose, which maintenance to update.
+     */
+    where: maintenanceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance updateMany
+   */
+  export type maintenanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update maintenances.
+     */
+    data: XOR<maintenanceUpdateManyMutationInput, maintenanceUncheckedUpdateManyInput>
+    /**
+     * Filter which maintenances to update
+     */
+    where?: maintenanceWhereInput
+    /**
+     * Limit how many maintenances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * maintenance updateManyAndReturn
+   */
+  export type maintenanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * The data used to update maintenances.
+     */
+    data: XOR<maintenanceUpdateManyMutationInput, maintenanceUncheckedUpdateManyInput>
+    /**
+     * Filter which maintenances to update
+     */
+    where?: maintenanceWhereInput
+    /**
+     * Limit how many maintenances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * maintenance upsert
+   */
+  export type maintenanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * The filter to search for the maintenance to update in case it exists.
+     */
+    where: maintenanceWhereUniqueInput
+    /**
+     * In case the maintenance found by the `where` argument doesn't exist, create a new maintenance with this data.
+     */
+    create: XOR<maintenanceCreateInput, maintenanceUncheckedCreateInput>
+    /**
+     * In case the maintenance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<maintenanceUpdateInput, maintenanceUncheckedUpdateInput>
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance delete
+   */
+  export type maintenanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+    /**
+     * Filter which maintenance to delete.
+     */
+    where: maintenanceWhereUniqueInput
+    relationLoadStrategy?: RelationLoadStrategy
+  }
+
+  /**
+   * maintenance deleteMany
+   */
+  export type maintenanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which maintenances to delete
+     */
+    where?: maintenanceWhereInput
+    /**
+     * Limit how many maintenances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * maintenance without action
+   */
+  export type maintenanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the maintenance
+     */
+    select?: maintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the maintenance
+     */
+    omit?: maintenanceOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10575,7 +11709,8 @@ export namespace Prisma {
     id: 'id',
     email: 'email',
     password: 'password',
-    role: 'role'
+    role: 'role',
+    createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -10677,6 +11812,16 @@ export namespace Prisma {
   export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
 
 
+  export const MaintenanceScalarFieldEnum: {
+    id: 'id',
+    item: 'item',
+    cycle: 'cycle',
+    startDate: 'startDate'
+  };
+
+  export type MaintenanceScalarFieldEnum = (typeof MaintenanceScalarFieldEnum)[keyof typeof MaintenanceScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -10752,20 +11897,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -10776,6 +11907,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -10825,6 +11970,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    createdAt?: DateTimeFilter<"User"> | Date | string
     account?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
     tasks?: TasksListRelationFilter
   }
@@ -10834,6 +11980,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
     account?: AccountOrderByWithRelationInput
     tasks?: TasksOrderByRelationAggregateInput
   }
@@ -10846,6 +11993,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
+    createdAt?: DateTimeFilter<"User"> | Date | string
     account?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
     tasks?: TasksListRelationFilter
   }, "id" | "email">
@@ -10855,6 +12003,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -10868,6 +12017,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -11330,11 +12480,61 @@ export namespace Prisma {
     invoice?: StringWithAggregatesFilter<"Invoice"> | string
   }
 
+  export type maintenanceWhereInput = {
+    AND?: maintenanceWhereInput | maintenanceWhereInput[]
+    OR?: maintenanceWhereInput[]
+    NOT?: maintenanceWhereInput | maintenanceWhereInput[]
+    id?: IntFilter<"maintenance"> | number
+    item?: StringFilter<"maintenance"> | string
+    cycle?: IntFilter<"maintenance"> | number
+    startDate?: DateTimeFilter<"maintenance"> | Date | string
+  }
+
+  export type maintenanceOrderByWithRelationInput = {
+    id?: SortOrder
+    item?: SortOrder
+    cycle?: SortOrder
+    startDate?: SortOrder
+  }
+
+  export type maintenanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: maintenanceWhereInput | maintenanceWhereInput[]
+    OR?: maintenanceWhereInput[]
+    NOT?: maintenanceWhereInput | maintenanceWhereInput[]
+    item?: StringFilter<"maintenance"> | string
+    cycle?: IntFilter<"maintenance"> | number
+    startDate?: DateTimeFilter<"maintenance"> | Date | string
+  }, "id">
+
+  export type maintenanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    item?: SortOrder
+    cycle?: SortOrder
+    startDate?: SortOrder
+    _count?: maintenanceCountOrderByAggregateInput
+    _avg?: maintenanceAvgOrderByAggregateInput
+    _max?: maintenanceMaxOrderByAggregateInput
+    _min?: maintenanceMinOrderByAggregateInput
+    _sum?: maintenanceSumOrderByAggregateInput
+  }
+
+  export type maintenanceScalarWhereWithAggregatesInput = {
+    AND?: maintenanceScalarWhereWithAggregatesInput | maintenanceScalarWhereWithAggregatesInput[]
+    OR?: maintenanceScalarWhereWithAggregatesInput[]
+    NOT?: maintenanceScalarWhereWithAggregatesInput | maintenanceScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"maintenance"> | number
+    item?: StringWithAggregatesFilter<"maintenance"> | string
+    cycle?: IntWithAggregatesFilter<"maintenance"> | number
+    startDate?: DateTimeWithAggregatesFilter<"maintenance"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     account?: AccountCreateNestedOneWithoutUserInput
     tasks?: TasksCreateNestedManyWithoutAssigneeInput
   }
@@ -11344,6 +12544,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     account?: AccountUncheckedCreateNestedOneWithoutUserInput
     tasks?: TasksUncheckedCreateNestedManyWithoutAssigneeInput
   }
@@ -11353,6 +12554,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutUserNestedInput
     tasks?: TasksUpdateManyWithoutAssigneeNestedInput
   }
@@ -11362,6 +12564,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUncheckedUpdateOneWithoutUserNestedInput
     tasks?: TasksUncheckedUpdateManyWithoutAssigneeNestedInput
   }
@@ -11371,6 +12574,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -11378,6 +12582,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -11385,6 +12590,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateInput = {
@@ -11854,6 +13060,52 @@ export namespace Prisma {
     invoice?: StringFieldUpdateOperationsInput | string
   }
 
+  export type maintenanceCreateInput = {
+    item: string
+    cycle: number
+    startDate: Date | string
+  }
+
+  export type maintenanceUncheckedCreateInput = {
+    id?: number
+    item: string
+    cycle: number
+    startDate: Date | string
+  }
+
+  export type maintenanceUpdateInput = {
+    item?: StringFieldUpdateOperationsInput | string
+    cycle?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type maintenanceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    item?: StringFieldUpdateOperationsInput | string
+    cycle?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type maintenanceCreateManyInput = {
+    id?: number
+    item: string
+    cycle: number
+    startDate: Date | string
+  }
+
+  export type maintenanceUpdateManyMutationInput = {
+    item?: StringFieldUpdateOperationsInput | string
+    cycle?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type maintenanceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    item?: StringFieldUpdateOperationsInput | string
+    cycle?: IntFieldUpdateOperationsInput | number
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11876,6 +13128,17 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type AccountNullableScalarRelationFilter = {
     is?: AccountWhereInput | null
     isNot?: AccountWhereInput | null
@@ -11896,6 +13159,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -11903,6 +13167,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -11910,6 +13175,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11938,6 +13204,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12215,17 +13495,6 @@ export namespace Prisma {
     serviceId?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -12297,20 +13566,6 @@ export namespace Prisma {
 
   export type TasksSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -12440,6 +13695,37 @@ export namespace Prisma {
     invoice?: SortOrder
   }
 
+  export type maintenanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    item?: SortOrder
+    cycle?: SortOrder
+    startDate?: SortOrder
+  }
+
+  export type maintenanceAvgOrderByAggregateInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+  }
+
+  export type maintenanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    item?: SortOrder
+    cycle?: SortOrder
+    startDate?: SortOrder
+  }
+
+  export type maintenanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    item?: SortOrder
+    cycle?: SortOrder
+    startDate?: SortOrder
+  }
+
+  export type maintenanceSumOrderByAggregateInput = {
+    id?: SortOrder
+    cycle?: SortOrder
+  }
+
   export type AccountCreateNestedOneWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput
@@ -12472,6 +13758,10 @@ export namespace Prisma {
 
   export type EnumRoleFieldUpdateOperationsInput = {
     set?: $Enums.Role
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type AccountUpdateOneWithoutUserNestedInput = {
@@ -12762,10 +14052,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -12827,6 +14113,17 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12863,6 +14160,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -12975,34 +14286,9 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13184,6 +14470,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     tasks?: TasksCreateNestedManyWithoutAssigneeInput
   }
 
@@ -13192,6 +14479,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     tasks?: TasksUncheckedCreateNestedManyWithoutAssigneeInput
   }
 
@@ -13281,6 +14569,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TasksUpdateManyWithoutAssigneeNestedInput
   }
 
@@ -13289,6 +14578,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TasksUncheckedUpdateManyWithoutAssigneeNestedInput
   }
 
@@ -13541,6 +14831,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     account?: AccountCreateNestedOneWithoutUserInput
   }
 
@@ -13549,6 +14840,7 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.Role
+    createdAt?: Date | string
     account?: AccountUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -13573,6 +14865,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneWithoutUserNestedInput
   }
 
@@ -13581,6 +14874,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUncheckedUpdateOneWithoutUserNestedInput
   }
 
