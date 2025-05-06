@@ -121,7 +121,8 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   password: 'password',
-  role: 'role'
+  role: 'role',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.RelationLoadStrategy = {
@@ -196,6 +197,13 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   invoice: 'invoice'
 };
 
+exports.Prisma.MaintenanceScalarFieldEnum = {
+  id: 'id',
+  item: 'item',
+  cycle: 'cycle',
+  startDate: 'startDate'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -225,7 +233,8 @@ exports.Role = exports.$Enums.Role = {
   USER: 'USER',
   ADMIN: 'ADMIN',
   MANAGER: 'MANAGER',
-  TECH: 'TECH'
+  TECH: 'TECH',
+  DISABLED: 'DISABLED'
 };
 
 exports.Prisma.ModelName = {
@@ -236,7 +245,8 @@ exports.Prisma.ModelName = {
   Tasks: 'Tasks',
   Consultations: 'Consultations',
   Billing: 'Billing',
-  Invoice: 'Invoice'
+  Invoice: 'Invoice',
+  maintenance: 'maintenance'
 };
 
 /**
