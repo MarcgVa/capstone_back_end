@@ -62,9 +62,9 @@ const updateUser = async (req, res, next) => {
   const { id } = req.params;
   try {
     if (authId === id || isAuthorized) { 
-      const user = await prisma.account.update({
+      const user = await prisma.user.update({
         where: {
-          accountId: { equals: id },
+          id: { equals: id },
         },
         data: {
           email,
@@ -112,5 +112,27 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const disableUser = async (req, res, next) => {
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
+  const { id } = req.params;
+  try {
+    if (isAuthorized) {
+      const user = await prisma.user.update({
+        where: {
+          accountId: { equals: id },
+        },
+        data: {
+          role: "DISABLED",
+        }
+      });
+    } else {
+      res.sendStatus(403);
+    }    
+  } catch (error) {
+    next(error);
+  }
+}
 
-module.exports = { getUsers, getSelf, updateUser, deleteUser };
+
+module.exports = { getUsers, getSelf, updateUser, deleteUser, disableUser };

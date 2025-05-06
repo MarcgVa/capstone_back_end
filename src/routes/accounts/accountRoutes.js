@@ -4,6 +4,7 @@ const {
   getSelf,
   updateUser,
   deleteUser,
+  disableUser,
 } = require("./accountControllers");
 
 function middleware(req, res, next) {
@@ -18,6 +19,8 @@ function middleware(req, res, next) {
 router.get("/list", middleware, getUsers);
 router.get("/me", middleware, getSelf);
 router.put("/:id", middleware, updateUser);
+router.put("/disable/:id", middleware, disableUser);
 router.delete(":id", middleware, deleteUser);
+
 
 module.exports = router;
