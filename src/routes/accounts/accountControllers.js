@@ -61,7 +61,7 @@ const updateUser = async (req, res, next) => {
    
   const { id } = req.params;
   try {
-    if (authId === id || isAuthorized) { 
+    if (authId === id || isAuthorized) {
       const user = await prisma.user.update({
         where: {
           id: { equals: id },
@@ -82,7 +82,14 @@ const updateUser = async (req, res, next) => {
           },
         },
       });
-
+      
+      if (user) {
+        res.send(user);
+      } else {
+        res.Status(500).send("Something went wrong :(");
+      }
+    } else { 
+      res.sendStatus(403);
     }
     
   } catch (error) {
@@ -91,7 +98,7 @@ const updateUser = async (req, res, next) => {
 };
 
 const deleteUser = async (req, res, next) => {
-   const { token, authId } = verifyAuthentication(req);
+  const { token, authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
   try {
