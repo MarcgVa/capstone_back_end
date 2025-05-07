@@ -47,9 +47,7 @@ const register = async (req, res) => {
 
 
   if (user) {
-    console.log(user);
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    console.log('token after registration',token);
     res.json({user, token });
   } else { 
     res.send("Something didn't work");
