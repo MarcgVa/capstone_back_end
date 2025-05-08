@@ -146,7 +146,6 @@ exports.Prisma.AccountScalarFieldEnum = {
 
 exports.Prisma.ServicePlanScalarFieldEnum = {
   servicePlanId: 'servicePlanId',
-  accountId: 'accountId',
   title: 'title',
   description: 'description',
   cost: 'cost',
@@ -156,7 +155,7 @@ exports.Prisma.ServicePlanScalarFieldEnum = {
 exports.Prisma.ServicesScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
-  serviceId: 'serviceId'
+  servicePlanId: 'servicePlanId'
 };
 
 exports.Prisma.TasksScalarFieldEnum = {
