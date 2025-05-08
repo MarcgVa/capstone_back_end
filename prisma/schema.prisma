@@ -61,8 +61,8 @@ model Services {
   id        String      @id @default(uuid())
   account   Account     @relation(fields: [accountId], references: [accountId])
   accountId String
-  service   ServicePlan @relation(fields: [serviceId], references: [servicePlanId])
-  serviceId String
+  servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
+  servicePlanId String 
 }
 
 model Tasks {
