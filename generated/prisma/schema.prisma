@@ -50,7 +50,6 @@ model Account {
 
 model ServicePlan {
   servicePlanId String     @id @default(uuid())
-  accountId     String?    @unique
   title         String     @unique
   description   String     @db.VarChar(255)
   cost          Float

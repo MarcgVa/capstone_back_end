@@ -4122,7 +4122,6 @@ export namespace Prisma {
 
   export type ServicePlanMinAggregateOutputType = {
     servicePlanId: string | null
-    accountId: string | null
     title: string | null
     description: string | null
     cost: number | null
@@ -4131,7 +4130,6 @@ export namespace Prisma {
 
   export type ServicePlanMaxAggregateOutputType = {
     servicePlanId: string | null
-    accountId: string | null
     title: string | null
     description: string | null
     cost: number | null
@@ -4140,7 +4138,6 @@ export namespace Prisma {
 
   export type ServicePlanCountAggregateOutputType = {
     servicePlanId: number
-    accountId: number
     title: number
     description: number
     cost: number
@@ -4161,7 +4158,6 @@ export namespace Prisma {
 
   export type ServicePlanMinAggregateInputType = {
     servicePlanId?: true
-    accountId?: true
     title?: true
     description?: true
     cost?: true
@@ -4170,7 +4166,6 @@ export namespace Prisma {
 
   export type ServicePlanMaxAggregateInputType = {
     servicePlanId?: true
-    accountId?: true
     title?: true
     description?: true
     cost?: true
@@ -4179,7 +4174,6 @@ export namespace Prisma {
 
   export type ServicePlanCountAggregateInputType = {
     servicePlanId?: true
-    accountId?: true
     title?: true
     description?: true
     cost?: true
@@ -4275,7 +4269,6 @@ export namespace Prisma {
 
   export type ServicePlanGroupByOutputType = {
     servicePlanId: string
-    accountId: string | null
     title: string
     description: string
     cost: number
@@ -4303,7 +4296,6 @@ export namespace Prisma {
 
   export type ServicePlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     servicePlanId?: boolean
-    accountId?: boolean
     title?: boolean
     description?: boolean
     cost?: boolean
@@ -4314,7 +4306,6 @@ export namespace Prisma {
 
   export type ServicePlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     servicePlanId?: boolean
-    accountId?: boolean
     title?: boolean
     description?: boolean
     cost?: boolean
@@ -4323,7 +4314,6 @@ export namespace Prisma {
 
   export type ServicePlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     servicePlanId?: boolean
-    accountId?: boolean
     title?: boolean
     description?: boolean
     cost?: boolean
@@ -4332,14 +4322,13 @@ export namespace Prisma {
 
   export type ServicePlanSelectScalar = {
     servicePlanId?: boolean
-    accountId?: boolean
     title?: boolean
     description?: boolean
     cost?: boolean
     cycle?: boolean
   }
 
-  export type ServicePlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"servicePlanId" | "accountId" | "title" | "description" | "cost" | "cycle", ExtArgs["result"]["servicePlan"]>
+  export type ServicePlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"servicePlanId" | "title" | "description" | "cost" | "cycle", ExtArgs["result"]["servicePlan"]>
   export type ServicePlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     services?: boolean | ServicePlan$servicesArgs<ExtArgs>
     _count?: boolean | ServicePlanCountOutputTypeDefaultArgs<ExtArgs>
@@ -4354,7 +4343,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       servicePlanId: string
-      accountId: string | null
       title: string
       description: string
       cost: number
@@ -4784,7 +4772,6 @@ export namespace Prisma {
    */
   interface ServicePlanFieldRefs {
     readonly servicePlanId: FieldRef<"ServicePlan", 'String'>
-    readonly accountId: FieldRef<"ServicePlan", 'String'>
     readonly title: FieldRef<"ServicePlan", 'String'>
     readonly description: FieldRef<"ServicePlan", 'String'>
     readonly cost: FieldRef<"ServicePlan", 'Float'>
@@ -11743,7 +11730,6 @@ export namespace Prisma {
 
   export const ServicePlanScalarFieldEnum: {
     servicePlanId: 'servicePlanId',
-    accountId: 'accountId',
     title: 'title',
     description: 'description',
     cost: 'cost',
@@ -12122,7 +12108,6 @@ export namespace Prisma {
     OR?: ServicePlanWhereInput[]
     NOT?: ServicePlanWhereInput | ServicePlanWhereInput[]
     servicePlanId?: StringFilter<"ServicePlan"> | string
-    accountId?: StringNullableFilter<"ServicePlan"> | string | null
     title?: StringFilter<"ServicePlan"> | string
     description?: StringFilter<"ServicePlan"> | string
     cost?: FloatFilter<"ServicePlan"> | number
@@ -12132,7 +12117,6 @@ export namespace Prisma {
 
   export type ServicePlanOrderByWithRelationInput = {
     servicePlanId?: SortOrder
-    accountId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrder
     cost?: SortOrder
@@ -12142,7 +12126,6 @@ export namespace Prisma {
 
   export type ServicePlanWhereUniqueInput = Prisma.AtLeast<{
     servicePlanId?: string
-    accountId?: string
     title?: string
     AND?: ServicePlanWhereInput | ServicePlanWhereInput[]
     OR?: ServicePlanWhereInput[]
@@ -12151,11 +12134,10 @@ export namespace Prisma {
     cost?: FloatFilter<"ServicePlan"> | number
     cycle?: IntFilter<"ServicePlan"> | number
     services?: ServicesListRelationFilter
-  }, "servicePlanId" | "accountId" | "title">
+  }, "servicePlanId" | "title">
 
   export type ServicePlanOrderByWithAggregationInput = {
     servicePlanId?: SortOrder
-    accountId?: SortOrderInput | SortOrder
     title?: SortOrder
     description?: SortOrder
     cost?: SortOrder
@@ -12172,7 +12154,6 @@ export namespace Prisma {
     OR?: ServicePlanScalarWhereWithAggregatesInput[]
     NOT?: ServicePlanScalarWhereWithAggregatesInput | ServicePlanScalarWhereWithAggregatesInput[]
     servicePlanId?: StringWithAggregatesFilter<"ServicePlan"> | string
-    accountId?: StringNullableWithAggregatesFilter<"ServicePlan"> | string | null
     title?: StringWithAggregatesFilter<"ServicePlan"> | string
     description?: StringWithAggregatesFilter<"ServicePlan"> | string
     cost?: FloatWithAggregatesFilter<"ServicePlan"> | number
@@ -12701,7 +12682,6 @@ export namespace Prisma {
 
   export type ServicePlanCreateInput = {
     servicePlanId?: string
-    accountId?: string | null
     title: string
     description: string
     cost: number
@@ -12711,7 +12691,6 @@ export namespace Prisma {
 
   export type ServicePlanUncheckedCreateInput = {
     servicePlanId?: string
-    accountId?: string | null
     title: string
     description: string
     cost: number
@@ -12721,7 +12700,6 @@ export namespace Prisma {
 
   export type ServicePlanUpdateInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
@@ -12731,7 +12709,6 @@ export namespace Prisma {
 
   export type ServicePlanUncheckedUpdateInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
@@ -12741,7 +12718,6 @@ export namespace Prisma {
 
   export type ServicePlanCreateManyInput = {
     servicePlanId?: string
-    accountId?: string | null
     title: string
     description: string
     cost: number
@@ -12750,7 +12726,6 @@ export namespace Prisma {
 
   export type ServicePlanUpdateManyMutationInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
@@ -12759,7 +12734,6 @@ export namespace Prisma {
 
   export type ServicePlanUncheckedUpdateManyInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
@@ -13370,21 +13344,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -13398,7 +13357,6 @@ export namespace Prisma {
 
   export type ServicePlanCountOrderByAggregateInput = {
     servicePlanId?: SortOrder
-    accountId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     cost?: SortOrder
@@ -13412,7 +13370,6 @@ export namespace Prisma {
 
   export type ServicePlanMaxOrderByAggregateInput = {
     servicePlanId?: SortOrder
-    accountId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     cost?: SortOrder
@@ -13421,7 +13378,6 @@ export namespace Prisma {
 
   export type ServicePlanMinOrderByAggregateInput = {
     servicePlanId?: SortOrder
-    accountId?: SortOrder
     title?: SortOrder
     description?: SortOrder
     cost?: SortOrder
@@ -13431,24 +13387,6 @@ export namespace Prisma {
   export type ServicePlanSumOrderByAggregateInput = {
     cost?: SortOrder
     cycle?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -13493,6 +13431,21 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     serviceId?: SortOrder
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -13566,6 +13519,24 @@ export namespace Prisma {
 
   export type TasksSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13978,10 +13949,6 @@ export namespace Prisma {
     connect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -14050,6 +14017,10 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTasksInput, UserUncheckedCreateWithoutTasksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTasksInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -14239,6 +14210,22 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -14251,6 +14238,11 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14268,27 +14260,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -14734,7 +14705,6 @@ export namespace Prisma {
 
   export type ServicePlanCreateWithoutServicesInput = {
     servicePlanId?: string
-    accountId?: string | null
     title: string
     description: string
     cost: number
@@ -14743,7 +14713,6 @@ export namespace Prisma {
 
   export type ServicePlanUncheckedCreateWithoutServicesInput = {
     servicePlanId?: string
-    accountId?: string | null
     title: string
     description: string
     cost: number
@@ -14810,7 +14779,6 @@ export namespace Prisma {
 
   export type ServicePlanUpdateWithoutServicesInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
@@ -14819,7 +14787,6 @@ export namespace Prisma {
 
   export type ServicePlanUncheckedUpdateWithoutServicesInput = {
     servicePlanId?: StringFieldUpdateOperationsInput | string
-    accountId?: NullableStringFieldUpdateOperationsInput | string | null
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
