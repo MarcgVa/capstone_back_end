@@ -11,16 +11,19 @@ const getUsers = async (req, res, next) => {
     try {
       const clients = await prisma.user.findMany({
         where: {
-          role: { not: "DISABLED" },
+          AND: [
+            {
+              role: { not: 'DISABLED' },
+            },
+            {
+              role: { not: 'ADMIN'},
+            },
+          ],
         },
         include: {
           account: true,
         },
-        orderBy: {
-          account: {
-            firstName: 'asc',
-          },
-        },
+        orderBy: [{ role: 'desc' }],
       });
       
       if (clients) {

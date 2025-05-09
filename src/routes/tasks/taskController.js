@@ -6,7 +6,7 @@ const getTasks = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
   try {
     const items = await prisma.tasks.findMany({});
-    res.send(items);
+    res.Status(200).send(items);
   } catch (error) {
     next(error);
   }
@@ -23,7 +23,7 @@ const getTask = async (req, res) => {
           id,
         },
       });
-      res.send(item);
+      res.Status(200).send(item);
     } catch (error) {
       next(error);
     }
@@ -50,7 +50,7 @@ const getMyTasks = async (req, res, next) => {
       ],
     },
   });
-  res.send(items);
+  res.Status(200).send(items);
 };
 
 const createTask = async (req, res, next) => {
@@ -72,7 +72,7 @@ const createTask = async (req, res, next) => {
         createdBy,
       },
     });
-    res.send(item);
+    res.Status(201).send(item);
   } catch (error) {
     next(error);
   }
@@ -96,7 +96,7 @@ const updateTask = async (req, res, next) => {
       },
     });
 
-    res.send(item);
+    res.Status(200).send(item);
 
   } catch (error) {
     next(error);

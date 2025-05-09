@@ -9,11 +9,13 @@ const authRoutes = require("../src/routes/auth/authRoutes");
 const taskRoutes = require("../src/routes/tasks/taskRoutes");
 const accountRoutes = require("../src/routes/accounts/accountRoutes");
 const scheduleRoutes = require("../src/routes/schedule/scheduleRoutes");
+const serviceRoutes = require("../src/routes/servicePlans/serviceRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/clients", accountRoutes);
 app.use("/api/ops", scheduleRoutes);
+app.use("/api/services",serviceRoutes)
 
 
 module.exports = app;
