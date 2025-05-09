@@ -54,15 +54,13 @@ model ServicePlan {
   description   String     @db.VarChar(255)
   cost          Float
   cycle         Int
-  services      Services[]
+
 }
 
 model Services {
   id        String      @id @default(uuid())
   account   Account     @relation(fields: [accountId], references: [accountId])
   accountId String
-  servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
-  servicePlanId String 
 }
 
 model Tasks {
