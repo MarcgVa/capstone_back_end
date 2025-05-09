@@ -11,7 +11,7 @@ const getUsers = async (req, res, next) => {
     try {
       const clients = await prisma.user.findMany({
         where: {
-          role: { equals: 'USER' }
+          role: { not: "DISABLED"}
         },
         include: {
           account: true
@@ -28,6 +28,33 @@ const getUsers = async (req, res, next) => {
   } else {
     res.send('Not authorized,verifyRole to make this request.')
   
+  }
+};
+
+const getUser = async (req, res, next) => {
+  const { token, authId } = verifyAuthentication(req);
+  const isAuthorized = await verifyAuthRole(authId);
+  const { id } = req.params;
+  if (token && isAuthorized) {
+    try {
+      const client = await prisma.user.findFirst({
+        where: {
+          id: {equals: id}
+        },
+        include: {
+          account: true,
+        },
+      });
+
+      if (client) {
+        console.log(client);
+        res.send(client);
+      }
+    } catch (error) {
+      next(error);
+    }
+  } else {
+    res.send("Not authorized,verifyRole to make this request.");
   }
 };
 
@@ -142,4 +169,4 @@ const disableUser = async (req, res, next) => {
 }
 
 
-module.exports = { getUsers, getSelf, updateUser, deleteUser, disableUser };
+module.exports = { getUsers, getUser, getSelf, updateUser, deleteUser, disableUser };
