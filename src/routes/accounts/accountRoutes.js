@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const {
   getUsers,
+  getUser,
   getSelf,
   updateUser,
   deleteUser,
@@ -17,6 +18,7 @@ function middleware(req, res, next) {
 }
 
 router.get("/list", middleware, getUsers);
+router.get("/:id", middleware, getUser);
 router.get("/me", middleware, getSelf);
 router.put("/:id", middleware, updateUser);
 router.put("/disable/:id", middleware, disableUser);
