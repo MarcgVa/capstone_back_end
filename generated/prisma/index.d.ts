@@ -351,8 +351,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -1688,6 +1688,37 @@ export namespace Prisma {
    * AccountCountOutputType without action
    */
   export type AccountCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ServicesWhereInput
+  }
+
+
+  /**
+   * Count Type ServicePlanCountOutputType
+   */
+
+  export type ServicePlanCountOutputType = {
+    services: number
+  }
+
+  export type ServicePlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    services?: boolean | ServicePlanCountOutputTypeCountServicesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ServicePlanCountOutputType without action
+   */
+  export type ServicePlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServicePlanCountOutputType
+     */
+    select?: ServicePlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ServicePlanCountOutputType without action
+   */
+  export type ServicePlanCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ServicesWhereInput
   }
 
@@ -4269,6 +4300,8 @@ export namespace Prisma {
     description?: boolean
     cost?: boolean
     cycle?: boolean
+    services?: boolean | ServicePlan$servicesArgs<ExtArgs>
+    _count?: boolean | ServicePlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["servicePlan"]>
 
   export type ServicePlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4296,10 +4329,18 @@ export namespace Prisma {
   }
 
   export type ServicePlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"servicePlanId" | "title" | "description" | "cost" | "cycle", ExtArgs["result"]["servicePlan"]>
+  export type ServicePlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    services?: boolean | ServicePlan$servicesArgs<ExtArgs>
+    _count?: boolean | ServicePlanCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ServicePlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ServicePlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ServicePlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ServicePlan"
-    objects: {}
+    objects: {
+      services: Prisma.$ServicesPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       servicePlanId: string
       title: string
@@ -4700,6 +4741,7 @@ export namespace Prisma {
    */
   export interface Prisma__ServicePlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    services<T extends ServicePlan$servicesArgs<ExtArgs> = {}>(args?: Subset<T, ServicePlan$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4751,6 +4793,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * Filter, which ServicePlan to fetch.
      */
     where: ServicePlanWhereUniqueInput
@@ -4770,6 +4816,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * Filter, which ServicePlan to fetch.
      */
     where: ServicePlanWhereUniqueInput
@@ -4788,6 +4838,10 @@ export namespace Prisma {
      * Omit specific fields from the ServicePlan
      */
     omit?: ServicePlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
     /**
      * Filter, which ServicePlan to fetch.
      */
@@ -4838,6 +4892,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * Filter, which ServicePlan to fetch.
      */
     where?: ServicePlanWhereInput
@@ -4887,6 +4945,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * Filter, which ServicePlans to fetch.
      */
     where?: ServicePlanWhereInput
@@ -4930,6 +4992,10 @@ export namespace Prisma {
      * Omit specific fields from the ServicePlan
      */
     omit?: ServicePlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
     /**
      * The data needed to create a ServicePlan.
      */
@@ -4979,6 +5045,10 @@ export namespace Prisma {
      * Omit specific fields from the ServicePlan
      */
     omit?: ServicePlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
     /**
      * The data needed to update a ServicePlan.
      */
@@ -5047,6 +5117,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * The filter to search for the ServicePlan to update in case it exists.
      */
     where: ServicePlanWhereUniqueInput
@@ -5074,6 +5148,10 @@ export namespace Prisma {
      */
     omit?: ServicePlanOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
+    /**
      * Filter which ServicePlan to delete.
      */
     where: ServicePlanWhereUniqueInput
@@ -5095,6 +5173,30 @@ export namespace Prisma {
   }
 
   /**
+   * ServicePlan.services
+   */
+  export type ServicePlan$servicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Services
+     */
+    select?: ServicesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Services
+     */
+    omit?: ServicesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicesInclude<ExtArgs> | null
+    where?: ServicesWhereInput
+    orderBy?: ServicesOrderByWithRelationInput | ServicesOrderByWithRelationInput[]
+    cursor?: ServicesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ServicesScalarFieldEnum | ServicesScalarFieldEnum[]
+  }
+
+  /**
    * ServicePlan without action
    */
   export type ServicePlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5106,6 +5208,10 @@ export namespace Prisma {
      * Omit specific fields from the ServicePlan
      */
     omit?: ServicePlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServicePlanInclude<ExtArgs> | null
   }
 
 
@@ -5122,16 +5228,19 @@ export namespace Prisma {
   export type ServicesMinAggregateOutputType = {
     id: string | null
     accountId: string | null
+    servicePlanId: string | null
   }
 
   export type ServicesMaxAggregateOutputType = {
     id: string | null
     accountId: string | null
+    servicePlanId: string | null
   }
 
   export type ServicesCountAggregateOutputType = {
     id: number
     accountId: number
+    servicePlanId: number
     _all: number
   }
 
@@ -5139,16 +5248,19 @@ export namespace Prisma {
   export type ServicesMinAggregateInputType = {
     id?: true
     accountId?: true
+    servicePlanId?: true
   }
 
   export type ServicesMaxAggregateInputType = {
     id?: true
     accountId?: true
+    servicePlanId?: true
   }
 
   export type ServicesCountAggregateInputType = {
     id?: true
     accountId?: true
+    servicePlanId?: true
     _all?: true
   }
 
@@ -5227,6 +5339,7 @@ export namespace Prisma {
   export type ServicesGroupByOutputType = {
     id: string
     accountId: string
+    servicePlanId: string
     _count: ServicesCountAggregateOutputType | null
     _min: ServicesMinAggregateOutputType | null
     _max: ServicesMaxAggregateOutputType | null
@@ -5249,45 +5362,57 @@ export namespace Prisma {
   export type ServicesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountId?: boolean
+    servicePlanId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
 
   export type ServicesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountId?: boolean
+    servicePlanId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
 
   export type ServicesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountId?: boolean
+    servicePlanId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
 
   export type ServicesSelectScalar = {
     id?: boolean
     accountId?: boolean
+    servicePlanId?: boolean
   }
 
-  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId", ExtArgs["result"]["services"]>
+  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "servicePlanId", ExtArgs["result"]["services"]>
   export type ServicesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }
   export type ServicesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }
   export type ServicesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }
 
   export type $ServicesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Services"
     objects: {
       account: Prisma.$AccountPayload<ExtArgs>
+      servicePlan: Prisma.$ServicePlanPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       accountId: string
+      servicePlanId: string
     }, ExtArgs["result"]["services"]>
     composites: {}
   }
@@ -5683,6 +5808,7 @@ export namespace Prisma {
   export interface Prisma__ServicesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    servicePlan<T extends ServicePlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServicePlanDefaultArgs<ExtArgs>>): Prisma__ServicePlanClient<$Result.GetResult<Prisma.$ServicePlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5714,6 +5840,7 @@ export namespace Prisma {
   interface ServicesFieldRefs {
     readonly id: FieldRef<"Services", 'String'>
     readonly accountId: FieldRef<"Services", 'String'>
+    readonly servicePlanId: FieldRef<"Services", 'String'>
   }
     
 
@@ -11614,7 +11741,8 @@ export namespace Prisma {
 
   export const ServicesScalarFieldEnum: {
     id: 'id',
-    accountId: 'accountId'
+    accountId: 'accountId',
+    servicePlanId: 'servicePlanId'
   };
 
   export type ServicesScalarFieldEnum = (typeof ServicesScalarFieldEnum)[keyof typeof ServicesScalarFieldEnum]
@@ -11984,6 +12112,7 @@ export namespace Prisma {
     description?: StringFilter<"ServicePlan"> | string
     cost?: FloatFilter<"ServicePlan"> | number
     cycle?: IntFilter<"ServicePlan"> | number
+    services?: ServicesListRelationFilter
   }
 
   export type ServicePlanOrderByWithRelationInput = {
@@ -11992,6 +12121,7 @@ export namespace Prisma {
     description?: SortOrder
     cost?: SortOrder
     cycle?: SortOrder
+    services?: ServicesOrderByRelationAggregateInput
   }
 
   export type ServicePlanWhereUniqueInput = Prisma.AtLeast<{
@@ -12003,6 +12133,7 @@ export namespace Prisma {
     description?: StringFilter<"ServicePlan"> | string
     cost?: FloatFilter<"ServicePlan"> | number
     cycle?: IntFilter<"ServicePlan"> | number
+    services?: ServicesListRelationFilter
   }, "servicePlanId" | "title">
 
   export type ServicePlanOrderByWithAggregationInput = {
@@ -12035,13 +12166,17 @@ export namespace Prisma {
     NOT?: ServicesWhereInput | ServicesWhereInput[]
     id?: StringFilter<"Services"> | string
     accountId?: StringFilter<"Services"> | string
+    servicePlanId?: StringFilter<"Services"> | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
   }
 
   export type ServicesOrderByWithRelationInput = {
     id?: SortOrder
     accountId?: SortOrder
+    servicePlanId?: SortOrder
     account?: AccountOrderByWithRelationInput
+    servicePlan?: ServicePlanOrderByWithRelationInput
   }
 
   export type ServicesWhereUniqueInput = Prisma.AtLeast<{
@@ -12050,12 +12185,15 @@ export namespace Prisma {
     OR?: ServicesWhereInput[]
     NOT?: ServicesWhereInput | ServicesWhereInput[]
     accountId?: StringFilter<"Services"> | string
+    servicePlanId?: StringFilter<"Services"> | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
   }, "id">
 
   export type ServicesOrderByWithAggregationInput = {
     id?: SortOrder
     accountId?: SortOrder
+    servicePlanId?: SortOrder
     _count?: ServicesCountOrderByAggregateInput
     _max?: ServicesMaxOrderByAggregateInput
     _min?: ServicesMinOrderByAggregateInput
@@ -12067,6 +12205,7 @@ export namespace Prisma {
     NOT?: ServicesScalarWhereWithAggregatesInput | ServicesScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Services"> | string
     accountId?: StringWithAggregatesFilter<"Services"> | string
+    servicePlanId?: StringWithAggregatesFilter<"Services"> | string
   }
 
   export type TasksWhereInput = {
@@ -12547,6 +12686,7 @@ export namespace Prisma {
     description: string
     cost: number
     cycle: number
+    services?: ServicesCreateNestedManyWithoutServicePlanInput
   }
 
   export type ServicePlanUncheckedCreateInput = {
@@ -12555,6 +12695,7 @@ export namespace Prisma {
     description: string
     cost: number
     cycle: number
+    services?: ServicesUncheckedCreateNestedManyWithoutServicePlanInput
   }
 
   export type ServicePlanUpdateInput = {
@@ -12563,6 +12704,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
     cycle?: IntFieldUpdateOperationsInput | number
+    services?: ServicesUpdateManyWithoutServicePlanNestedInput
   }
 
   export type ServicePlanUncheckedUpdateInput = {
@@ -12571,6 +12713,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     cost?: FloatFieldUpdateOperationsInput | number
     cycle?: IntFieldUpdateOperationsInput | number
+    services?: ServicesUncheckedUpdateManyWithoutServicePlanNestedInput
   }
 
   export type ServicePlanCreateManyInput = {
@@ -12600,26 +12743,31 @@ export namespace Prisma {
   export type ServicesCreateInput = {
     id?: string
     account: AccountCreateNestedOneWithoutServicesInput
+    servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
   }
 
   export type ServicesUncheckedCreateInput = {
     id?: string
     accountId: string
+    servicePlanId: string
   }
 
   export type ServicesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     account?: AccountUpdateOneRequiredWithoutServicesNestedInput
+    servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
   }
 
   export type ServicesUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    servicePlanId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServicesCreateManyInput = {
     id?: string
     accountId: string
+    servicePlanId: string
   }
 
   export type ServicesUpdateManyMutationInput = {
@@ -12629,6 +12777,7 @@ export namespace Prisma {
   export type ServicesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    servicePlanId?: StringFieldUpdateOperationsInput | string
   }
 
   export type TasksCreateInput = {
@@ -13261,19 +13410,27 @@ export namespace Prisma {
     isNot?: AccountWhereInput
   }
 
+  export type ServicePlanScalarRelationFilter = {
+    is?: ServicePlanWhereInput
+    isNot?: ServicePlanWhereInput
+  }
+
   export type ServicesCountOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
+    servicePlanId?: SortOrder
   }
 
   export type ServicesMaxOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
+    servicePlanId?: SortOrder
   }
 
   export type ServicesMinOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
+    servicePlanId?: SortOrder
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -13778,6 +13935,20 @@ export namespace Prisma {
     deleteMany?: ServicesScalarWhereInput | ServicesScalarWhereInput[]
   }
 
+  export type ServicesCreateNestedManyWithoutServicePlanInput = {
+    create?: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput> | ServicesCreateWithoutServicePlanInput[] | ServicesUncheckedCreateWithoutServicePlanInput[]
+    connectOrCreate?: ServicesCreateOrConnectWithoutServicePlanInput | ServicesCreateOrConnectWithoutServicePlanInput[]
+    createMany?: ServicesCreateManyServicePlanInputEnvelope
+    connect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+  }
+
+  export type ServicesUncheckedCreateNestedManyWithoutServicePlanInput = {
+    create?: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput> | ServicesCreateWithoutServicePlanInput[] | ServicesUncheckedCreateWithoutServicePlanInput[]
+    connectOrCreate?: ServicesCreateOrConnectWithoutServicePlanInput | ServicesCreateOrConnectWithoutServicePlanInput[]
+    createMany?: ServicesCreateManyServicePlanInputEnvelope
+    connect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -13786,10 +13957,44 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type ServicesUpdateManyWithoutServicePlanNestedInput = {
+    create?: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput> | ServicesCreateWithoutServicePlanInput[] | ServicesUncheckedCreateWithoutServicePlanInput[]
+    connectOrCreate?: ServicesCreateOrConnectWithoutServicePlanInput | ServicesCreateOrConnectWithoutServicePlanInput[]
+    upsert?: ServicesUpsertWithWhereUniqueWithoutServicePlanInput | ServicesUpsertWithWhereUniqueWithoutServicePlanInput[]
+    createMany?: ServicesCreateManyServicePlanInputEnvelope
+    set?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    disconnect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    delete?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    connect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    update?: ServicesUpdateWithWhereUniqueWithoutServicePlanInput | ServicesUpdateWithWhereUniqueWithoutServicePlanInput[]
+    updateMany?: ServicesUpdateManyWithWhereWithoutServicePlanInput | ServicesUpdateManyWithWhereWithoutServicePlanInput[]
+    deleteMany?: ServicesScalarWhereInput | ServicesScalarWhereInput[]
+  }
+
+  export type ServicesUncheckedUpdateManyWithoutServicePlanNestedInput = {
+    create?: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput> | ServicesCreateWithoutServicePlanInput[] | ServicesUncheckedCreateWithoutServicePlanInput[]
+    connectOrCreate?: ServicesCreateOrConnectWithoutServicePlanInput | ServicesCreateOrConnectWithoutServicePlanInput[]
+    upsert?: ServicesUpsertWithWhereUniqueWithoutServicePlanInput | ServicesUpsertWithWhereUniqueWithoutServicePlanInput[]
+    createMany?: ServicesCreateManyServicePlanInputEnvelope
+    set?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    disconnect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    delete?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    connect?: ServicesWhereUniqueInput | ServicesWhereUniqueInput[]
+    update?: ServicesUpdateWithWhereUniqueWithoutServicePlanInput | ServicesUpdateWithWhereUniqueWithoutServicePlanInput[]
+    updateMany?: ServicesUpdateManyWithWhereWithoutServicePlanInput | ServicesUpdateManyWithWhereWithoutServicePlanInput[]
+    deleteMany?: ServicesScalarWhereInput | ServicesScalarWhereInput[]
+  }
+
   export type AccountCreateNestedOneWithoutServicesInput = {
     create?: XOR<AccountCreateWithoutServicesInput, AccountUncheckedCreateWithoutServicesInput>
     connectOrCreate?: AccountCreateOrConnectWithoutServicesInput
     connect?: AccountWhereUniqueInput
+  }
+
+  export type ServicePlanCreateNestedOneWithoutServicesInput = {
+    create?: XOR<ServicePlanCreateWithoutServicesInput, ServicePlanUncheckedCreateWithoutServicesInput>
+    connectOrCreate?: ServicePlanCreateOrConnectWithoutServicesInput
+    connect?: ServicePlanWhereUniqueInput
   }
 
   export type AccountUpdateOneRequiredWithoutServicesNestedInput = {
@@ -13798,6 +14003,14 @@ export namespace Prisma {
     upsert?: AccountUpsertWithoutServicesInput
     connect?: AccountWhereUniqueInput
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutServicesInput, AccountUpdateWithoutServicesInput>, AccountUncheckedUpdateWithoutServicesInput>
+  }
+
+  export type ServicePlanUpdateOneRequiredWithoutServicesNestedInput = {
+    create?: XOR<ServicePlanCreateWithoutServicesInput, ServicePlanUncheckedCreateWithoutServicesInput>
+    connectOrCreate?: ServicePlanCreateOrConnectWithoutServicesInput
+    upsert?: ServicePlanUpsertWithoutServicesInput
+    connect?: ServicePlanWhereUniqueInput
+    update?: XOR<XOR<ServicePlanUpdateToOneWithWhereWithoutServicesInput, ServicePlanUpdateWithoutServicesInput>, ServicePlanUncheckedUpdateWithoutServicesInput>
   }
 
   export type UserCreateNestedOneWithoutTasksInput = {
@@ -14293,10 +14506,12 @@ export namespace Prisma {
 
   export type ServicesCreateWithoutAccountInput = {
     id?: string
+    servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
   }
 
   export type ServicesUncheckedCreateWithoutAccountInput = {
     id?: string
+    servicePlanId: string
   }
 
   export type ServicesCreateOrConnectWithoutAccountInput = {
@@ -14413,6 +14628,43 @@ export namespace Prisma {
     NOT?: ServicesScalarWhereInput | ServicesScalarWhereInput[]
     id?: StringFilter<"Services"> | string
     accountId?: StringFilter<"Services"> | string
+    servicePlanId?: StringFilter<"Services"> | string
+  }
+
+  export type ServicesCreateWithoutServicePlanInput = {
+    id?: string
+    account: AccountCreateNestedOneWithoutServicesInput
+  }
+
+  export type ServicesUncheckedCreateWithoutServicePlanInput = {
+    id?: string
+    accountId: string
+  }
+
+  export type ServicesCreateOrConnectWithoutServicePlanInput = {
+    where: ServicesWhereUniqueInput
+    create: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput>
+  }
+
+  export type ServicesCreateManyServicePlanInputEnvelope = {
+    data: ServicesCreateManyServicePlanInput | ServicesCreateManyServicePlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ServicesUpsertWithWhereUniqueWithoutServicePlanInput = {
+    where: ServicesWhereUniqueInput
+    update: XOR<ServicesUpdateWithoutServicePlanInput, ServicesUncheckedUpdateWithoutServicePlanInput>
+    create: XOR<ServicesCreateWithoutServicePlanInput, ServicesUncheckedCreateWithoutServicePlanInput>
+  }
+
+  export type ServicesUpdateWithWhereUniqueWithoutServicePlanInput = {
+    where: ServicesWhereUniqueInput
+    data: XOR<ServicesUpdateWithoutServicePlanInput, ServicesUncheckedUpdateWithoutServicePlanInput>
+  }
+
+  export type ServicesUpdateManyWithWhereWithoutServicePlanInput = {
+    where: ServicesScalarWhereInput
+    data: XOR<ServicesUpdateManyMutationInput, ServicesUncheckedUpdateManyWithoutServicePlanInput>
   }
 
   export type AccountCreateWithoutServicesInput = {
@@ -14449,6 +14701,27 @@ export namespace Prisma {
   export type AccountCreateOrConnectWithoutServicesInput = {
     where: AccountWhereUniqueInput
     create: XOR<AccountCreateWithoutServicesInput, AccountUncheckedCreateWithoutServicesInput>
+  }
+
+  export type ServicePlanCreateWithoutServicesInput = {
+    servicePlanId?: string
+    title: string
+    description: string
+    cost: number
+    cycle: number
+  }
+
+  export type ServicePlanUncheckedCreateWithoutServicesInput = {
+    servicePlanId?: string
+    title: string
+    description: string
+    cost: number
+    cycle: number
+  }
+
+  export type ServicePlanCreateOrConnectWithoutServicesInput = {
+    where: ServicePlanWhereUniqueInput
+    create: XOR<ServicePlanCreateWithoutServicesInput, ServicePlanUncheckedCreateWithoutServicesInput>
   }
 
   export type AccountUpsertWithoutServicesInput = {
@@ -14491,6 +14764,33 @@ export namespace Prisma {
     cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
+  export type ServicePlanUpsertWithoutServicesInput = {
+    update: XOR<ServicePlanUpdateWithoutServicesInput, ServicePlanUncheckedUpdateWithoutServicesInput>
+    create: XOR<ServicePlanCreateWithoutServicesInput, ServicePlanUncheckedCreateWithoutServicesInput>
+    where?: ServicePlanWhereInput
+  }
+
+  export type ServicePlanUpdateToOneWithWhereWithoutServicesInput = {
+    where?: ServicePlanWhereInput
+    data: XOR<ServicePlanUpdateWithoutServicesInput, ServicePlanUncheckedUpdateWithoutServicesInput>
+  }
+
+  export type ServicePlanUpdateWithoutServicesInput = {
+    servicePlanId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: FloatFieldUpdateOperationsInput | number
+    cycle?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ServicePlanUncheckedUpdateWithoutServicesInput = {
+    servicePlanId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    cost?: FloatFieldUpdateOperationsInput | number
+    cycle?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateWithoutTasksInput = {
@@ -14763,6 +15063,7 @@ export namespace Prisma {
 
   export type ServicesCreateManyAccountInput = {
     id?: string
+    servicePlanId: string
   }
 
   export type BillingUpdateWithoutAccountInput = {
@@ -14805,14 +15106,37 @@ export namespace Prisma {
 
   export type ServicesUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
+    servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
   }
 
   export type ServicesUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
+    servicePlanId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServicesUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
+    servicePlanId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ServicesCreateManyServicePlanInput = {
+    id?: string
+    accountId: string
+  }
+
+  export type ServicesUpdateWithoutServicePlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    account?: AccountUpdateOneRequiredWithoutServicesNestedInput
+  }
+
+  export type ServicesUncheckedUpdateWithoutServicePlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ServicesUncheckedUpdateManyWithoutServicePlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
   }
 
 

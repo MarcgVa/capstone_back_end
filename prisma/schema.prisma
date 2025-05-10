@@ -19,12 +19,12 @@ datasource db {
 
 // Models //
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  password String
-  role     Role     @default(USER)
-  account  Account?
-  tasks    Tasks[]
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  account   Account?
+  tasks     Tasks[]
   createdAt DateTime @default(now())
 }
 
@@ -39,8 +39,8 @@ model Account {
   state     String
   zip       Int
   phone     String     @unique
-  startDate DateTime? @db.Date
-  cutDate   DateTime? @db.Date
+  startDate DateTime?  @db.Date
+  cutDate   DateTime?  @db.Date
   bill      Billing[]
   invoice   Invoice[]
   Services  Services[]
@@ -54,13 +54,15 @@ model ServicePlan {
   description   String     @db.VarChar(255)
   cost          Float
   cycle         Int
-
+  services      Services[]
 }
 
 model Services {
-  id        String      @id @default(uuid())
-  account   Account     @relation(fields: [accountId], references: [accountId])
-  accountId String
+  id            String      @id @default(uuid())
+  account       Account     @relation(fields: [accountId], references: [accountId])
+  accountId     String
+  servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
+  servicePlanId String
 }
 
 model Tasks {
@@ -105,9 +107,9 @@ model Invoice {
 }
 
 model maintenance {
-  id Int @id @default(autoincrement())
-  item String @db.VarChar(50)
-  cycle Int
+  id        Int      @id @default(autoincrement())
+  item      String   @db.VarChar(50)
+  cycle     Int
   startDate DateTime @db.Date
 }
 
