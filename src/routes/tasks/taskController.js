@@ -4,9 +4,10 @@ const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
 const getTasks = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
+  
   try {
     const items = await prisma.tasks.findMany({});
-    res.Status(200).send(items);
+    res.send(items);
   } catch (error) {
     next(error);
   }

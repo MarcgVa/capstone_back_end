@@ -2,6 +2,12 @@ const router = require("express").Router();
 const {
   getServicePlans,
   newServicePlan,
+  updateServicePlan,
+  deleteServicePlan,
+  getService, 
+  getServices,
+  addService,
+  deleteService,
 } = require("./serviceController");
 
 function middleware(req, res, next) {
@@ -13,16 +19,18 @@ function middleware(req, res, next) {
   }
 }
 
-// router.get("/list", middleware, getServices);
-// router.get("/:id", middleware, getService);
-// router.delete("/:id", middleware, deleteService);
-// router.post("/new",middleware, addService)
+// Service Table Routes
+router.get("/list", middleware, getServices);
+router.get("/:id", middleware, getService);
+router.delete("/:id", middleware, deleteService);
+router.post("/new",middleware, addService)
 
+
+// ServicePlan Table Routes
 router.get("/plans", getServicePlans);
-
 router.post("/admin/new",middleware,newServicePlan)
-// router.put("/admin/:id", middleware, updateServicePlan);
-// router.delete("/admin/:id", middleware, deleteServicePlan);
+router.put("/admin/:id", middleware, updateServicePlan);
+router.delete("/admin/:id", middleware, deleteServicePlan);
 
 
 

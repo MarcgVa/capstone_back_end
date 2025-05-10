@@ -49,17 +49,20 @@ model Account {
 }
 
 model ServicePlan {
-  servicePlanId String @id @default(uuid())
-  title         String @unique
-  description   String @db.VarChar(255)
+  servicePlanId String     @id @default(uuid())
+  title         String     @unique
+  description   String     @db.VarChar(255)
   cost          Float
   cycle         Int
+  services      Services[]
 }
 
 model Services {
-  id        String  @id @default(uuid())
-  account   Account @relation(fields: [accountId], references: [accountId])
-  accountId String
+  id            String      @id @default(uuid())
+  account       Account     @relation(fields: [accountId], references: [accountId])
+  accountId     String
+  servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
+  servicePlanId String
 }
 
 model Tasks {
