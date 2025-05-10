@@ -5,7 +5,8 @@ const {
   updateServicePlan,
   deleteServicePlan,
   getService, 
-  getServices,
+  getAllServices,
+  getServicesForUser,
   addService,
   deleteService,
 } = require("./serviceController");
@@ -20,7 +21,8 @@ function middleware(req, res, next) {
 }
 
 // Service Table Routes
-router.get("/list", middleware, getServices);
+router.get("/list", middleware, getAllServices);
+router.get("/me", middleware, getServicesForUser);
 router.get("/:id", middleware, getService);
 router.delete("/:id", middleware, deleteService);
 router.post("/new",middleware, addService)

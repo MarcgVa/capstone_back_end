@@ -40,7 +40,6 @@ model Account {
   zip       Int
   phone     String     @unique
   startDate DateTime?  @db.Date
-  cutDate   DateTime?  @db.Date
   bill      Billing[]
   invoice   Invoice[]
   Services  Services[]
@@ -63,6 +62,10 @@ model Services {
   accountId     String
   servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
   servicePlanId String
+  scheduledDate DateTime?   @db.Date
+  code          String?
+
+  @@unique([accountId, servicePlanId])
 }
 
 model Tasks {
