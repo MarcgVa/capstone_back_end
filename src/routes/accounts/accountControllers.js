@@ -21,7 +21,15 @@ const getUsers = async (req, res, next) => {
           ],
         },
         include: {
-          account: true,
+          account: {
+            include: {
+              Services: {
+                include: {
+                  servicePlan: true,
+                },
+              },
+            },
+          },
         },
         orderBy: [{ role: 'desc' }],
       });
@@ -43,19 +51,26 @@ const getUser = async (req, res, next) => {
   const { token, authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
-  if (token && isAuthorized) {
+  if (authId === id || token && isAuthorized) {
     try {
       const client = await prisma.user.findFirst({
         where: {
-          id: {equals: id}
+          id: { equals: id },
         },
         include: {
-          account: true,
+          account: {
+            include: {
+              Services: {
+                include: {
+                  servicePlan: true,
+                },
+              },
+            },
+          },
         },
       });
 
       if (client) {
-        console.log(client);
         res.send(client);
       }
     } catch (error) {
@@ -71,11 +86,19 @@ const getSelf = async (req, res, next) => {
     const { authId } = verifyAuthentication(req);
     const account = await prisma.user.findFirst({
       where: {
-        id: { equals: authId, }
+        id: { equals: authId },
       },
       include: {
-        account: true,
-      }
+        account: {
+          include: {
+            Services: {
+              include: {
+                servicePlan: true,
+              },
+            },
+          },
+        },
+      },
     });
 
     if (account) {

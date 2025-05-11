@@ -143,8 +143,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   state: 'state',
   zip: 'zip',
   phone: 'phone',
-  startDate: 'startDate',
-  cutDate: 'cutDate'
+  startDate: 'startDate'
 };
 
 exports.Prisma.ServicePlanScalarFieldEnum = {
@@ -158,7 +157,9 @@ exports.Prisma.ServicePlanScalarFieldEnum = {
 exports.Prisma.ServicesScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
-  servicePlanId: 'servicePlanId'
+  servicePlanId: 'servicePlanId',
+  scheduledDate: 'scheduledDate',
+  code: 'code'
 };
 
 exports.Prisma.TasksScalarFieldEnum = {

@@ -15,7 +15,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/clients", accountRoutes);
 app.use("/api/ops", scheduleRoutes);
-app.use("/api/services",serviceRoutes)
+app.use("/api/services", serviceRoutes);
 
 
 module.exports = app;

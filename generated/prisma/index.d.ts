@@ -2862,7 +2862,6 @@ export namespace Prisma {
     zip: number | null
     phone: string | null
     startDate: Date | null
-    cutDate: Date | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -2876,7 +2875,6 @@ export namespace Prisma {
     zip: number | null
     phone: string | null
     startDate: Date | null
-    cutDate: Date | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -2890,7 +2888,6 @@ export namespace Prisma {
     zip: number
     phone: number
     startDate: number
-    cutDate: number
     _all: number
   }
 
@@ -2916,7 +2913,6 @@ export namespace Prisma {
     zip?: true
     phone?: true
     startDate?: true
-    cutDate?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -2930,7 +2926,6 @@ export namespace Prisma {
     zip?: true
     phone?: true
     startDate?: true
-    cutDate?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -2944,7 +2939,6 @@ export namespace Prisma {
     zip?: true
     phone?: true
     startDate?: true
-    cutDate?: true
     _all?: true
   }
 
@@ -3045,7 +3039,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate: Date | null
-    cutDate: Date | null
     _count: AccountCountAggregateOutputType | null
     _avg: AccountAvgAggregateOutputType | null
     _sum: AccountSumAggregateOutputType | null
@@ -3078,7 +3071,6 @@ export namespace Prisma {
     zip?: boolean
     phone?: boolean
     startDate?: boolean
-    cutDate?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     bill?: boolean | Account$billArgs<ExtArgs>
     invoice?: boolean | Account$invoiceArgs<ExtArgs>
@@ -3097,7 +3089,6 @@ export namespace Prisma {
     zip?: boolean
     phone?: boolean
     startDate?: boolean
-    cutDate?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -3112,7 +3103,6 @@ export namespace Prisma {
     zip?: boolean
     phone?: boolean
     startDate?: boolean
-    cutDate?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -3127,10 +3117,9 @@ export namespace Prisma {
     zip?: boolean
     phone?: boolean
     startDate?: boolean
-    cutDate?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "firstName" | "lastName" | "address" | "city" | "state" | "zip" | "phone" | "startDate" | "cutDate", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "firstName" | "lastName" | "address" | "city" | "state" | "zip" | "phone" | "startDate", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     bill?: boolean | Account$billArgs<ExtArgs>
@@ -3164,7 +3153,6 @@ export namespace Prisma {
       zip: number
       phone: string
       startDate: Date | null
-      cutDate: Date | null
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -3602,7 +3590,6 @@ export namespace Prisma {
     readonly zip: FieldRef<"Account", 'Int'>
     readonly phone: FieldRef<"Account", 'String'>
     readonly startDate: FieldRef<"Account", 'DateTime'>
-    readonly cutDate: FieldRef<"Account", 'DateTime'>
   }
     
 
@@ -5229,18 +5216,24 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     servicePlanId: string | null
+    scheduledDate: Date | null
+    code: string | null
   }
 
   export type ServicesMaxAggregateOutputType = {
     id: string | null
     accountId: string | null
     servicePlanId: string | null
+    scheduledDate: Date | null
+    code: string | null
   }
 
   export type ServicesCountAggregateOutputType = {
     id: number
     accountId: number
     servicePlanId: number
+    scheduledDate: number
+    code: number
     _all: number
   }
 
@@ -5249,18 +5242,24 @@ export namespace Prisma {
     id?: true
     accountId?: true
     servicePlanId?: true
+    scheduledDate?: true
+    code?: true
   }
 
   export type ServicesMaxAggregateInputType = {
     id?: true
     accountId?: true
     servicePlanId?: true
+    scheduledDate?: true
+    code?: true
   }
 
   export type ServicesCountAggregateInputType = {
     id?: true
     accountId?: true
     servicePlanId?: true
+    scheduledDate?: true
+    code?: true
     _all?: true
   }
 
@@ -5340,6 +5339,8 @@ export namespace Prisma {
     id: string
     accountId: string
     servicePlanId: string
+    scheduledDate: Date | null
+    code: string | null
     _count: ServicesCountAggregateOutputType | null
     _min: ServicesMinAggregateOutputType | null
     _max: ServicesMaxAggregateOutputType | null
@@ -5363,6 +5364,8 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     servicePlanId?: boolean
+    scheduledDate?: boolean
+    code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
@@ -5371,6 +5374,8 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     servicePlanId?: boolean
+    scheduledDate?: boolean
+    code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
@@ -5379,6 +5384,8 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     servicePlanId?: boolean
+    scheduledDate?: boolean
+    code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["services"]>
@@ -5387,9 +5394,11 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     servicePlanId?: boolean
+    scheduledDate?: boolean
+    code?: boolean
   }
 
-  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "servicePlanId", ExtArgs["result"]["services"]>
+  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "servicePlanId" | "scheduledDate" | "code", ExtArgs["result"]["services"]>
   export type ServicesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
@@ -5413,6 +5422,8 @@ export namespace Prisma {
       id: string
       accountId: string
       servicePlanId: string
+      scheduledDate: Date | null
+      code: string | null
     }, ExtArgs["result"]["services"]>
     composites: {}
   }
@@ -5841,6 +5852,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Services", 'String'>
     readonly accountId: FieldRef<"Services", 'String'>
     readonly servicePlanId: FieldRef<"Services", 'String'>
+    readonly scheduledDate: FieldRef<"Services", 'DateTime'>
+    readonly code: FieldRef<"Services", 'String'>
   }
     
 
@@ -11721,8 +11734,7 @@ export namespace Prisma {
     state: 'state',
     zip: 'zip',
     phone: 'phone',
-    startDate: 'startDate',
-    cutDate: 'cutDate'
+    startDate: 'startDate'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -11742,7 +11754,9 @@ export namespace Prisma {
   export const ServicesScalarFieldEnum: {
     id: 'id',
     accountId: 'accountId',
-    servicePlanId: 'servicePlanId'
+    servicePlanId: 'servicePlanId',
+    scheduledDate: 'scheduledDate',
+    code: 'code'
   };
 
   export type ServicesScalarFieldEnum = (typeof ServicesScalarFieldEnum)[keyof typeof ServicesScalarFieldEnum]
@@ -12020,7 +12034,6 @@ export namespace Prisma {
     zip?: IntFilter<"Account"> | number
     phone?: StringFilter<"Account"> | string
     startDate?: DateTimeNullableFilter<"Account"> | Date | string | null
-    cutDate?: DateTimeNullableFilter<"Account"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     bill?: BillingListRelationFilter
     invoice?: InvoiceListRelationFilter
@@ -12038,7 +12051,6 @@ export namespace Prisma {
     zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrderInput | SortOrder
-    cutDate?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     bill?: BillingOrderByRelationAggregateInput
     invoice?: InvoiceOrderByRelationAggregateInput
@@ -12060,7 +12072,6 @@ export namespace Prisma {
     state?: StringFilter<"Account"> | string
     zip?: IntFilter<"Account"> | number
     startDate?: DateTimeNullableFilter<"Account"> | Date | string | null
-    cutDate?: DateTimeNullableFilter<"Account"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     bill?: BillingListRelationFilter
     invoice?: InvoiceListRelationFilter
@@ -12078,7 +12089,6 @@ export namespace Prisma {
     zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrderInput | SortOrder
-    cutDate?: SortOrderInput | SortOrder
     _count?: AccountCountOrderByAggregateInput
     _avg?: AccountAvgOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
@@ -12100,7 +12110,6 @@ export namespace Prisma {
     zip?: IntWithAggregatesFilter<"Account"> | number
     phone?: StringWithAggregatesFilter<"Account"> | string
     startDate?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
-    cutDate?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
   }
 
   export type ServicePlanWhereInput = {
@@ -12167,6 +12176,8 @@ export namespace Prisma {
     id?: StringFilter<"Services"> | string
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
+    scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    code?: StringNullableFilter<"Services"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
   }
@@ -12175,25 +12186,32 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     servicePlanId?: SortOrder
+    scheduledDate?: SortOrderInput | SortOrder
+    code?: SortOrderInput | SortOrder
     account?: AccountOrderByWithRelationInput
     servicePlan?: ServicePlanOrderByWithRelationInput
   }
 
   export type ServicesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    accountId_servicePlanId?: ServicesAccountIdServicePlanIdCompoundUniqueInput
     AND?: ServicesWhereInput | ServicesWhereInput[]
     OR?: ServicesWhereInput[]
     NOT?: ServicesWhereInput | ServicesWhereInput[]
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
+    scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    code?: StringNullableFilter<"Services"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
-  }, "id">
+  }, "id" | "accountId_servicePlanId">
 
   export type ServicesOrderByWithAggregationInput = {
     id?: SortOrder
     accountId?: SortOrder
     servicePlanId?: SortOrder
+    scheduledDate?: SortOrderInput | SortOrder
+    code?: SortOrderInput | SortOrder
     _count?: ServicesCountOrderByAggregateInput
     _max?: ServicesMaxOrderByAggregateInput
     _min?: ServicesMinOrderByAggregateInput
@@ -12206,6 +12224,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Services"> | string
     accountId?: StringWithAggregatesFilter<"Services"> | string
     servicePlanId?: StringWithAggregatesFilter<"Services"> | string
+    scheduledDate?: DateTimeNullableWithAggregatesFilter<"Services"> | Date | string | null
+    code?: StringNullableWithAggregatesFilter<"Services"> | string | null
   }
 
   export type TasksWhereInput = {
@@ -12583,7 +12603,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
@@ -12601,7 +12620,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
     Services?: ServicesUncheckedCreateNestedManyWithoutAccountInput
@@ -12616,7 +12634,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
@@ -12634,7 +12651,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
     Services?: ServicesUncheckedUpdateManyWithoutAccountNestedInput
@@ -12651,7 +12667,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -12663,7 +12678,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -12677,7 +12691,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ServicePlanCreateInput = {
@@ -12742,6 +12755,8 @@ export namespace Prisma {
 
   export type ServicesCreateInput = {
     id?: string
+    scheduledDate?: Date | string | null
+    code?: string | null
     account: AccountCreateNestedOneWithoutServicesInput
     servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
   }
@@ -12750,10 +12765,14 @@ export namespace Prisma {
     id?: string
     accountId: string
     servicePlanId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type ServicesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutServicesNestedInput
     servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
   }
@@ -12762,22 +12781,30 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ServicesCreateManyInput = {
     id?: string
     accountId: string
     servicePlanId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type ServicesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ServicesUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TasksCreateInput = {
@@ -13273,7 +13300,6 @@ export namespace Prisma {
     zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
-    cutDate?: SortOrder
   }
 
   export type AccountAvgOrderByAggregateInput = {
@@ -13292,7 +13318,6 @@ export namespace Prisma {
     zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
-    cutDate?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -13306,7 +13331,6 @@ export namespace Prisma {
     zip?: SortOrder
     phone?: SortOrder
     startDate?: SortOrder
-    cutDate?: SortOrder
   }
 
   export type AccountSumOrderByAggregateInput = {
@@ -13405,34 +13429,6 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type AccountScalarRelationFilter = {
-    is?: AccountWhereInput
-    isNot?: AccountWhereInput
-  }
-
-  export type ServicePlanScalarRelationFilter = {
-    is?: ServicePlanWhereInput
-    isNot?: ServicePlanWhereInput
-  }
-
-  export type ServicesCountOrderByAggregateInput = {
-    id?: SortOrder
-    accountId?: SortOrder
-    servicePlanId?: SortOrder
-  }
-
-  export type ServicesMaxOrderByAggregateInput = {
-    id?: SortOrder
-    accountId?: SortOrder
-    servicePlanId?: SortOrder
-  }
-
-  export type ServicesMinOrderByAggregateInput = {
-    id?: SortOrder
-    accountId?: SortOrder
-    servicePlanId?: SortOrder
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13446,6 +13442,63 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type AccountScalarRelationFilter = {
+    is?: AccountWhereInput
+    isNot?: AccountWhereInput
+  }
+
+  export type ServicePlanScalarRelationFilter = {
+    is?: ServicePlanWhereInput
+    isNot?: ServicePlanWhereInput
+  }
+
+  export type ServicesAccountIdServicePlanIdCompoundUniqueInput = {
+    accountId: string
+    servicePlanId: string
+  }
+
+  export type ServicesCountOrderByAggregateInput = {
+    id?: SortOrder
+    accountId?: SortOrder
+    servicePlanId?: SortOrder
+    scheduledDate?: SortOrder
+    code?: SortOrder
+  }
+
+  export type ServicesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    accountId?: SortOrder
+    servicePlanId?: SortOrder
+    scheduledDate?: SortOrder
+    code?: SortOrder
+  }
+
+  export type ServicesMinOrderByAggregateInput = {
+    id?: SortOrder
+    accountId?: SortOrder
+    servicePlanId?: SortOrder
+    scheduledDate?: SortOrder
+    code?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -13519,24 +13572,6 @@ export namespace Prisma {
 
   export type TasksSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -13997,6 +14032,10 @@ export namespace Prisma {
     connect?: ServicePlanWhereUniqueInput
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type AccountUpdateOneRequiredWithoutServicesNestedInput = {
     create?: XOR<AccountCreateWithoutServicesInput, AccountUncheckedCreateWithoutServicesInput>
     connectOrCreate?: AccountCreateOrConnectWithoutServicesInput
@@ -14017,10 +14056,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTasksInput, UserUncheckedCreateWithoutTasksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTasksInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -14240,11 +14275,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -14260,6 +14290,11 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -14302,7 +14337,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
     Services?: ServicesCreateNestedManyWithoutAccountInput
@@ -14318,7 +14352,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
     Services?: ServicesUncheckedCreateNestedManyWithoutAccountInput
@@ -14382,7 +14415,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
     Services?: ServicesUpdateManyWithoutAccountNestedInput
@@ -14398,7 +14430,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
     Services?: ServicesUncheckedUpdateManyWithoutAccountNestedInput
@@ -14506,12 +14537,16 @@ export namespace Prisma {
 
   export type ServicesCreateWithoutAccountInput = {
     id?: string
+    scheduledDate?: Date | string | null
+    code?: string | null
     servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
   }
 
   export type ServicesUncheckedCreateWithoutAccountInput = {
     id?: string
     servicePlanId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type ServicesCreateOrConnectWithoutAccountInput = {
@@ -14629,16 +14664,22 @@ export namespace Prisma {
     id?: StringFilter<"Services"> | string
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
+    scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    code?: StringNullableFilter<"Services"> | string | null
   }
 
   export type ServicesCreateWithoutServicePlanInput = {
     id?: string
+    scheduledDate?: Date | string | null
+    code?: string | null
     account: AccountCreateNestedOneWithoutServicesInput
   }
 
   export type ServicesUncheckedCreateWithoutServicePlanInput = {
     id?: string
     accountId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type ServicesCreateOrConnectWithoutServicePlanInput = {
@@ -14676,7 +14717,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
@@ -14693,7 +14733,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -14744,7 +14783,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
@@ -14761,7 +14799,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -14854,7 +14891,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     invoice?: InvoiceCreateNestedManyWithoutAccountInput
     Services?: ServicesCreateNestedManyWithoutAccountInput
@@ -14871,7 +14907,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     invoice?: InvoiceUncheckedCreateNestedManyWithoutAccountInput
     Services?: ServicesUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -14901,7 +14936,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     invoice?: InvoiceUpdateManyWithoutAccountNestedInput
     Services?: ServicesUpdateManyWithoutAccountNestedInput
@@ -14918,7 +14952,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invoice?: InvoiceUncheckedUpdateManyWithoutAccountNestedInput
     Services?: ServicesUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -14932,7 +14965,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     user: UserCreateNestedOneWithoutAccountInput
     bill?: BillingCreateNestedManyWithoutAccountInput
     Services?: ServicesCreateNestedManyWithoutAccountInput
@@ -14949,7 +14981,6 @@ export namespace Prisma {
     zip: number
     phone: string
     startDate?: Date | string | null
-    cutDate?: Date | string | null
     bill?: BillingUncheckedCreateNestedManyWithoutAccountInput
     Services?: ServicesUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -14979,7 +15010,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutAccountNestedInput
     bill?: BillingUpdateManyWithoutAccountNestedInput
     Services?: ServicesUpdateManyWithoutAccountNestedInput
@@ -14996,7 +15026,6 @@ export namespace Prisma {
     zip?: IntFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
     startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cutDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bill?: BillingUncheckedUpdateManyWithoutAccountNestedInput
     Services?: ServicesUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -15064,6 +15093,8 @@ export namespace Prisma {
   export type ServicesCreateManyAccountInput = {
     id?: string
     servicePlanId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type BillingUpdateWithoutAccountInput = {
@@ -15106,37 +15137,51 @@ export namespace Prisma {
 
   export type ServicesUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
     servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
   }
 
   export type ServicesUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ServicesUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ServicesCreateManyServicePlanInput = {
     id?: string
     accountId: string
+    scheduledDate?: Date | string | null
+    code?: string | null
   }
 
   export type ServicesUpdateWithoutServicePlanInput = {
     id?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutServicesNestedInput
   }
 
   export type ServicesUncheckedUpdateWithoutServicePlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ServicesUncheckedUpdateManyWithoutServicePlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
