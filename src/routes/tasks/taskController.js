@@ -13,23 +13,17 @@ const getTasks = async (req, res, next) => {
   }
 };
 
-const getTask = async (req, res) => {
-  const { authId } = verifyAuthentication(req);
-  const isAuthorized = await verifyAuthRole(authId);
+const getTaskById = async (req, res, next) => {
   const { id } = req.params;
-  if (authId === id || isAuthorized){
-    try {
-      const item = await prisma.tasks.findMany({
-        where: {
-          id,
-        },
-      });
-      res.Status(200).send(item);
-    } catch (error) {
-      next(error);
-    }
-  } else {
-    res.sendStatus(403) 
+  try {     
+    const item = await prisma.tasks.findMany({
+      where: {
+        id: {equals: (id*1)},
+      },
+    });
+    res.send(item);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -122,4 +116,4 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-module.exports = { getTasks, getTask, getMyTasks, createTask, updateTask, deleteTask };
+module.exports = { getTasks, getTaskById, getMyTasks, createTask, updateTask, deleteTask };

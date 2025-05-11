@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   getTasks,
-  getTask,
+  getTaskById,
   getMyTasks,
   updateTask,
   deleteTask,
@@ -18,7 +18,7 @@ function middleware(req, res, next) {
 }
 
 router.get("/all", middleware, getTasks);
-router.get("/:id", middleware, getTask);
+router.get("/task/:id", middleware, getTaskById);
 router.get("/me", middleware, getMyTasks);
 router.post("/new", createTask);
 router.put("/:id", middleware, updateTask);
