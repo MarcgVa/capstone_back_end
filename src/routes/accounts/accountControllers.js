@@ -51,7 +51,7 @@ const getUser = async (req, res, next) => {
   const { token, authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
-  if (token && isAuthorized) {
+  if (authId === id || token && isAuthorized) {
     try {
       const client = await prisma.user.findFirst({
         where: {
@@ -71,7 +71,6 @@ const getUser = async (req, res, next) => {
       });
 
       if (client) {
-        console.log(client);
         res.send(client);
       }
     } catch (error) {

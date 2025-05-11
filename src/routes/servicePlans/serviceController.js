@@ -9,21 +9,9 @@ const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 /* <---------- Service table functions ----------> */
 
 const getServicePlans = async (req, res, next) => {
-  
-  try {
-
-    const response = await prisma.servicePlan.findMany({});
-
-    if (response) {
-      res.send(response);
-    } else {
-      res.Status(500).send('Something went wrong :(');
-    }
-    
-  } catch (error) {
-    next(error);
-    res.json(error);
-  }
+  const response = await prisma.servicePlan.findMany({});
+  console.log(response);
+  res.send(response);
 };
 
 const newServicePlan = async (req, res, next) => {
@@ -129,7 +117,8 @@ const getService = async (req, res, next) => {
 };
 
 const getAllServices = async (req, res, next) => {
-  
+  const response = await prisma.services.findMany({});
+  res.send(response);
 };
 
 const getServicesForUser = async (req, res, next) => {

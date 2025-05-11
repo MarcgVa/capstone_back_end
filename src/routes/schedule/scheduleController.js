@@ -12,10 +12,13 @@ const getAllSchedules = async (req, res, next) => {
 
   if (isAuthorized) {
     try {
-      const items = await prisma.account.findMany({
+      const items = await prisma.services.findMany({
         where: {
-          cutDate: { equals: TODAY },
+          scheduledDate: { equals: TODAY },
         },
+        include: {
+          account: true,
+        }
       });
       res.send(items);
     } catch (error) {
