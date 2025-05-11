@@ -76,6 +76,8 @@ model Tasks {
   updatedAt   DateTime @updatedAt
   completed   Boolean  @default(false)
   dueDate     DateTime @db.Date
+  category    Category @default(Message)
+  priority    Priority @default(NORMAL)
   assignedTo  String?
   assignee    User     @relation(fields: [createdBy], references: [id])
   createdBy   String
@@ -122,4 +124,17 @@ enum Role {
   MANAGER
   TECH
   DISABLED
+}
+
+enum Category {
+  Message
+  Task
+  Request
+}
+
+enum Priority {
+  URGENT
+  HIGH
+  NORMAL
+  LOW
 }

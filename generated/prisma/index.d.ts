@@ -73,11 +73,38 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const Category: {
+  Message: 'Message',
+  Task: 'Task',
+  Request: 'Request'
+};
+
+export type Category = (typeof Category)[keyof typeof Category]
+
+
+export const Priority: {
+  URGENT: 'URGENT',
+  HIGH: 'HIGH',
+  NORMAL: 'NORMAL',
+  LOW: 'LOW'
+};
+
+export type Priority = (typeof Priority)[keyof typeof Priority]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type Category = $Enums.Category
+
+export const Category: typeof $Enums.Category
+
+export type Priority = $Enums.Priority
+
+export const Priority: typeof $Enums.Priority
 
 /**
  * ##  Prisma Client ʲˢ
@@ -6305,6 +6332,8 @@ export namespace Prisma {
     updatedAt: Date | null
     completed: boolean | null
     dueDate: Date | null
+    category: $Enums.Category | null
+    priority: $Enums.Priority | null
     assignedTo: string | null
     createdBy: string | null
   }
@@ -6317,6 +6346,8 @@ export namespace Prisma {
     updatedAt: Date | null
     completed: boolean | null
     dueDate: Date | null
+    category: $Enums.Category | null
+    priority: $Enums.Priority | null
     assignedTo: string | null
     createdBy: string | null
   }
@@ -6329,6 +6360,8 @@ export namespace Prisma {
     updatedAt: number
     completed: number
     dueDate: number
+    category: number
+    priority: number
     assignedTo: number
     createdBy: number
     updatedBy: number
@@ -6352,6 +6385,8 @@ export namespace Prisma {
     updatedAt?: true
     completed?: true
     dueDate?: true
+    category?: true
+    priority?: true
     assignedTo?: true
     createdBy?: true
   }
@@ -6364,6 +6399,8 @@ export namespace Prisma {
     updatedAt?: true
     completed?: true
     dueDate?: true
+    category?: true
+    priority?: true
     assignedTo?: true
     createdBy?: true
   }
@@ -6376,6 +6413,8 @@ export namespace Prisma {
     updatedAt?: true
     completed?: true
     dueDate?: true
+    category?: true
+    priority?: true
     assignedTo?: true
     createdBy?: true
     updatedBy?: true
@@ -6476,6 +6515,8 @@ export namespace Prisma {
     updatedAt: Date
     completed: boolean
     dueDate: Date
+    category: $Enums.Category
+    priority: $Enums.Priority
     assignedTo: string | null
     createdBy: string
     updatedBy: JsonValue | null
@@ -6508,6 +6549,8 @@ export namespace Prisma {
     updatedAt?: boolean
     completed?: boolean
     dueDate?: boolean
+    category?: boolean
+    priority?: boolean
     assignedTo?: boolean
     createdBy?: boolean
     updatedBy?: boolean
@@ -6522,6 +6565,8 @@ export namespace Prisma {
     updatedAt?: boolean
     completed?: boolean
     dueDate?: boolean
+    category?: boolean
+    priority?: boolean
     assignedTo?: boolean
     createdBy?: boolean
     updatedBy?: boolean
@@ -6536,6 +6581,8 @@ export namespace Prisma {
     updatedAt?: boolean
     completed?: boolean
     dueDate?: boolean
+    category?: boolean
+    priority?: boolean
     assignedTo?: boolean
     createdBy?: boolean
     updatedBy?: boolean
@@ -6550,12 +6597,14 @@ export namespace Prisma {
     updatedAt?: boolean
     completed?: boolean
     dueDate?: boolean
+    category?: boolean
+    priority?: boolean
     assignedTo?: boolean
     createdBy?: boolean
     updatedBy?: boolean
   }
 
-  export type TasksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt" | "completed" | "dueDate" | "assignedTo" | "createdBy" | "updatedBy", ExtArgs["result"]["tasks"]>
+  export type TasksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt" | "completed" | "dueDate" | "category" | "priority" | "assignedTo" | "createdBy" | "updatedBy", ExtArgs["result"]["tasks"]>
   export type TasksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignee?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6579,6 +6628,8 @@ export namespace Prisma {
       updatedAt: Date
       completed: boolean
       dueDate: Date
+      category: $Enums.Category
+      priority: $Enums.Priority
       assignedTo: string | null
       createdBy: string
       updatedBy: Prisma.JsonValue | null
@@ -7013,6 +7064,8 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Tasks", 'DateTime'>
     readonly completed: FieldRef<"Tasks", 'Boolean'>
     readonly dueDate: FieldRef<"Tasks", 'DateTime'>
+    readonly category: FieldRef<"Tasks", 'Category'>
+    readonly priority: FieldRef<"Tasks", 'Priority'>
     readonly assignedTo: FieldRef<"Tasks", 'String'>
     readonly createdBy: FieldRef<"Tasks", 'String'>
     readonly updatedBy: FieldRef<"Tasks", 'Json'>
@@ -11770,6 +11823,8 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     completed: 'completed',
     dueDate: 'dueDate',
+    category: 'category',
+    priority: 'priority',
     assignedTo: 'assignedTo',
     createdBy: 'createdBy',
     updatedBy: 'updatedBy'
@@ -11942,6 +11997,34 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Category'
+   */
+  export type EnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category'>
+    
+
+
+  /**
+   * Reference to a field of type 'Category[]'
+   */
+  export type ListEnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Priority'
+   */
+  export type EnumPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Priority'>
+    
+
+
+  /**
+   * Reference to a field of type 'Priority[]'
+   */
+  export type ListEnumPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Priority[]'>
     
 
 
@@ -12239,6 +12322,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tasks"> | Date | string
     completed?: BoolFilter<"Tasks"> | boolean
     dueDate?: DateTimeFilter<"Tasks"> | Date | string
+    category?: EnumCategoryFilter<"Tasks"> | $Enums.Category
+    priority?: EnumPriorityFilter<"Tasks"> | $Enums.Priority
     assignedTo?: StringNullableFilter<"Tasks"> | string | null
     createdBy?: StringFilter<"Tasks"> | string
     updatedBy?: JsonNullableFilter<"Tasks">
@@ -12253,6 +12338,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     completed?: SortOrder
     dueDate?: SortOrder
+    category?: SortOrder
+    priority?: SortOrder
     assignedTo?: SortOrderInput | SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
@@ -12270,6 +12357,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tasks"> | Date | string
     completed?: BoolFilter<"Tasks"> | boolean
     dueDate?: DateTimeFilter<"Tasks"> | Date | string
+    category?: EnumCategoryFilter<"Tasks"> | $Enums.Category
+    priority?: EnumPriorityFilter<"Tasks"> | $Enums.Priority
     assignedTo?: StringNullableFilter<"Tasks"> | string | null
     createdBy?: StringFilter<"Tasks"> | string
     updatedBy?: JsonNullableFilter<"Tasks">
@@ -12284,6 +12373,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     completed?: SortOrder
     dueDate?: SortOrder
+    category?: SortOrder
+    priority?: SortOrder
     assignedTo?: SortOrderInput | SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrderInput | SortOrder
@@ -12305,6 +12396,8 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Tasks"> | Date | string
     completed?: BoolWithAggregatesFilter<"Tasks"> | boolean
     dueDate?: DateTimeWithAggregatesFilter<"Tasks"> | Date | string
+    category?: EnumCategoryWithAggregatesFilter<"Tasks"> | $Enums.Category
+    priority?: EnumPriorityWithAggregatesFilter<"Tasks"> | $Enums.Priority
     assignedTo?: StringNullableWithAggregatesFilter<"Tasks"> | string | null
     createdBy?: StringWithAggregatesFilter<"Tasks"> | string
     updatedBy?: JsonNullableWithAggregatesFilter<"Tasks">
@@ -12814,6 +12907,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
     assignee: UserCreateNestedOneWithoutTasksInput
@@ -12827,6 +12922,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     createdBy: string
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
@@ -12839,6 +12936,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
     assignee?: UserUpdateOneRequiredWithoutTasksNestedInput
@@ -12852,6 +12951,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: StringFieldUpdateOperationsInput | string
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
@@ -12865,6 +12966,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     createdBy: string
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
@@ -12877,6 +12980,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -12889,6 +12994,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: StringFieldUpdateOperationsInput | string
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
@@ -13505,6 +13612,20 @@ export namespace Prisma {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
+
+  export type EnumCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
+  }
+
+  export type EnumPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPriorityFilter<$PrismaModel> | $Enums.Priority
+  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -13537,6 +13658,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     completed?: SortOrder
     dueDate?: SortOrder
+    category?: SortOrder
+    priority?: SortOrder
     assignedTo?: SortOrder
     createdBy?: SortOrder
     updatedBy?: SortOrder
@@ -13554,6 +13677,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     completed?: SortOrder
     dueDate?: SortOrder
+    category?: SortOrder
+    priority?: SortOrder
     assignedTo?: SortOrder
     createdBy?: SortOrder
   }
@@ -13566,6 +13691,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     completed?: SortOrder
     dueDate?: SortOrder
+    category?: SortOrder
+    priority?: SortOrder
     assignedTo?: SortOrder
     createdBy?: SortOrder
   }
@@ -13580,6 +13707,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategoryWithAggregatesFilter<$PrismaModel> | $Enums.Category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategoryFilter<$PrismaModel>
+    _max?: NestedEnumCategoryFilter<$PrismaModel>
+  }
+
+  export type EnumPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPriorityWithAggregatesFilter<$PrismaModel> | $Enums.Priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPriorityFilter<$PrismaModel>
+    _max?: NestedEnumPriorityFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -14062,6 +14209,14 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type EnumCategoryFieldUpdateOperationsInput = {
+    set?: $Enums.Category
+  }
+
+  export type EnumPriorityFieldUpdateOperationsInput = {
+    set?: $Enums.Priority
+  }
+
   export type UserUpdateOneRequiredWithoutTasksNestedInput = {
     create?: XOR<UserCreateWithoutTasksInput, UserUncheckedCreateWithoutTasksInput>
     connectOrCreate?: UserCreateOrConnectWithoutTasksInput
@@ -14297,12 +14452,46 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumCategoryFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
+  }
+
+  export type NestedEnumPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPriorityFilter<$PrismaModel> | $Enums.Priority
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCategoryWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel>
+    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel>
+    not?: NestedEnumCategoryWithAggregatesFilter<$PrismaModel> | $Enums.Category
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCategoryFilter<$PrismaModel>
+    _max?: NestedEnumCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Priority | EnumPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Priority[] | ListEnumPriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumPriorityWithAggregatesFilter<$PrismaModel> | $Enums.Priority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPriorityFilter<$PrismaModel>
+    _max?: NestedEnumPriorityFilter<$PrismaModel>
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -14369,6 +14558,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -14381,6 +14572,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -14462,6 +14655,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Tasks"> | Date | string
     completed?: BoolFilter<"Tasks"> | boolean
     dueDate?: DateTimeFilter<"Tasks"> | Date | string
+    category?: EnumCategoryFilter<"Tasks"> | $Enums.Category
+    priority?: EnumPriorityFilter<"Tasks"> | $Enums.Priority
     assignedTo?: StringNullableFilter<"Tasks"> | string | null
     createdBy?: StringFilter<"Tasks"> | string
     updatedBy?: JsonNullableFilter<"Tasks">
@@ -15038,6 +15233,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     completed?: boolean
     dueDate: Date | string
+    category?: $Enums.Category
+    priority?: $Enums.Priority
     assignedTo?: string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -15049,6 +15246,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -15061,6 +15260,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }
@@ -15073,6 +15274,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completed?: BoolFieldUpdateOperationsInput | boolean
     dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    priority?: EnumPriorityFieldUpdateOperationsInput | $Enums.Priority
     assignedTo?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableJsonNullValueInput | InputJsonValue
   }

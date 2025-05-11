@@ -132,6 +132,9 @@ const getServicesForUser = async (req, res, next) => {
       include: {
         servicePlan: true,
       },
+      orderBy: {
+        scheduledDate:{sort: 'asc', nulls: 'last'},
+      }
     });
 
     res.send(response);
