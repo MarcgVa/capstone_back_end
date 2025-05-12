@@ -3,8 +3,7 @@ const { prisma, jwt } = require("../../common/common");
 const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
 const date = new Date();
-const TODAY = date
-console.log('today',TODAY);
+const TODAY = date;
 
 const getAllSchedules = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
@@ -32,9 +31,9 @@ const getAllSchedules = async (req, res, next) => {
 const getSchedule = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
   try {
-    const items = await prisma.account.findMany({
+    const items = await prisma.services.findMany({
       where: {
-        cutDate: { equals: TODAY },
+        scheduledDate: { equals: TODAY },
       },
     });
     res.send(items);
@@ -42,6 +41,16 @@ const getSchedule = async (req, res, next) => {
     next(error);
   }
 };
+
+const getMySchedule = async (req, res, next) => {
+  const { authId } = verifyAuthentication(req);
+  try {
+      // TODO:: Finish getting tech's daily schedule once the assignment functionality is done.
+
+  } catch (error) {
+    next(error);
+  }
+}
 
 
 module.exports = { getAllSchedules, getSchedule };
