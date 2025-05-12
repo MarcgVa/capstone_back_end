@@ -27,6 +27,19 @@ const getTaskById = async (req, res, next) => {
   }
 };
 
+const getNewConsults = async (req, res, next) => {
+  try {     
+    const response = await prisma.tasks.findMany({
+      where: {
+        title: { equals: "NEW CONSULT REQUEST" },
+      },
+    });
+    res.send(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getMyTasks = async (req, res, next) => {
   const token = req.headers?.authorization.split(" ")[1];
   const id = jwt.verify(token, process.env.JWT_SECRET);
@@ -116,4 +129,4 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-module.exports = { getTasks, getTaskById, getMyTasks, createTask, updateTask, deleteTask };
+module.exports = { getTasks, getTaskById, getNewConsults, getMyTasks, createTask, updateTask, deleteTask };

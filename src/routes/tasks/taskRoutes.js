@@ -3,6 +3,7 @@ const {
   getTasks,
   getTaskById,
   getMyTasks,
+  getNewConsults,
   updateTask,
   deleteTask,
   createTask,
@@ -18,8 +19,9 @@ function middleware(req, res, next) {
 }
 
 router.get("/all", middleware, getTasks);
-router.get("/:id", middleware, getTaskById);
 router.get("/me", middleware, getMyTasks);
+router.get("/consults", middleware, getNewConsults);
+router.get("/:id", middleware, getTaskById);
 router.post("/new", createTask);
 router.put("/:id", middleware, updateTask);
 router.delete("/:id", middleware, deleteTask);
