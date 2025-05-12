@@ -18,7 +18,7 @@ function middleware(req, res, next) {
 }
 
 router.get("/all", middleware, getTasks);
-router.get("/task/:id", middleware, getTaskById);
+router.get("/:id", middleware, getTaskById);
 router.get("/me", middleware, getMyTasks);
 router.post("/new", createTask);
 router.put("/:id", middleware, updateTask);
