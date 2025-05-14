@@ -159,6 +159,7 @@ exports.Prisma.ServicesScalarFieldEnum = {
   accountId: 'accountId',
   servicePlanId: 'servicePlanId',
   scheduledDate: 'scheduledDate',
+  scheduledTech: 'scheduledTech',
   code: 'code'
 };
 

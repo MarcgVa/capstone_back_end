@@ -5244,6 +5244,7 @@ export namespace Prisma {
     accountId: string | null
     servicePlanId: string | null
     scheduledDate: Date | null
+    scheduledTech: string | null
     code: string | null
   }
 
@@ -5252,6 +5253,7 @@ export namespace Prisma {
     accountId: string | null
     servicePlanId: string | null
     scheduledDate: Date | null
+    scheduledTech: string | null
     code: string | null
   }
 
@@ -5260,6 +5262,7 @@ export namespace Prisma {
     accountId: number
     servicePlanId: number
     scheduledDate: number
+    scheduledTech: number
     code: number
     _all: number
   }
@@ -5270,6 +5273,7 @@ export namespace Prisma {
     accountId?: true
     servicePlanId?: true
     scheduledDate?: true
+    scheduledTech?: true
     code?: true
   }
 
@@ -5278,6 +5282,7 @@ export namespace Prisma {
     accountId?: true
     servicePlanId?: true
     scheduledDate?: true
+    scheduledTech?: true
     code?: true
   }
 
@@ -5286,6 +5291,7 @@ export namespace Prisma {
     accountId?: true
     servicePlanId?: true
     scheduledDate?: true
+    scheduledTech?: true
     code?: true
     _all?: true
   }
@@ -5367,6 +5373,7 @@ export namespace Prisma {
     accountId: string
     servicePlanId: string
     scheduledDate: Date | null
+    scheduledTech: string | null
     code: string | null
     _count: ServicesCountAggregateOutputType | null
     _min: ServicesMinAggregateOutputType | null
@@ -5392,6 +5399,7 @@ export namespace Prisma {
     accountId?: boolean
     servicePlanId?: boolean
     scheduledDate?: boolean
+    scheduledTech?: boolean
     code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
@@ -5402,6 +5410,7 @@ export namespace Prisma {
     accountId?: boolean
     servicePlanId?: boolean
     scheduledDate?: boolean
+    scheduledTech?: boolean
     code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
@@ -5412,6 +5421,7 @@ export namespace Prisma {
     accountId?: boolean
     servicePlanId?: boolean
     scheduledDate?: boolean
+    scheduledTech?: boolean
     code?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
@@ -5422,10 +5432,11 @@ export namespace Prisma {
     accountId?: boolean
     servicePlanId?: boolean
     scheduledDate?: boolean
+    scheduledTech?: boolean
     code?: boolean
   }
 
-  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "servicePlanId" | "scheduledDate" | "code", ExtArgs["result"]["services"]>
+  export type ServicesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "servicePlanId" | "scheduledDate" | "scheduledTech" | "code", ExtArgs["result"]["services"]>
   export type ServicesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     servicePlan?: boolean | ServicePlanDefaultArgs<ExtArgs>
@@ -5450,6 +5461,7 @@ export namespace Prisma {
       accountId: string
       servicePlanId: string
       scheduledDate: Date | null
+      scheduledTech: string | null
       code: string | null
     }, ExtArgs["result"]["services"]>
     composites: {}
@@ -5880,6 +5892,7 @@ export namespace Prisma {
     readonly accountId: FieldRef<"Services", 'String'>
     readonly servicePlanId: FieldRef<"Services", 'String'>
     readonly scheduledDate: FieldRef<"Services", 'DateTime'>
+    readonly scheduledTech: FieldRef<"Services", 'String'>
     readonly code: FieldRef<"Services", 'String'>
   }
     
@@ -11809,6 +11822,7 @@ export namespace Prisma {
     accountId: 'accountId',
     servicePlanId: 'servicePlanId',
     scheduledDate: 'scheduledDate',
+    scheduledTech: 'scheduledTech',
     code: 'code'
   };
 
@@ -12260,6 +12274,7 @@ export namespace Prisma {
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
     scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    scheduledTech?: StringNullableFilter<"Services"> | string | null
     code?: StringNullableFilter<"Services"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
@@ -12270,6 +12285,7 @@ export namespace Prisma {
     accountId?: SortOrder
     servicePlanId?: SortOrder
     scheduledDate?: SortOrderInput | SortOrder
+    scheduledTech?: SortOrderInput | SortOrder
     code?: SortOrderInput | SortOrder
     account?: AccountOrderByWithRelationInput
     servicePlan?: ServicePlanOrderByWithRelationInput
@@ -12284,6 +12300,7 @@ export namespace Prisma {
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
     scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    scheduledTech?: StringNullableFilter<"Services"> | string | null
     code?: StringNullableFilter<"Services"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
@@ -12294,6 +12311,7 @@ export namespace Prisma {
     accountId?: SortOrder
     servicePlanId?: SortOrder
     scheduledDate?: SortOrderInput | SortOrder
+    scheduledTech?: SortOrderInput | SortOrder
     code?: SortOrderInput | SortOrder
     _count?: ServicesCountOrderByAggregateInput
     _max?: ServicesMaxOrderByAggregateInput
@@ -12308,6 +12326,7 @@ export namespace Prisma {
     accountId?: StringWithAggregatesFilter<"Services"> | string
     servicePlanId?: StringWithAggregatesFilter<"Services"> | string
     scheduledDate?: DateTimeNullableWithAggregatesFilter<"Services"> | Date | string | null
+    scheduledTech?: StringNullableWithAggregatesFilter<"Services"> | string | null
     code?: StringNullableWithAggregatesFilter<"Services"> | string | null
   }
 
@@ -12849,6 +12868,7 @@ export namespace Prisma {
   export type ServicesCreateInput = {
     id?: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
     account: AccountCreateNestedOneWithoutServicesInput
     servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
@@ -12859,12 +12879,14 @@ export namespace Prisma {
     accountId: string
     servicePlanId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
   export type ServicesUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutServicesNestedInput
     servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
@@ -12875,6 +12897,7 @@ export namespace Prisma {
     accountId?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -12883,12 +12906,14 @@ export namespace Prisma {
     accountId: string
     servicePlanId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
   export type ServicesUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -12897,6 +12922,7 @@ export namespace Prisma {
     accountId?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -13571,6 +13597,7 @@ export namespace Prisma {
     accountId?: SortOrder
     servicePlanId?: SortOrder
     scheduledDate?: SortOrder
+    scheduledTech?: SortOrder
     code?: SortOrder
   }
 
@@ -13579,6 +13606,7 @@ export namespace Prisma {
     accountId?: SortOrder
     servicePlanId?: SortOrder
     scheduledDate?: SortOrder
+    scheduledTech?: SortOrder
     code?: SortOrder
   }
 
@@ -13587,6 +13615,7 @@ export namespace Prisma {
     accountId?: SortOrder
     servicePlanId?: SortOrder
     scheduledDate?: SortOrder
+    scheduledTech?: SortOrder
     code?: SortOrder
   }
 
@@ -14733,6 +14762,7 @@ export namespace Prisma {
   export type ServicesCreateWithoutAccountInput = {
     id?: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
     servicePlan: ServicePlanCreateNestedOneWithoutServicesInput
   }
@@ -14741,6 +14771,7 @@ export namespace Prisma {
     id?: string
     servicePlanId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
@@ -14860,12 +14891,14 @@ export namespace Prisma {
     accountId?: StringFilter<"Services"> | string
     servicePlanId?: StringFilter<"Services"> | string
     scheduledDate?: DateTimeNullableFilter<"Services"> | Date | string | null
+    scheduledTech?: StringNullableFilter<"Services"> | string | null
     code?: StringNullableFilter<"Services"> | string | null
   }
 
   export type ServicesCreateWithoutServicePlanInput = {
     id?: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
     account: AccountCreateNestedOneWithoutServicesInput
   }
@@ -14874,6 +14907,7 @@ export namespace Prisma {
     id?: string
     accountId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
@@ -15297,6 +15331,7 @@ export namespace Prisma {
     id?: string
     servicePlanId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
@@ -15341,6 +15376,7 @@ export namespace Prisma {
   export type ServicesUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
     servicePlan?: ServicePlanUpdateOneRequiredWithoutServicesNestedInput
   }
@@ -15349,6 +15385,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -15356,6 +15393,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     servicePlanId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -15363,12 +15401,14 @@ export namespace Prisma {
     id?: string
     accountId: string
     scheduledDate?: Date | string | null
+    scheduledTech?: string | null
     code?: string | null
   }
 
   export type ServicesUpdateWithoutServicePlanInput = {
     id?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutServicesNestedInput
   }
@@ -15377,6 +15417,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -15384,6 +15425,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
     scheduledDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scheduledTech?: NullableStringFieldUpdateOperationsInput | string | null
     code?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

@@ -44,8 +44,30 @@ const getSchedule = async (req, res, next) => {
 
 const getMySchedule = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
+  const user = await prisma.user.findFirst({
+    where: { id: { equals: authId } },
+    
+  });
+
+  console.log(user.email);
+  
   try {
-      // TODO:: Finish getting tech's daily schedule once the assignment functionality is done.
+    const items = await prisma.services.findMany({
+      where: {
+        AND: [
+          {
+            scheduledDate: { equals: TODAY },
+          },
+          {
+            scheduledTech: { equals: user.email },
+          },
+        ],
+      },
+      include: {
+        account: true,
+      },
+    });
+    res.send(items);
 
   } catch (error) {
     next(error);
@@ -53,4 +75,4 @@ const getMySchedule = async (req, res, next) => {
 }
 
 
-module.exports = { getAllSchedules, getSchedule };
+module.exports = { getAllSchedules, getMySchedule };
