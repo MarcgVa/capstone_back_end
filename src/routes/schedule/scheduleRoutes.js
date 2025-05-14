@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { getAllSchedules, getSchedule } = require('./scheduleController');
+const { getAllSchedules, getMySchedule } = require('./scheduleController');
 
 
 function middleware(req, res, next) {
@@ -13,7 +13,7 @@ function middleware(req, res, next) {
 
 
 router.get("/schedules", middleware, getAllSchedules);
-router.get("/schedule", middleware, getSchedule);
+router.get("/schedule", middleware, getMySchedule);
 
 
 

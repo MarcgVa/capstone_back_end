@@ -31,6 +31,9 @@ const getUsers = async (req, res, next) => {
             },
           },
         },
+        omit: {
+          password: true,
+        },
         orderBy: [{ role: 'desc' }],
       });
       
@@ -68,6 +71,9 @@ const getUser = async (req, res, next) => {
             },
           },
         },
+        omit: {
+          password: true,
+        },
       });
 
       if (client) {
@@ -99,6 +105,9 @@ const getSelf = async (req, res, next) => {
           },
         },
       },
+      omit: {
+        password: true,
+      },
     });
 
     if (account) {
@@ -112,12 +121,14 @@ const getSelf = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
+  const { id } = req.params;
   const { authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
-  const { email, role, account } = req.body;
+  console.log(req.body);
+  const { account, user } = req.body;
+  console.log(user);
+  const { email, role } = user;
   const { firstName, lastName, address, city, state, zip, phone } = account;
-   
-  const { id } = req.params;
   try {
     if (authId === id || isAuthorized) {
       const user = await prisma.user.update({

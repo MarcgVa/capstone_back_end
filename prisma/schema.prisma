@@ -63,6 +63,7 @@ model Services {
   servicePlan   ServicePlan @relation(fields: [servicePlanId], references: [servicePlanId])
   servicePlanId String
   scheduledDate DateTime?   @db.Date
+  scheduledTech String?
   code          String?
 
   @@unique([accountId, servicePlanId])
