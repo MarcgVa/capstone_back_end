@@ -2,10 +2,8 @@ require("dotenv").config();
 const { prisma, jwt } = require("../../common/common");
 const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
-const date = new Date();
-const TODAY = date;
-
 const getAllSchedules = async (req, res, next) => {
+  const today = new Date();
   const { authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
 
@@ -13,27 +11,28 @@ const getAllSchedules = async (req, res, next) => {
     try {
       const items = await prisma.services.findMany({
         where: {
-          scheduledDate: { equals: TODAY },
+          scheduledDate: { equals: today },
         },
         include: {
           account: true,
-        }
+        },
       });
       res.send(items);
     } catch (error) {
       next(error);
     }
-  } else { 
+  } else {
     res.sendStatus(403);
   }
 };
 
 const getSchedule = async (req, res, next) => {
+  const today = new Date();
   const { authId } = verifyAuthentication(req);
   try {
     const items = await prisma.services.findMany({
       where: {
-        scheduledDate: { equals: TODAY },
+        scheduledDate: { equals: today },
       },
     });
     res.send(items);
@@ -43,36 +42,50 @@ const getSchedule = async (req, res, next) => {
 };
 
 const getMySchedule = async (req, res, next) => {
+  const today = new Date();
   const { authId } = verifyAuthentication(req);
+
+  // Get tech email address
   const user = await prisma.user.findFirst({
     where: { id: { equals: authId } },
-    
   });
 
-  console.log(user.email);
-  
+  // Get clients and services for today.
   try {
-    const items = await prisma.services.findMany({
+    const items = await prisma.account.findMany({
       where: {
-        AND: [
-          {
-            scheduledDate: { equals: TODAY },
+        Services: {
+          some: {
+            AND: [
+              {
+                scheduledDate: { equals: today },
+              },
+              {
+                scheduledTech: { equals: user.email },
+              },
+            ],
           },
-          {
-            scheduledTech: { equals: user.email },
-          },
-        ],
+        },
       },
-      include: {
-        account: true,
+      select: {
+        firstName: true,
+        lastName: true,
+        address: true,
+        city: true,
+        state: true,
+        zip: true,
+        phone: true,
+        Services: {
+          select: {
+            code: true,
+          },
+        },
       },
     });
     res.send(items);
-
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 module.exports = { getAllSchedules, getMySchedule };
