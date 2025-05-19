@@ -1,4 +1,5 @@
 require("dotenv").config();
+const e = require("express");
 const { prisma, bcrypt, jwt } = require("../../common/common");
 const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
@@ -6,7 +7,7 @@ const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
 
 
-/* <---------- Service table functions ----------> */
+/* <---------- Service Plan table functions ----------> */
 
 const getServicePlans = async (req, res, next) => {
   const response = await prisma.servicePlan.findMany({});
@@ -148,13 +149,14 @@ const getServicesForUser = async (req, res, next) => {
 
 const addService = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
-  const { servicePlanId } = req.body;
+  const { servicePlanId, code } = req.body;
 
   try {
     const response = await prisma.services.create({
       data: {
         accountId: authId,
         servicePlanId: servicePlanId,
+        code: code,
       },
     });
 
@@ -168,6 +170,31 @@ const addService = async (req, res, next) => {
     res.send(error);
   }
 };
+
+const updateService = async (req, res, next) => {
+  console.log('body', req.body);
+  const { id, servicePlanId } = req.body;
+  console.log('id', id);
+  console.log('servicePlanId', servicePlanId);
+
+  try {
+    const response = await prisma.services.update({
+      where: {
+        id: id,
+      },
+      data: {
+        servicePlanId: servicePlanId,
+      }
+    });
+    res.send(response);
+
+  } catch (error) {
+    next(error);
+    console.error(error);
+  }
+}
+
+
 
 const deleteService = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
@@ -199,4 +226,4 @@ const deleteService = async (req, res, next) => {
 
 
 
-module.exports = { getServicePlans, newServicePlan, updateServicePlan, deleteServicePlan, getService, getAllServices, getServicesForUser, deleteService, addService };
+module.exports = { getServicePlans, newServicePlan, updateServicePlan, deleteServicePlan, getService, getAllServices, getServicesForUser, deleteService, addService, updateService };

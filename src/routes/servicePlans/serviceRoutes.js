@@ -8,7 +8,8 @@ const {
   getAllServices,
   getServicesForUser,
   addService,
-  deleteService
+  deleteService,
+  updateService
 } = require("./serviceController");
 
 
@@ -28,6 +29,7 @@ router.get("/me", middleware, getServicesForUser);
 router.get("/:id", middleware, getService);
 router.delete("/:id", middleware, deleteService);
 router.post("/new", middleware, addService);
+router.put("/:id", middleware, updateService);
 
 
 // ServicePlan Table Routes

@@ -53,6 +53,7 @@ model ServicePlan {
   description   String     @db.VarChar(255)
   cost          Float
   cycle         Int
+  code          String?
   services      Services[]
 }
 
