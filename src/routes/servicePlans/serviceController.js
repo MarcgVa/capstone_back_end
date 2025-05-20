@@ -4,33 +4,33 @@ const { prisma, bcrypt, jwt } = require("../../common/common");
 const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 
 
-
-
-
 /* <---------- Service Plan table functions ----------> */
 
 const getServicePlans = async (req, res, next) => {
-  const response = await prisma.servicePlan.findMany({
-    orderBy: {
-      code: 'asc',
-    },
-  });
-  console.log(response);
-  res.send(response);
+  try {
+    const response = await prisma.servicePlan.findMany({
+      orderBy: {
+        code: 'asc',
+      },
+    });
+    res.send(response);
+  } catch (error) {
+    res.Status(500).send(error)
+  }
 };
 
 const newServicePlan = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   if (isAuthorized) {
-    const { title, description, cost, cycle } = req.body;
+    const { title, description, cost, cycle, code } = req.body;
     try {
       const response = await prisma.servicePlan.create({
         data: {
           title,
           description,
-          cost,
-          cycle,
+          cost: (cost*1),
+          cycle:(cycle*1),
           code,
         },
       });
@@ -74,8 +74,6 @@ const deleteServicePlan = async (req, res, next) => {
   const {  authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   const { id } = req.params;
-  console.log(id);
-  console.log(isAuthorized);
   if (isAuthorized) {
     try {
     
