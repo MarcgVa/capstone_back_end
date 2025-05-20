@@ -36,7 +36,7 @@ router.put("/service/:id", middleware, updateService);
 
 // ServicePlan Table Routes
 router.get("/admin/plans", middleware, getServicePlans);
-router.post("/admin/new", middleware, newServicePlan);
+router.post("/admin/plans/new", middleware, newServicePlan);
 router.put("/admin/:id", middleware, updateServicePlan);
 router.delete("/admin/:id", middleware, deleteServicePlan);
 

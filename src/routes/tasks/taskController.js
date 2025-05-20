@@ -6,7 +6,11 @@ const getTasks = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
   
   try {
-    const items = await prisma.tasks.findMany({});
+    const items = await prisma.tasks.findMany({
+      orderBy: {
+        title: 'asc',
+      },
+    });
     res.send(items);
   } catch (error) {
     next(error);
@@ -56,6 +60,9 @@ const getMyTasks = async (req, res, next) => {
         { createdBy: { equals: id } },
 
       ],
+    },
+    orderBy: {
+      title: 'asc',
     },
   });
   res.Status(200).send(items);

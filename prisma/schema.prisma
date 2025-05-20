@@ -51,7 +51,7 @@ model ServicePlan {
   servicePlanId String     @id @default(uuid())
   title         String     @unique
   description   String     @db.VarChar(255)
-  cost          Float
+  cost          Int
   cycle         Int
   code          String?
   services      Services[]
