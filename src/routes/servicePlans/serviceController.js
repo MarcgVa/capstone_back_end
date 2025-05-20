@@ -10,7 +10,11 @@ const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
 /* <---------- Service Plan table functions ----------> */
 
 const getServicePlans = async (req, res, next) => {
-  const response = await prisma.servicePlan.findMany({});
+  const response = await prisma.servicePlan.findMany({
+    orderBy: {
+      code: 'asc',
+    },
+  });
   console.log(response);
   res.send(response);
 };
@@ -109,6 +113,9 @@ const getService = async (req, res, next) => {
       include: {
         servicePlan: true,
       },
+      orderBy: {
+        code: 'asc',
+      },
     });
 
     res.send(response);
@@ -119,7 +126,11 @@ const getService = async (req, res, next) => {
 };
 
 const getAllServices = async (req, res, next) => {
-  const response = await prisma.services.findMany({});
+  const response = await prisma.services.findMany({
+    orderBy: {
+      code: 'asc',
+    },
+  });
   res.send(response);
 };
 
@@ -135,8 +146,8 @@ const getServicesForUser = async (req, res, next) => {
         servicePlan: true,
       },
       orderBy: {
-        scheduledDate:{sort: 'asc', nulls: 'last'},
-      }
+        scheduledDate: { sort: 'asc', nulls: 'last' },
+      },
     });
 
     res.send(response);
@@ -228,6 +239,9 @@ const getServiceWithNoCutDate = async (req, res, next) => {
     const response = await prisma.services.findMany({
       where: {
         scheduledDate: null,
+      },
+      orderBy: {
+        code: 'asc',
       },
     });
     console.log('response-outside', response);
