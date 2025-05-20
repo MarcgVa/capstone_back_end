@@ -4,12 +4,13 @@ const {
   newServicePlan,
   updateServicePlan,
   deleteServicePlan,
-  getService, 
+  getService,
   getAllServices,
   getServicesForUser,
   addService,
   deleteService,
-  updateService
+  updateService,
+  getServiceWithNoCutDate
 } = require("./serviceController");
 
 
@@ -24,12 +25,13 @@ function middleware(req, res, next) {
 };
 
 // Service Table Routes
+router.get("/no-cut", middleware, getServiceWithNoCutDate);
 router.get("/list", middleware, getAllServices);
 router.get("/me", middleware, getServicesForUser);
-router.get("/:id", middleware, getService);
-router.delete("/:id", middleware, deleteService);
 router.post("/new", middleware, addService);
-router.put("/:id", middleware, updateService);
+router.get("/service/:id", middleware, getService);
+router.delete("/service/:id", middleware, deleteService);
+router.put("/service/:id", middleware, updateService);
 
 
 // ServicePlan Table Routes

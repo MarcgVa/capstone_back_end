@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { prisma, jwt } = require("../../common/common");
-const { verifyAuthentication, verifyAuthRole } = require("../../common/utils");
+const { verifyAuthentication, verifyAuthRole, verifyOpsRole } = require("../../common/utils");
 
 const getAllSchedules = async (req, res, next) => {
   const today = new Date();
@@ -26,13 +26,27 @@ const getAllSchedules = async (req, res, next) => {
   }
 };
 
-const getSchedule = async (req, res, next) => {
+const getTodaySchedule = async (req, res, next) => {
   const today = new Date();
   const { authId } = verifyAuthentication(req);
+  // Get clients and services for today.
   try {
-    const items = await prisma.services.findMany({
+    const items = await prisma.account.findMany({
       where: {
-        scheduledDate: { equals: today },
+        Services: {
+          some: {
+                 scheduledDate: { equals: today },
+          },
+        },
+      },
+      select: {
+        firstName: true,
+        lastName: true,
+        Services: {
+          select: {
+            code: true,
+          },
+        },
       },
     });
     res.send(items);
@@ -44,6 +58,7 @@ const getSchedule = async (req, res, next) => {
 const getMySchedule = async (req, res, next) => {
   const today = new Date();
   const { authId } = verifyAuthentication(req);
+
 
   // Get tech email address
   const user = await prisma.user.findFirst({
@@ -88,4 +103,25 @@ const getMySchedule = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllSchedules, getMySchedule };
+const getMaintenanceSchedule = async (req, res, next) => {
+  const { authId } = verifyAuthentication(req);
+  const isAuthorized = verifyOpsRole(authId);
+  
+  if (isAuthorized) {
+    try {
+      const response = await prisma.maintenance.findMany({});
+      
+      if (response) { 
+        res.send(response);
+      }
+    } catch (error) {
+      console.log(error);
+      res.send(error)
+    }
+  } else { 
+    res.sendStatus(403);
+  }
+  
+}
+
+module.exports = { getAllSchedules, getMySchedule, getMaintenanceSchedule, getTodaySchedule };

@@ -27,6 +27,7 @@ const newServicePlan = async (req, res, next) => {
           description,
           cost,
           cycle,
+          code,
         },
       });
       res.send(response);
@@ -221,9 +222,37 @@ const deleteService = async (req, res, next) => {
   }
 };
 
+const getServiceWithNoCutDate = async (req, res, next) => { 
+  console.log('working');
+  try {
+    const response = await prisma.services.findMany({
+      where: {
+        scheduledDate: null,
+      },
+    });
+    console.log('response-outside', response);
+    if (response) { 
+      console.log('response',response);
+      res.send(response);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 
 
-
-module.exports = { getServicePlans, newServicePlan, updateServicePlan, deleteServicePlan, getService, getAllServices, getServicesForUser, deleteService, addService, updateService };
+module.exports = {
+  getServicePlans,
+  newServicePlan,
+  updateServicePlan,
+  deleteServicePlan,
+  getService,
+  getAllServices,
+  getServicesForUser,
+  deleteService,
+  addService,
+  updateService,
+  getServiceWithNoCutDate
+};
