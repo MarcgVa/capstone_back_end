@@ -26,7 +26,22 @@ const verifyAuthRole = async (id) => {
   }
 };
 
+const verifyOpsRole = async (id) => {
+  const authAccount = await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  const role = authAccount.role.toLowerCase();
+  if (role !== 'user') {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 
-module.exports = { verifyAuthentication, verifyAuthRole };
+
+module.exports = { verifyAuthentication, verifyAuthRole, verifyOpsRole };
 
