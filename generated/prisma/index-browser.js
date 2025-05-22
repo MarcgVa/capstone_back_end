@@ -195,7 +195,8 @@ exports.Prisma.BillingScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   billCycle: 'billCycle',
-  amount: 'amount'
+  amount: 'amount',
+  item: 'item'
 };
 
 exports.Prisma.InvoiceScalarFieldEnum = {

@@ -104,6 +104,7 @@ model Billing {
   endDate   DateTime @db.Date
   billCycle String
   amount    Float
+  item      String?
 }
 
 model Invoice {

@@ -26,7 +26,7 @@ function middleware(req, res, next) {
 
 // Service Table Routes
 router.get("/no-cut", middleware, getServiceWithNoCutDate);
-router.get("/list", middleware, getAllServices);
+router.get("/list",middleware, getAllServices);
 router.post("/new", middleware, addService);
 router.get("/client/:id", middleware, getServicesForUser);
 router.get("/service/:id", middleware, getService);
@@ -35,7 +35,7 @@ router.put("/service/:id", middleware, updateService);
 
 
 // ServicePlan Table Routes
-router.get("/admin/plans", middleware, getServicePlans);
+router.get("/admin/plans", getServicePlans);
 router.post("/admin/plans/new", middleware, newServicePlan);
 router.put("/admin/:id", middleware, updateServicePlan);
 router.delete("/admin/:id", middleware, deleteServicePlan);
