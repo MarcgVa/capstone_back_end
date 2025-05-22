@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon ./server/index.js",
-    "seed": "node ./server/seed.js"
+    "seed": "node ./server/seed.js",
+    "start": "node ./server/server.js",
+    "build": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +27,8 @@
   },
   "devDependencies": {
     "prisma": "^6.8.2"
+  },
+  "engines": {
+    "node": ">=20.16.0"
   }
 }
