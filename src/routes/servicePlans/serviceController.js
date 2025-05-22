@@ -10,9 +10,10 @@ const getServicePlans = async (req, res, next) => {
   try {
     const response = await prisma.servicePlan.findMany({
       orderBy: {
-        code: 'asc',
+        cycle: 'desc',
       },
     });
+    console.log('orderby', response);
     res.send(response);
   } catch (error) {
     res.Status(500).send(error)
@@ -134,11 +135,12 @@ const getAllServices = async (req, res, next) => {
 
 const getServicesForUser = async (req, res, next) => {
   const { authId } = verifyAuthentication(req);
+  const { id } = req.params;
   try {
     
     const response = await prisma.services.findMany({
       where: {
-        accountId: {equals: authId},
+        accountId: {equals: id},
       },
       include: {
         servicePlan: true,
@@ -148,6 +150,7 @@ const getServicesForUser = async (req, res, next) => {
       },
     });
 
+    console.log(response)
     res.send(response);
     
   } catch (error) {
