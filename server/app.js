@@ -2,14 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const app.use(cors())
 app.use(express.json());
-
-if (process.env.ENV === "dev") {
-  app.use(cors({ origin: /localhost/ }));
-} else {
-  app.use(cors({ origin: "https://grupelawncare.netlify.app" }));
-}
 
 const authRoutes = require("../src/routes/auth/authRoutes");
 const taskRoutes = require("../src/routes/tasks/taskRoutes");
