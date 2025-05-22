@@ -10,9 +10,10 @@ const getServicePlans = async (req, res, next) => {
   try {
     const response = await prisma.servicePlan.findMany({
       orderBy: {
-        code: 'asc',
+        cycle: 'desc',
       },
     });
+    console.log('orderby', response);
     res.send(response);
   } catch (error) {
     res.Status(500).send(error)
