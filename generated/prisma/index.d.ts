@@ -8611,6 +8611,7 @@ export namespace Prisma {
     endDate: Date | null
     billCycle: string | null
     amount: number | null
+    item: string | null
   }
 
   export type BillingMaxAggregateOutputType = {
@@ -8620,6 +8621,7 @@ export namespace Prisma {
     endDate: Date | null
     billCycle: string | null
     amount: number | null
+    item: string | null
   }
 
   export type BillingCountAggregateOutputType = {
@@ -8629,6 +8631,7 @@ export namespace Prisma {
     endDate: number
     billCycle: number
     amount: number
+    item: number
     _all: number
   }
 
@@ -8650,6 +8653,7 @@ export namespace Prisma {
     endDate?: true
     billCycle?: true
     amount?: true
+    item?: true
   }
 
   export type BillingMaxAggregateInputType = {
@@ -8659,6 +8663,7 @@ export namespace Prisma {
     endDate?: true
     billCycle?: true
     amount?: true
+    item?: true
   }
 
   export type BillingCountAggregateInputType = {
@@ -8668,6 +8673,7 @@ export namespace Prisma {
     endDate?: true
     billCycle?: true
     amount?: true
+    item?: true
     _all?: true
   }
 
@@ -8764,6 +8770,7 @@ export namespace Prisma {
     endDate: Date
     billCycle: string
     amount: number
+    item: string | null
     _count: BillingCountAggregateOutputType | null
     _avg: BillingAvgAggregateOutputType | null
     _sum: BillingSumAggregateOutputType | null
@@ -8792,6 +8799,7 @@ export namespace Prisma {
     endDate?: boolean
     billCycle?: boolean
     amount?: boolean
+    item?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["billing"]>
 
@@ -8802,6 +8810,7 @@ export namespace Prisma {
     endDate?: boolean
     billCycle?: boolean
     amount?: boolean
+    item?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["billing"]>
 
@@ -8812,6 +8821,7 @@ export namespace Prisma {
     endDate?: boolean
     billCycle?: boolean
     amount?: boolean
+    item?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["billing"]>
 
@@ -8822,9 +8832,10 @@ export namespace Prisma {
     endDate?: boolean
     billCycle?: boolean
     amount?: boolean
+    item?: boolean
   }
 
-  export type BillingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "billToId" | "startDate" | "endDate" | "billCycle" | "amount", ExtArgs["result"]["billing"]>
+  export type BillingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "billToId" | "startDate" | "endDate" | "billCycle" | "amount" | "item", ExtArgs["result"]["billing"]>
   export type BillingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }
@@ -8847,6 +8858,7 @@ export namespace Prisma {
       endDate: Date
       billCycle: string
       amount: number
+      item: string | null
     }, ExtArgs["result"]["billing"]>
     composites: {}
   }
@@ -9277,6 +9289,7 @@ export namespace Prisma {
     readonly endDate: FieldRef<"Billing", 'DateTime'>
     readonly billCycle: FieldRef<"Billing", 'String'>
     readonly amount: FieldRef<"Billing", 'Float'>
+    readonly item: FieldRef<"Billing", 'String'>
   }
     
 
@@ -11880,7 +11893,8 @@ export namespace Prisma {
     startDate: 'startDate',
     endDate: 'endDate',
     billCycle: 'billCycle',
-    amount: 'amount'
+    amount: 'amount',
+    item: 'item'
   };
 
   export type BillingScalarFieldEnum = (typeof BillingScalarFieldEnum)[keyof typeof BillingScalarFieldEnum]
@@ -12515,6 +12529,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"Billing"> | Date | string
     billCycle?: StringFilter<"Billing"> | string
     amount?: FloatFilter<"Billing"> | number
+    item?: StringNullableFilter<"Billing"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
   }
 
@@ -12525,6 +12540,7 @@ export namespace Prisma {
     endDate?: SortOrder
     billCycle?: SortOrder
     amount?: SortOrder
+    item?: SortOrderInput | SortOrder
     account?: AccountOrderByWithRelationInput
   }
 
@@ -12538,6 +12554,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"Billing"> | Date | string
     billCycle?: StringFilter<"Billing"> | string
     amount?: FloatFilter<"Billing"> | number
+    item?: StringNullableFilter<"Billing"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
   }, "id">
 
@@ -12548,6 +12565,7 @@ export namespace Prisma {
     endDate?: SortOrder
     billCycle?: SortOrder
     amount?: SortOrder
+    item?: SortOrderInput | SortOrder
     _count?: BillingCountOrderByAggregateInput
     _avg?: BillingAvgOrderByAggregateInput
     _max?: BillingMaxOrderByAggregateInput
@@ -12565,6 +12583,7 @@ export namespace Prisma {
     endDate?: DateTimeWithAggregatesFilter<"Billing"> | Date | string
     billCycle?: StringWithAggregatesFilter<"Billing"> | string
     amount?: FloatWithAggregatesFilter<"Billing"> | number
+    item?: StringNullableWithAggregatesFilter<"Billing"> | string | null
   }
 
   export type InvoiceWhereInput = {
@@ -13125,6 +13144,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
     account: AccountCreateNestedOneWithoutBillInput
   }
 
@@ -13135,6 +13155,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
   }
 
   export type BillingUpdateInput = {
@@ -13142,6 +13163,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutBillNestedInput
   }
 
@@ -13152,6 +13174,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BillingCreateManyInput = {
@@ -13161,6 +13184,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
   }
 
   export type BillingUpdateManyMutationInput = {
@@ -13168,6 +13192,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BillingUncheckedUpdateManyInput = {
@@ -13177,6 +13202,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InvoiceCreateInput = {
@@ -13842,6 +13868,7 @@ export namespace Prisma {
     endDate?: SortOrder
     billCycle?: SortOrder
     amount?: SortOrder
+    item?: SortOrder
   }
 
   export type BillingAvgOrderByAggregateInput = {
@@ -13856,6 +13883,7 @@ export namespace Prisma {
     endDate?: SortOrder
     billCycle?: SortOrder
     amount?: SortOrder
+    item?: SortOrder
   }
 
   export type BillingMinOrderByAggregateInput = {
@@ -13865,6 +13893,7 @@ export namespace Prisma {
     endDate?: SortOrder
     billCycle?: SortOrder
     amount?: SortOrder
+    item?: SortOrder
   }
 
   export type BillingSumOrderByAggregateInput = {
@@ -14748,6 +14777,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
   }
 
   export type BillingUncheckedCreateWithoutAccountInput = {
@@ -14756,6 +14786,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
   }
 
   export type BillingCreateOrConnectWithoutAccountInput = {
@@ -14869,6 +14900,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"Billing"> | Date | string
     billCycle?: StringFilter<"Billing"> | string
     amount?: FloatFilter<"Billing"> | number
+    item?: StringNullableFilter<"Billing"> | string | null
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutAccountInput = {
@@ -15353,6 +15385,7 @@ export namespace Prisma {
     endDate: Date | string
     billCycle: string
     amount: number
+    item?: string | null
   }
 
   export type InvoiceCreateManyAccountInput = {
@@ -15373,6 +15406,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BillingUncheckedUpdateWithoutAccountInput = {
@@ -15381,6 +15415,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BillingUncheckedUpdateManyWithoutAccountInput = {
@@ -15389,6 +15424,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     billCycle?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
+    item?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InvoiceUpdateWithoutAccountInput = {

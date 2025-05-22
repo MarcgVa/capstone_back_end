@@ -1,6 +1,8 @@
 const { prisma } = require("../src/common/common");
 
 
+
+
 async function seed() {
   console.log("Seeding the database.");
   try {
