@@ -6,7 +6,7 @@ const cors = require("cors");
 if (process.env.ENV === "dev") {
   app.use(cors({ origin: /localhost/ }));
 } else {
-  app.use(cors({ origin: "https://https://grupelawncare.netlify.app" }));
+  app.use(cors({ origin: "https://grupelawncare.netlify.app" }));
 }
 
 
