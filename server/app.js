@@ -8,7 +8,7 @@ app.use(express.json());
 if (process.env.ENV === "dev") {
   app.use(cors({ origin: /localhost/ }));
 } else {
-  app.use(cors({ origin: "https://https://grupelawncare.netlify.app" }));
+  app.use(cors({ origin: "https://grupelawncare.netlify.app" }));
 }
 
 const authRoutes = require("../src/routes/auth/authRoutes");
