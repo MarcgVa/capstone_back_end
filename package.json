@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon ./server/index.js",
+    "server": "nodemon ./server/server.js",
     "seed": "node ./server/seed.js",
     "start": "node ./server/server.js",
     "build": "prisma generate"
