@@ -49,6 +49,8 @@ const updateServicePlan = async (req, res, next) => {
   const { token, authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
   const { title, description, cost, cycle } = req.body;
+  const { id } = req.params;
+
   if(isAuthorized){
     try {
       const response = await prisma.servicePlan.update({
@@ -62,6 +64,8 @@ const updateServicePlan = async (req, res, next) => {
           cycle,
         },
       });
+
+      res.send(response);
     } catch (error) {
       next(error);
       res.json(error);
@@ -191,7 +195,7 @@ const updateService = async (req, res, next) => {
   console.log('servicePlanId', servicePlanId);
 
   try {
-    const response = await prisma.services.update({
+    const response = await prisma.services.upsert({
       where: {
         id: id,
       },
