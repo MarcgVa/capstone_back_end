@@ -208,18 +208,18 @@ const updateService = async (req, res, next) => {
   try {
     const response = await prisma.services.upsert({
       where: {
-        AND: [          
-          {accountId: accountId},
-          {code: code},
-        ]
+        accountId_code: {
+          accountId,
+          code,
+        },
       },
       update: {
         servicePlanId: servicePlanId,
       },
       create: {
-        code: code,
-        accountId: accountId,
-        servicePlanId: servicePlanId,
+        code,
+        servicePlanId,
+        accountId,
       },
     });
     res.send(response);
