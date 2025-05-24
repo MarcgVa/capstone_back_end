@@ -4,6 +4,11 @@ const app = express();
 const cors = require('cors');
 app.use(express.json());
 app.use(cors());
+// if (process.env.ENV === 'dev') {
+//   app.use(cors({ origin: "http://localhost:3001" }));
+// } else { 
+//   app.use(cors({ origin: "https://grupelawncare.netlify.app" }));
+// }
 const authRoutes = require("../src/routes/auth/authRoutes");
 const taskRoutes = require("../src/routes/tasks/taskRoutes");
 const accountRoutes = require("../src/routes/accounts/accountRoutes");
