@@ -202,32 +202,29 @@ const addService = async (req, res, next) => {
 };
 
 const updateService = async (req, res, next) => {
-  console.log('body', req.body);
-  const { id } = req.params;
-  const { code, servicePlanId } = req.body;
-  console.log('id', id);
-  console.log('servicePlanId', servicePlanId);
+  res.send('is working');
+  // const { id } = req.params;
+  // const { code, servicePlanId } = req.body;
+  // try {
+  //   const response = await prisma.services.upsert({
+  //     where: {
+  //       code: code,
+  //     },
+  //     data: {
+  //       servicePlanId: servicePlanId,
+  //     },
+  //     create: {
+  //       code: code,
+  //       accountId: id,
+  //       servicePlanId: servicePlanId,
+  //     },
+  //   });
+  //   res.send(response);
 
-  try {
-    const response = await prisma.services.upsert({
-      where: {
-        code: code,
-      },
-      data: {
-        servicePlanId: servicePlanId,
-      },
-      create: {
-        code: code,
-        accountId: id,
-        servicePlanId: servicePlanId,
-      },
-    });
-    res.send(response);
-
-  } catch (error) {
-    next(error);
-    console.error(error);
-  }
+  // } catch (error) {
+  //   next(error);
+  //   console.error(error);
+  // }
 }
 
 
