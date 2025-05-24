@@ -209,7 +209,7 @@ const updateService = async (req, res, next) => {
       where: {
         code: code,
       },
-      data: {
+      update: {
         servicePlanId: servicePlanId,
       },
       create: {
