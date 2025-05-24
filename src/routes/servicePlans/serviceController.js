@@ -48,7 +48,7 @@ const newServicePlan = async (req, res, next) => {
 const updateServicePlan = async (req, res, next) => {
   const { token, authId } = verifyAuthentication(req);
   const isAuthorized = await verifyAuthRole(authId);
-  const { title, description, cost, cycle } = req.body;
+  const { title, description, cost, cycle, code } = req.body;
   const { id } = req.params;
 
   if(isAuthorized){
@@ -62,6 +62,7 @@ const updateServicePlan = async (req, res, next) => {
           description,
           cost,
           cycle,
+          code,
         },
       });
 
