@@ -10,7 +10,8 @@ const {
   addService,
   deleteService,
   updateService,
-  getServiceWithNoCutDate
+  getServiceWithNoCutDate,
+  getServicePlanById,
 } = require("./serviceController");
 
 
@@ -36,6 +37,7 @@ router.put("/service/:id", middleware, updateService);
 
 // ServicePlan Table Routes
 router.get("/admin/plans", getServicePlans);
+router.get("/admin/plans/plan/:id", middleware, getServicePlanById);
 router.post("/admin/plans/new", middleware, newServicePlan);
 router.put("/admin/plans/:id", middleware, updateServicePlan);
 router.delete("/admin/:id", middleware, deleteServicePlan);
