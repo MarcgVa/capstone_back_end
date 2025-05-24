@@ -221,8 +221,8 @@ const updateService = async (req, res, next) => {
     res.send(response);
 
   } catch (error) {
-    next(error);
     console.error(error);
+    res.send(error);
   }
 }
 
