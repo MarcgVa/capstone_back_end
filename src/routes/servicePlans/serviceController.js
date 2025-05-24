@@ -13,7 +13,19 @@ const getServicePlans = async (req, res, next) => {
         cycle: 'desc',
       },
     });
-    console.log('orderby', response);
+    res.send(response);
+  } catch (error) {
+    res.Status(500).send(error)
+  }
+};
+const getServicePlanById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const response = await prisma.servicePlan.findFirst({
+      where: {
+        servicePlanId: id,
+      },
+    });
     res.send(response);
   } catch (error) {
     res.Status(500).send(error)
@@ -274,5 +286,6 @@ module.exports = {
   deleteService,
   addService,
   updateService,
-  getServiceWithNoCutDate
+  getServiceWithNoCutDate,
+  getServicePlanById,
 };
