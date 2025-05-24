@@ -55,7 +55,7 @@ const updateServicePlan = async (req, res, next) => {
     try {
       const response = await prisma.servicePlan.update({
         where: {
-        id, 
+        servicePlanId: id, 
         },
         data: {
           title,
