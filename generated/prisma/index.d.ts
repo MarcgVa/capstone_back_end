@@ -12327,6 +12327,7 @@ export namespace Prisma {
   export type ServicesWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     accountId_servicePlanId?: ServicesAccountIdServicePlanIdCompoundUniqueInput
+    accountId_code?: ServicesAccountIdCodeCompoundUniqueInput
     AND?: ServicesWhereInput | ServicesWhereInput[]
     OR?: ServicesWhereInput[]
     NOT?: ServicesWhereInput | ServicesWhereInput[]
@@ -12337,7 +12338,7 @@ export namespace Prisma {
     code?: StringNullableFilter<"Services"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     servicePlan?: XOR<ServicePlanScalarRelationFilter, ServicePlanWhereInput>
-  }, "id" | "accountId_servicePlanId">
+  }, "id" | "accountId_servicePlanId" | "accountId_code">
 
   export type ServicesOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13636,6 +13637,11 @@ export namespace Prisma {
   export type ServicesAccountIdServicePlanIdCompoundUniqueInput = {
     accountId: string
     servicePlanId: string
+  }
+
+  export type ServicesAccountIdCodeCompoundUniqueInput = {
+    accountId: string
+    code: string
   }
 
   export type ServicesCountOrderByAggregateInput = {

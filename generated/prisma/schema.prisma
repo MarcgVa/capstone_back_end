@@ -68,6 +68,7 @@ model Services {
   code          String?
 
   @@unique([accountId, servicePlanId])
+  @@unique([accountId, code])
 }
 
 model Tasks {
